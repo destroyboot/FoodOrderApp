@@ -4,17 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Data.Entities
+namespace Core.Contracts.Menu
 {
-    public class MenuCategoryTranslation
+    public class MenuItemDto
     {
         public int Id { get; set; }
         public int MenuCategoryId { get; set; }
+        public decimal CurrentPrice { get; set; }
+        public bool IsAvailable { get; set; }
+        public int? PhotoAssetId { get; set; }
 
-        // "pl-PL" / "en-US"
-        public string Culture { get; set; } = default!;
         public string Name { get; set; } = default!;
-
         public string? Description { get; set; }
     }
 }

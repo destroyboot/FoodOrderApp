@@ -30,7 +30,7 @@ namespace API.Controllers
         {
             var query = _orders.Query()
                 .Where(o => o.Status != OrderStatus.Draft
-                            && o.Status != OrderStatus.Served
+                            && o.Status != OrderStatus.Completed
                             && o.Status != OrderStatus.Cancelled)
                 .OrderBy(o => o.CreatedAt)
                 .Select(o => new AdminOrderListItemDto

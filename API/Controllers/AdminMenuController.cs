@@ -14,15 +14,19 @@ namespace API.Controllers
 
         public AdminMenuController(IMenuService menu) => _menu = menu;
 
+        [HttpGet("categories")]
+        public async Task<IActionResult> GetCategories(CancellationToken ct)
+        {
+            var result = await _menu.GetCategoriesAsync(ct);
+            return Ok(result);
+        }
+
         [HttpPost("categories")]
         public async Task<IActionResult> CreateCategory(MenuCategoryCreateDto dto, CancellationToken ct)
         {
             var id = await _menu.CreateCategoryAsync(dto, userId: "system", ct);
             return CreatedAtAction(nameof(GetCategory), new { id }, new { id });
         }
-
-        [HttpGet("categories/{id:int}")]
-        public IActionResult GetCategory(int id) => Ok(new { id }); // optional for now
 
         [HttpPut("categories/{id:int}")]
         public async Task<IActionResult> UpdateCategory(int id, MenuCategoryUpdateDto dto, CancellationToken ct)
@@ -38,11 +42,36 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [HttpGet("categories/{id:int}")]
+        public async Task<IActionResult> GetCategory(int id, CancellationToken ct)
+        {
+            var category = await _menu.GetCategoryByIdAsync(id, ct);
+            if (category is null) return NotFound();
+            return Ok(category);
+        }
+
+        [HttpPut("categories/{id:int}/translations")]
+        public async Task<IActionResult> UpsertCategoryTranslation(
+            int id,
+            MenuCategoryTranslationUpsertDto dto,
+            CancellationToken ct)
+        {
+            await _menu.UpsertCategoryTranslationAsync(id, dto, userId: "system", ct);
+            return NoContent();
+        }
+
         [HttpPost("items")]
         public async Task<IActionResult> CreateItem(MenuItemCreateDto dto, CancellationToken ct)
         {
             var id = await _menu.CreateItemAsync(dto, userId: "system", ct);
             return CreatedAtAction(nameof(GetItem), new { id }, new { id });
+        }
+
+        [HttpGet("items")]
+        public async Task<IActionResult> GetItems([FromQuery] string? culture, CancellationToken ct)
+        {
+            var result = await _menu.GetItemsAsync(culture, ct);
+            return Ok(result);
         }
 
         [HttpGet("items/{id:int}")]
@@ -73,6 +102,16 @@ namespace API.Controllers
         public async Task<IActionResult> ChangePrice(int id, [FromQuery] decimal newPrice, CancellationToken ct)
         {
             await _menu.ChangePriceAsync(id, newPrice, userId: "system", ct);
+            return NoContent();
+        }
+
+        [HttpPut("items/{id:int}/translations")]
+        public async Task<IActionResult> UpsertItemTranslation(
+            int id,
+            MenuItemTranslationUpsertDto dto,
+            CancellationToken ct)
+        {
+            await _menu.UpsertItemTranslationAsync(id, dto, userId: "system", ct);
             return NoContent();
         }
     }

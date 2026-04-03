@@ -85,7 +85,151 @@ namespace Core.Services
             await _uow.SaveChangesAsync(ct);
         }
 
+        public async Task<IReadOnlyList<MenuCategoryDto>> GetCategoriesAsync(CancellationToken ct = default)
+        {
+            const string culture = "en-US"; // temporary, later dynamic
+
+            var query =
+                _categories.Query(tracked: false)
+                    .OrderBy(c => c.SortOrder)
+                    .Select(c => new MenuCategoryDto
+                    {
+                        Id = c.Id,
+                        Name = c.Translations
+                            .Where(t => t.Culture == culture)
+                            .Select(t => t.Name)
+                            .FirstOrDefault() ?? "(no name)",
+                        Description = null // not in model yet
+                    });
+
+            return await _q.ToListAsync(query, ct);
+        }
+
+        public async Task<MenuCategoryDto?> GetCategoryByIdAsync(int id, CancellationToken ct = default)
+        {
+            const string culture = "en-US";
+
+            var query =
+                _categories.Query(tracked: false)
+                    .Where(c => c.Id == id)
+                    .Select(c => new MenuCategoryDto
+                    {
+                        Id = c.Id,
+                        Name = c.Translations
+                            .Where(t => t.Culture == culture)
+                            .Select(t => t.Name)
+                            .FirstOrDefault() ?? "(no name)",
+                        Description = null
+                    });
+
+            return await _q.FirstOrDefaultAsync(query, ct);
+        }
+
+        public async Task UpsertCategoryTranslationAsync(
+    int categoryId,
+    MenuCategoryTranslationUpsertDto dto,
+    string userId,
+    CancellationToken ct = default)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Culture))
+                throw new InvalidOperationException("Culture is required.");
+            if (string.IsNullOrWhiteSpace(dto.Name))
+                throw new InvalidOperationException("Name is required.");
+
+            var culture = dto.Culture.Trim();
+            var name = dto.Name.Trim();
+            var desc = string.IsNullOrWhiteSpace(dto.Description) ? null : dto.Description.Trim();
+
+            var category = await _q.FirstOrDefaultAsync(
+                _categories.Query(tracked: true)
+                    .Where(c => c.Id == categoryId),
+                ct);
+
+            if (category is null)
+                throw new InvalidOperationException("Category not found.");
+
+            var existing = category.Translations.FirstOrDefault(t => t.Culture == culture);
+
+            if (existing is null)
+            {
+                category.Translations.Add(new MenuCategoryTranslation
+                {
+                    MenuCategoryId = categoryId,
+                    Culture = culture,
+                    Name = name,
+                    Description = desc
+                });
+            }
+            else
+            {
+                existing.Name = name;
+                existing.Description = desc;
+            }
+
+            await _uow.SaveChangesAsync(ct);
+        }
+
         // ---------- Items ----------
+
+        public async Task<IReadOnlyList<MenuItemDto>> GetItemsAsync(string? culture, CancellationToken ct = default)
+        {
+            var c = string.IsNullOrWhiteSpace(culture) ? "en-US" : culture.Trim();
+
+            var query =
+                _items.Query(tracked: false)
+                    .OrderBy(m => m.MenuCategoryId)
+                    .ThenBy(m => m.Id)
+                    .Select(m => new MenuItemDto
+                    {
+                        Id = m.Id,
+                        MenuCategoryId = m.MenuCategoryId,
+                        CurrentPrice = m.CurrentPrice,
+                        IsAvailable = m.IsAvailable,
+                        PhotoAssetId = m.PhotoAssetId,
+
+                        Name = m.Translations
+                            .Where(t => t.Culture == c)
+                            .Select(t => t.Name)
+                            .FirstOrDefault() ?? "(no name)",
+
+                        Description = m.Translations
+                            .Where(t => t.Culture == c)
+                            .Select(t => t.Description)
+                            .FirstOrDefault()
+                    });
+
+            return await _q.ToListAsync(query, ct);
+        }
+
+        public async Task<MenuItemDto?> GetItemByIdAsync(int id, string? culture, CancellationToken ct = default)
+        {
+            var c = string.IsNullOrWhiteSpace(culture) ? "en-US" : culture.Trim();
+
+            var query =
+                _items.Query(tracked: false)
+                    .Where(m => m.Id == id)
+                    .Select(m => new MenuItemDto
+                    {
+                        Id = m.Id,
+                        MenuCategoryId = m.MenuCategoryId,
+                        CurrentPrice = m.CurrentPrice,
+                        IsAvailable = m.IsAvailable,
+                        PhotoAssetId = m.PhotoAssetId,
+
+                        Name = m.Translations
+                            .Where(t => t.Culture == c)
+                            .Select(t => t.Name)
+                            .FirstOrDefault() ?? "(no name)",
+
+                        Description = m.Translations
+                            .Where(t => t.Culture == c)
+                            .Select(t => t.Description)
+                            .FirstOrDefault()
+                    });
+
+            return await _q.FirstOrDefaultAsync(query, ct);
+        }
+
         public async Task<int> CreateItemAsync(MenuItemCreateDto dto, string userId, CancellationToken ct = default)
         {
             ValidateItem(dto);
@@ -169,6 +313,53 @@ namespace Core.Services
             entity.IsAvailable = isAvailable;
             await _uow.SaveChangesAsync(ct);
         }
+
+        public async Task UpsertItemTranslationAsync(
+            int itemId,
+            MenuItemTranslationUpsertDto dto,
+            string userId,
+            CancellationToken ct = default)
+                {
+                    if (string.IsNullOrWhiteSpace(dto.Culture))
+                        throw new InvalidOperationException("Culture is required.");
+
+                    if (string.IsNullOrWhiteSpace(dto.Name))
+                        throw new InvalidOperationException("Name is required.");
+
+                    var culture = dto.Culture.Trim();
+                    var name = dto.Name.Trim();
+                    var description = string.IsNullOrWhiteSpace(dto.Description)
+                        ? null
+                        : dto.Description.Trim();
+
+                    var item = await _q.FirstOrDefaultAsync(
+                        _items.Query(tracked: true)
+                            .Where(m => m.Id == itemId),
+                        ct);
+
+                    if (item is null)
+                        throw new InvalidOperationException("Menu item not found.");
+
+                    var existing = item.Translations.FirstOrDefault(t => t.Culture == culture);
+
+                    if (existing is null)
+                    {
+                        item.Translations.Add(new MenuItemTranslation
+                        {
+                            MenuItemId = itemId,
+                            Culture = culture,
+                            Name = name,
+                            Description = description
+                        });
+                    }
+                    else
+                    {
+                        existing.Name = name;
+                        existing.Description = description;
+                    }
+
+                    await _uow.SaveChangesAsync(ct);
+                }
 
         // ---------- Validation helpers ----------
         private static void ValidateCategoryTranslations(List<MenuCategoryTranslationDto> tr)

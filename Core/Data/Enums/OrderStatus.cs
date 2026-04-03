@@ -11,9 +11,9 @@ namespace Core.Data.Enums
         Draft = 0,
         Pending = 1,
         Accepted = 2,
-        InPreparation = 3,
+        Preparing = 3,
         Ready = 4,
-        Served = 5,
+        Completed = 5,
         Cancelled = 6
     }
 }

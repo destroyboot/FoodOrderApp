@@ -81,10 +81,10 @@ namespace Core.Services
             if (roles.Contains("Admin")) return true;
 
             if (roles.Contains("Waiter"))
-                return target is OrderStatus.Accepted or OrderStatus.Served or OrderStatus.Cancelled;
+                return target is OrderStatus.Accepted or OrderStatus.Completed or OrderStatus.Cancelled;
 
             if (roles.Contains("Chef"))
-                return target is OrderStatus.InPreparation or OrderStatus.Ready;
+                return target is OrderStatus.Preparing or OrderStatus.Ready;
 
             return false;
         }
@@ -96,10 +96,10 @@ namespace Core.Services
             return current switch
             {
                 OrderStatus.Pending => next is OrderStatus.Accepted or OrderStatus.Cancelled,
-                OrderStatus.Accepted => next is OrderStatus.InPreparation or OrderStatus.Cancelled,
-                OrderStatus.InPreparation => next is OrderStatus.Ready or OrderStatus.Cancelled,
-                OrderStatus.Ready => next is OrderStatus.Served,
-                OrderStatus.Served => false,
+                OrderStatus.Accepted => next is OrderStatus.Preparing or OrderStatus.Cancelled,
+                OrderStatus.Preparing => next is OrderStatus.Ready or OrderStatus.Cancelled,
+                OrderStatus.Ready => next is OrderStatus.Completed,
+                OrderStatus.Completed => false,
                 OrderStatus.Cancelled => false,
                 OrderStatus.Draft => false,
                 _ => false

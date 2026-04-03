@@ -46,7 +46,7 @@ namespace API.Controllers
             var query = _orders.Query()
                 .Where(o => o.CustomerId == ownerKey
                             && o.Status != OrderStatus.Draft
-                            && o.Status != OrderStatus.Served
+                            && o.Status != OrderStatus.Completed
                             && o.Status != OrderStatus.Cancelled)
                 .OrderByDescending(o => o.CreatedAt)
                 .Select(o => new
@@ -76,7 +76,7 @@ namespace API.Controllers
             var query = _orders.Query()
                 .Where(o => o.CustomerId == ownerKey
                             && o.Status != OrderStatus.Draft
-                            && (o.Status == OrderStatus.Served || o.Status == OrderStatus.Cancelled))
+                            && (o.Status == OrderStatus.Completed || o.Status == OrderStatus.Cancelled))
                 .OrderByDescending(o => o.CreatedAt)
                 .Take(take)
                 .Select(o => new
