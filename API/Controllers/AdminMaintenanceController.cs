@@ -22,7 +22,6 @@ namespace API.Controllers
         {
             var now = DateTime.UtcNow;
 
-            // users that are not confirmed and their registration code expired
             var expired = _users.Users
                 .Where(u => !u.EmailConfirmed
                             && u.RegistrationCodeExpiresAt != null

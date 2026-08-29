@@ -19,6 +19,7 @@ namespace Infrastructure.Repositories
         {
             var query = _db.MenuItems
             .Include(m => m.Translations)
+            .Include(m => m.Category)
             .AsQueryable();
             return tracked ? query : query.AsNoTracking();
         }

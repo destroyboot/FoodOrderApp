@@ -9,6 +9,7 @@ namespace Core.Contracts.Orders
     public class CartPreviewResponseDto
     {
         public decimal Subtotal { get; set; }
+        public decimal ExtraChargeTotal { get; set; }
         public decimal DeliveryFee { get; set; }
         public decimal Total { get; set; }
 

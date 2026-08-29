@@ -23,6 +23,7 @@ namespace Infrastructure.Repositories
         {
             var query = _db.MenuCategories
                 .Include(c => c.Translations)
+                .Include(c => c.Restaurant)
                 .AsQueryable();
 
             return tracked ? query : query.AsNoTracking();

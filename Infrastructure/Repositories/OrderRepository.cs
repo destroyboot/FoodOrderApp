@@ -23,6 +23,8 @@ namespace Infrastructure.Repositories
         {
             var query = _db.Orders
                 .Include(o => o.Items)
+                .Include(o => o.BillingDetails)
+                .Include(o => o.Comments)
                 .AsQueryable();
 
             return tracked ? query : query.AsNoTracking();

@@ -42,22 +42,17 @@ namespace API.Controllers
             var guest = GuestToken!.Trim();
             var userId = UserId;
 
-            // If someone accidentally tries to "claim" with token equal to userId, just do nothing
             if (string.Equals(guest, userId, StringComparison.Ordinal))
                 return Ok(new { movedOrders = 0 });
 
-            // Load tracked orders owned by the guest token and reassign them
             var guestOrdersQuery = _orders.Query(tracked: true)
                 .Where(o => o.CustomerId == guest);
 
             var guestOrders = await _q.ToListAsync(guestOrdersQuery, ct);
 
-            // If there are no guest orders, nothing to do
             if (guestOrders.Count == 0)
                 return Ok(new { movedOrders = 0 });
 
-            // If user already has a Draft cart, we should NOT move a guest Draft cart over.
-            // Rule: one Draft per user.
             var userHasDraft = await _q.AnyAsync(
                 _orders.Query().Where(o => o.CustomerId == userId && o.Status == OrderStatus.Draft),
                 ct);
@@ -68,7 +63,6 @@ namespace API.Controllers
             {
                 if (o.Status == OrderStatus.Draft && userHasDraft)
                 {
-                    // Option: keep guest draft as-is, or delete it. We'll keep it.
                     continue;
                 }
 

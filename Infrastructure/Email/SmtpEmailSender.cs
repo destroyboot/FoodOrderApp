@@ -1,13 +1,9 @@
-﻿using Core.Interfaces;
+using Core.Interfaces;
+using Core.Models;
+using MailKit.Net.Smtp;
 using MailKit.Security;
 using Microsoft.Extensions.Options;
 using MimeKit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MailKit.Net.Smtp;
 
 namespace Infrastructure.Email
 {
@@ -20,7 +16,12 @@ namespace Infrastructure.Email
             _cfg = cfg.Value;
         }
 
-        public async Task SendAsync(string toEmail, string subject, string htmlBody, CancellationToken ct = default)
+        public async Task SendAsync(
+            string toEmail,
+            string subject,
+            string htmlBody,
+            IEnumerable<EmailAttachment>? attachments = null,
+            CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(toEmail))
                 throw new InvalidOperationException("Recipient email is required.");
@@ -30,23 +31,29 @@ namespace Infrastructure.Email
             message.To.Add(MailboxAddress.Parse(toEmail));
             message.Subject = subject;
 
-            message.Body = new BodyBuilder
+            var bodyBuilder = new BodyBuilder
             {
                 HtmlBody = htmlBody
-            }.ToMessageBody();
+            };
+
+            foreach (var attachment in attachments ?? [])
+            {
+                if (attachment.ContentBytes.Length == 0 || string.IsNullOrWhiteSpace(attachment.FileName))
+                    continue;
+
+                bodyBuilder.Attachments.Add(
+                    attachment.FileName,
+                    attachment.ContentBytes,
+                    ContentType.Parse(attachment.ContentType));
+            }
+
+            message.Body = bodyBuilder.ToMessageBody();
 
             using var client = new SmtpClient();
 
-            // For dev environments with odd certs; you can remove later:
-            // client.ServerCertificateValidationCallback = (_, _, _, _) => true;
-
             var socket = _cfg.UseStartTls ? SecureSocketOptions.StartTls : SecureSocketOptions.SslOnConnect;
-
             await client.ConnectAsync(_cfg.Host, _cfg.Port, socket, ct);
-
-            // Some servers require this:
             await client.AuthenticateAsync(_cfg.Username, _cfg.Password, ct);
-
             await client.SendAsync(message, ct);
             await client.DisconnectAsync(true, ct);
         }

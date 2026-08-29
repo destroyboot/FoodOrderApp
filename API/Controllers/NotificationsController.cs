@@ -59,6 +59,7 @@ namespace API.Controllers
                     n.Type,
                     n.Title,
                     n.Body,
+                    n.PayloadJson,
                     n.IsRead,
                     n.CreatedAt,
                     n.ReadAt

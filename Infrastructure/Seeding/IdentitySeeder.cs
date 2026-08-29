@@ -1,21 +1,19 @@
-﻿using Infrastructure.Auth;
+using Core.Data.Entities;
+using Infrastructure.Auth;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Seeding
 {
     public static class IdentitySeeder
     {
         public static async Task SeedAsync(
+            AppDbContext db,
             UserManager<ApplicationUser> users,
             RoleManager<IdentityRole> roles)
         {
-            // 1) Roles
-            var roleNames = new[] { "Admin", "Waiter", "Chef", "Customer" };
+            var roleNames = new[] { "Admin", "RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver", "Customer" };
 
             foreach (var roleName in roleNames)
             {
@@ -23,81 +21,103 @@ namespace Infrastructure.Seeding
                     await roles.CreateAsync(new IdentityRole(roleName));
             }
 
-            // 2) Admin user (dev)
-            const string adminEmail = "admin@foodapp.local";
-            const string adminPassword = "Admin123!"; // DEV ONLY - change later
+            var admin = await EnsureDevUserAsync(users, "admin@foodapp.local", "Admin123!", "admin");
+            var chef = await EnsureDevUserAsync(users, "chef@foodapp.local", "Chef123!", "chef");
+            var waiter = await EnsureDevUserAsync(users, "waiter@foodapp.local", "Waiter123!", "waiter");
 
-            const string chefEmail = "chef@foodapp.local";
-            const string chefPassword = "Chef123!"; // DEV ONLY - change later
+            await EnsureIdentityRoleAsync(users, admin, "Admin");
+            await EnsureIdentityRoleAsync(users, chef, "Chef");
+            await EnsureIdentityRoleAsync(users, waiter, "Waiter");
 
-            const string waiterEmail = "waiter@foodapp.local";
-            const string waiterPassword = "Waiter123!"; // DEV ONLY - change later
+            await EnsureRestaurantDriverAccountsAsync(db, users, "Pierogi Bistro", "pierogi");
+            await EnsureRestaurantDriverAccountsAsync(db, users, "Sushi Garden", "sushi");
+        }
 
-            var admin = await users.FindByEmailAsync(adminEmail);
-            if (admin is null)
+        private static async Task<ApplicationUser> EnsureDevUserAsync(
+            UserManager<ApplicationUser> users,
+            string email,
+            string password,
+            string label)
+        {
+            var user = await users.FindByEmailAsync(email);
+            if (user is not null)
+                return user;
+
+            user = new ApplicationUser
             {
-                admin = new ApplicationUser
-                {
-                    UserName = adminEmail,
-                    Email = adminEmail,
-                    EmailConfirmed = true
-                };
+                UserName = email,
+                Email = email,
+                EmailConfirmed = true
+            };
 
-                var create = await users.CreateAsync(admin, adminPassword);
-                if (!create.Succeeded)
-                {
-                    var errors = string.Join("; ", create.Errors.Select(e => e.Description));
-                    throw new InvalidOperationException($"Failed to create admin user: {errors}");
-                }
+            var create = await users.CreateAsync(user, password);
+            if (!create.Succeeded)
+            {
+                var errors = string.Join("; ", create.Errors.Select(e => e.Description));
+                throw new InvalidOperationException($"Failed to create {label} user: {errors}");
             }
 
-            // Ensure role assignment
-            if (!await users.IsInRoleAsync(admin, "Admin"))
-                await users.AddToRoleAsync(admin, "Admin");
+            return user;
+        }
 
-            var chef = await users.FindByEmailAsync(chefEmail);
-            if (chef is null)
+        private static async Task EnsureIdentityRoleAsync(
+            UserManager<ApplicationUser> users,
+            ApplicationUser user,
+            string role)
+        {
+            if (!await users.IsInRoleAsync(user, role))
+                await users.AddToRoleAsync(user, role);
+        }
+
+        private static async Task EnsureRestaurantDriverAccountsAsync(
+            AppDbContext db,
+            UserManager<ApplicationUser> users,
+            string restaurantName,
+            string emailPrefix)
+        {
+            var restaurant = await db.Restaurants
+                .Where(x => x.IsActive && x.Name == restaurantName)
+                .Select(x => new { x.Id, x.Name })
+                .FirstOrDefaultAsync();
+
+            if (restaurant is null)
+                return;
+
+            for (var number = 1; number <= 2; number++)
             {
-                chef = new ApplicationUser
-                {
-                    UserName = chefEmail,
-                    Email = chefEmail,
-                    EmailConfirmed = true
-                };
+                var driver = await EnsureDevUserAsync(
+                    users,
+                    $"{emailPrefix}.driver{number}@foodapp.local",
+                    "Driver123!",
+                    $"{restaurant.Name} delivery driver");
 
-                var create = await users.CreateAsync(chef, chefPassword);
-                if (!create.Succeeded)
-                {
-                    var errors = string.Join("; ", create.Errors.Select(e => e.Description));
-                    throw new InvalidOperationException($"Failed to create chef user: {errors}");
-                }
+                await EnsureIdentityRoleAsync(users, driver, "DeliveryDriver");
+                await EnsureRestaurantRoleAssignmentAsync(db, restaurant.Id, driver.Id, "DeliveryDriver");
             }
+        }
 
-            // Ensure role assignment
-            if (!await users.IsInRoleAsync(chef, "Chef"))
-                await users.AddToRoleAsync(chef, "Chef");
+        private static async Task EnsureRestaurantRoleAssignmentAsync(
+            AppDbContext db,
+            int restaurantId,
+            string userId,
+            string role)
+        {
+            var exists = await db.RestaurantUserRoles.AnyAsync(x =>
+                x.RestaurantId == restaurantId &&
+                x.UserId == userId &&
+                x.Role == role);
 
-            var waiter = await users.FindByEmailAsync(waiterEmail);
-            if (waiter is null)
+            if (exists)
+                return;
+
+            db.RestaurantUserRoles.Add(new RestaurantUserRole
             {
-                waiter = new ApplicationUser
-                {
-                    UserName = waiterEmail,
-                    Email = waiterEmail,
-                    EmailConfirmed = true
-                };
+                RestaurantId = restaurantId,
+                UserId = userId,
+                Role = role
+            });
 
-                var create = await users.CreateAsync(waiter, waiterPassword);
-                if (!create.Succeeded)
-                {
-                    var errors = string.Join("; ", create.Errors.Select(e => e.Description));
-                    throw new InvalidOperationException($"Failed to create waiter user: {errors}");
-                }
-            }
-
-            // Ensure role assignment
-            if (!await users.IsInRoleAsync(waiter, "Waiter"))
-                await users.AddToRoleAsync(waiter, "Waiter");
+            await db.SaveChangesAsync();
         }
     }
 }

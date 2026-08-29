@@ -21,7 +21,6 @@ namespace API.Middleware
             }
             catch (InvalidOperationException ex)
             {
-                // Business rule / validation
                 context.Response.StatusCode = StatusCodes.Status400BadRequest;
                 await context.Response.WriteAsJsonAsync(new { error = ex.Message });
             }
@@ -42,7 +41,6 @@ namespace API.Middleware
 
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
 
-                // DEV: include detail for debugging
                 var env = context.RequestServices.GetRequiredService<IHostEnvironment>();
                 if (env.IsDevelopment())
                 {

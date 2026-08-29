@@ -37,12 +37,14 @@ namespace Core.Services
 
             var entity = new MenuCategory
             {
+                RestaurantId = dto.RestaurantId,
                 IsActive = dto.IsActive,
                 SortOrder = dto.SortOrder,
                 Translations = dto.Translations.Select(t => new MenuCategoryTranslation
                 {
                     Culture = t.Culture.Trim(),
-                    Name = t.Name.Trim()
+                    Name = t.Name.Trim(),
+                    Description = string.IsNullOrWhiteSpace(t.Description) ? null : t.Description.Trim()
                 }).ToList()
             };
 
@@ -59,6 +61,7 @@ namespace Core.Services
             var entity = await _q.FirstOrDefaultAsync(query, ct);
             if (entity is null) throw new InvalidOperationException("MenuCategory not found.");
 
+            entity.RestaurantId = dto.RestaurantId;
             entity.IsActive = dto.IsActive;
             entity.SortOrder = dto.SortOrder;
 
@@ -69,7 +72,8 @@ namespace Core.Services
                 entity.Translations.Add(new MenuCategoryTranslation
                 {
                     Culture = t.Culture.Trim(),
-                    Name = t.Name.Trim()
+                    Name = t.Name.Trim(),
+                    Description = string.IsNullOrWhiteSpace(t.Description) ? null : t.Description.Trim()
                 });
             }
 
@@ -85,42 +89,72 @@ namespace Core.Services
             await _uow.SaveChangesAsync(ct);
         }
 
-        public async Task<IReadOnlyList<MenuCategoryDto>> GetCategoriesAsync(CancellationToken ct = default)
+        public async Task<IReadOnlyList<MenuCategoryDto>> GetCategoriesAsync(string? culture, int? restaurantId = null, CancellationToken ct = default)
         {
-            const string culture = "en-US"; // temporary, later dynamic
-
-            var query =
-                _categories.Query(tracked: false)
-                    .OrderBy(c => c.SortOrder)
-                    .Select(c => new MenuCategoryDto
-                    {
-                        Id = c.Id,
-                        Name = c.Translations
-                            .Where(t => t.Culture == culture)
-                            .Select(t => t.Name)
-                            .FirstOrDefault() ?? "(no name)",
-                        Description = null // not in model yet
-                    });
+            var requestedCulture = string.IsNullOrWhiteSpace(culture) ? DefaultCulture : culture.Trim();
+            var query = _categories.Query()
+                .Where(x => restaurantId == null || x.RestaurantId == restaurantId)
+                .OrderBy(x => x.SortOrder)
+                .ThenBy(x => x.Id)
+                .Select(x => new MenuCategoryDto
+                {
+                    Id = x.Id,
+                    RestaurantId = x.RestaurantId,
+                    IsActive = x.IsActive,
+                    SortOrder = x.SortOrder,
+                    Name =
+                        x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == x.Restaurant!.Settings!.DefaultCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
+                    Description =
+                        x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == x.Restaurant!.Settings!.DefaultCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Description).FirstOrDefault(),
+                    Translations = x.Translations
+                        .OrderBy(t => t.Culture)
+                        .Select(t => new MenuCategoryTranslationDto
+                        {
+                            Culture = t.Culture,
+                            Name = t.Name,
+                            Description = t.Description
+                        })
+                        .ToList()
+                });
 
             return await _q.ToListAsync(query, ct);
         }
 
         public async Task<MenuCategoryDto?> GetCategoryByIdAsync(int id, CancellationToken ct = default)
         {
-            const string culture = "en-US";
+            var query = _categories.Query()
+                .Where(x => x.Id == id)
+                .Select(x => new MenuCategoryDto
+                {
+                    Id = x.Id,
+                    RestaurantId = x.RestaurantId,
+                    IsActive = x.IsActive,
+                    SortOrder = x.SortOrder,
 
-            var query =
-                _categories.Query(tracked: false)
-                    .Where(c => c.Id == id)
-                    .Select(c => new MenuCategoryDto
-                    {
-                        Id = c.Id,
-                        Name = c.Translations
-                            .Where(t => t.Culture == culture)
-                            .Select(t => t.Name)
-                            .FirstOrDefault() ?? "(no name)",
-                        Description = null
-                    });
+                    Name =
+                        x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
+
+                    Description =
+                        x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Description).FirstOrDefault(),
+
+                    Translations = x.Translations
+                        .OrderBy(t => t.Culture)
+                        .Select(t => new MenuCategoryTranslationDto
+                        {
+                            Culture = t.Culture,
+                            Name = t.Name,
+                            Description = t.Description
+                        })
+                        .ToList()
+                });
 
             return await _q.FirstOrDefaultAsync(query, ct);
         }
@@ -171,63 +205,147 @@ namespace Core.Services
 
         // ---------- Items ----------
 
-        public async Task<IReadOnlyList<MenuItemDto>> GetItemsAsync(string? culture, CancellationToken ct = default)
+        public async Task<IReadOnlyList<MenuItemDto>> GetItemsAsync(string? culture, int? restaurantId = null, CancellationToken ct = default)
         {
             var c = string.IsNullOrWhiteSpace(culture) ? "en-US" : culture.Trim();
 
             var query =
                 _items.Query(tracked: false)
+                    .Where(m => restaurantId == null || (m.Category != null && m.Category.RestaurantId == restaurantId))
                     .OrderBy(m => m.MenuCategoryId)
+                    .ThenBy(m => m.SortOrder)
                     .ThenBy(m => m.Id)
-                    .Select(m => new MenuItemDto
+                    .Select(m => new
                     {
-                        Id = m.Id,
-                        MenuCategoryId = m.MenuCategoryId,
-                        CurrentPrice = m.CurrentPrice,
-                        IsAvailable = m.IsAvailable,
-                        PhotoAssetId = m.PhotoAssetId,
+                        Item = new MenuItemDto
+                        {
+                            Id = m.Id,
+                            MenuCategoryId = m.MenuCategoryId,
+                            RestaurantId = m.Category != null ? m.Category.RestaurantId : 0,
+                            CurrentPrice = m.CurrentPrice,
+                            IsAvailable = m.IsAvailable,
+                            SortOrder = m.SortOrder,
+                            EnableIngredientSwap = m.EnableIngredientSwap,
+                            PhotoAssetId = m.PhotoAssetId,
+                            PhotoPath = m.PhotoPath,
 
-                        Name = m.Translations
+                            Name = m.Translations
                             .Where(t => t.Culture == c)
                             .Select(t => t.Name)
                             .FirstOrDefault() ?? "(no name)",
 
-                        Description = m.Translations
+                            Description = m.Translations
                             .Where(t => t.Culture == c)
                             .Select(t => t.Description)
                             .FirstOrDefault()
+                            ?? m.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault()
+                            ?? m.Translations.Select(t => t.Description).FirstOrDefault(),
+
+                            Allergens = m.Translations
+                            .Where(t => t.Culture == c)
+                            .Select(t => t.Allergens)
+                            .FirstOrDefault()
+                            ?? m.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Allergens).FirstOrDefault()
+                            ?? m.Translations.Select(t => t.Allergens).FirstOrDefault()
+                        },
+                        DefaultIngredientAllergenCodes = m.Ingredients
+                            .Where(i => i.IsDefault && i.Ingredient != null && i.Ingredient.AllergenCode != null)
+                            .Select(i => i.Ingredient!.AllergenCode!)
+                            .ToList()
                     });
 
-            return await _q.ToListAsync(query, ct);
+            var rows = await _q.ToListAsync(query, ct);
+            var items = rows.Select(row =>
+            {
+                var item = row.Item;
+                if (string.IsNullOrWhiteSpace(item.Allergens))
+                {
+                    var derivedAllergens = row.DefaultIngredientAllergenCodes
+                        .SelectMany(SplitAllergenCodes)
+                        .Distinct(StringComparer.OrdinalIgnoreCase)
+                        .ToList();
+
+                    if (derivedAllergens.Count > 0)
+                    {
+                        item.Allergens = string.Join(", ", derivedAllergens);
+                    }
+                }
+
+                item.PhotoUrl = BuildPhotoUrl(item.PhotoPath);
+                return item;
+            }).ToList();
+
+            return items;
+        }
+
+        private static IReadOnlyList<string> SplitAllergenCodes(string? value)
+        {
+            if (string.IsNullOrWhiteSpace(value))
+            {
+                return Array.Empty<string>();
+            }
+
+            return value
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
         }
 
         public async Task<MenuItemDto?> GetItemByIdAsync(int id, string? culture, CancellationToken ct = default)
         {
-            var c = string.IsNullOrWhiteSpace(culture) ? "en-US" : culture.Trim();
+            var requestedCulture = string.IsNullOrWhiteSpace(culture)
+                ? DefaultCulture
+                : culture.Trim();
 
-            var query =
-                _items.Query(tracked: false)
-                    .Where(m => m.Id == id)
-                    .Select(m => new MenuItemDto
-                    {
-                        Id = m.Id,
-                        MenuCategoryId = m.MenuCategoryId,
-                        CurrentPrice = m.CurrentPrice,
-                        IsAvailable = m.IsAvailable,
-                        PhotoAssetId = m.PhotoAssetId,
+            var query = _items.Query()
+                .Where(x => x.Id == id)
+                .Select(x => new MenuItemDto
+                {
+                    Id = x.Id,
+                    MenuCategoryId = x.MenuCategoryId,
+                    RestaurantId = x.Category != null ? x.Category.RestaurantId : 0,
+                    CurrentPrice = x.CurrentPrice,
+                    IsAvailable = x.IsAvailable,
+                    SortOrder = x.SortOrder,
+                    EnableIngredientSwap = x.EnableIngredientSwap,
+                    PhotoAssetId = x.PhotoAssetId,
+                    PhotoPath = x.PhotoPath,
 
-                        Name = m.Translations
-                            .Where(t => t.Culture == c)
-                            .Select(t => t.Name)
-                            .FirstOrDefault() ?? "(no name)",
+                    Name =
+                        x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
 
-                        Description = m.Translations
-                            .Where(t => t.Culture == c)
-                            .Select(t => t.Description)
-                            .FirstOrDefault()
-                    });
+                    Description =
+                        x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Description).FirstOrDefault(),
 
-            return await _q.FirstOrDefaultAsync(query, ct);
+                    Allergens =
+                        x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Allergens).FirstOrDefault()
+                        ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Allergens).FirstOrDefault()
+                        ?? x.Translations.Select(t => t.Allergens).FirstOrDefault(),
+
+                    Translations = x.Translations
+                        .OrderBy(t => t.Culture)
+                        .Select(t => new MenuItemTranslationDto
+                        {
+                            Culture = t.Culture,
+                            Name = t.Name,
+                            Description = t.Description,
+                            Allergens = t.Allergens
+                        })
+                        .ToList()
+                });
+
+            var item = await _q.FirstOrDefaultAsync(query, ct);
+            if (item is not null)
+            {
+                item.PhotoUrl = BuildPhotoUrl(item.PhotoPath);
+            }
+
+            return item;
         }
 
         public async Task<int> CreateItemAsync(MenuItemCreateDto dto, string userId, CancellationToken ct = default)
@@ -241,9 +359,11 @@ namespace Core.Services
             var entity = new MenuItem
             {
                 MenuCategoryId = dto.MenuCategoryId,
+                SortOrder = dto.SortOrder,
                 CurrentPrice = dto.CurrentPrice,
                 IsAvailable = dto.IsAvailable,
                 PhotoAssetId = dto.PhotoAssetId,
+                PhotoPath = NormalizePhotoPath(dto.PhotoPath),
                 Translations = dto.Translations.Select(t => new MenuItemTranslation
                 {
                     Culture = t.Culture.Trim(),
@@ -266,8 +386,10 @@ namespace Core.Services
             if (entity is null) throw new InvalidOperationException("MenuItem not found.");
 
             entity.MenuCategoryId = dto.MenuCategoryId;
+            entity.SortOrder = dto.SortOrder;
             entity.IsAvailable = dto.IsAvailable;
             entity.PhotoAssetId = dto.PhotoAssetId;
+            entity.PhotoPath = NormalizePhotoPath(dto.PhotoPath);
 
             // Replace-all translations
             entity.Translations.Clear();
@@ -374,6 +496,24 @@ namespace Core.Services
         {
             if (dto.CurrentPrice < 0) throw new ArgumentOutOfRangeException(nameof(dto.CurrentPrice));
             ValidateItemTranslations(dto.Translations);
+        }
+
+        public string? BuildPhotoUrl(string? photoPath)
+        {
+            if (string.IsNullOrWhiteSpace(photoPath))
+                return null;
+
+            var normalized = photoPath.Replace("\\", "/").Trim();
+            return normalized.StartsWith("/") ? normalized : "/" + normalized;
+        }
+
+        private static string? NormalizePhotoPath(string? photoPath)
+        {
+            if (string.IsNullOrWhiteSpace(photoPath))
+                return null;
+
+            var normalized = photoPath.Replace("\\", "/").Trim();
+            return normalized.StartsWith("/") ? normalized : "/" + normalized;
         }
 
         private static void ValidateItemTranslations(List<MenuItemTranslationDto> tr)

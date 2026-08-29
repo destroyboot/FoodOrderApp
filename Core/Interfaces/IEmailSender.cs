@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Core.Models;
 
 namespace Core.Interfaces
 {
@@ -12,6 +8,7 @@ namespace Core.Interfaces
             string toEmail,
             string subject,
             string htmlBody,
+            IEnumerable<EmailAttachment>? attachments = null,
             CancellationToken ct = default);
     }
 }

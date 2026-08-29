@@ -1,0 +1,6310 @@
+{
+  "entries": {
+    "account.accountRemoval": {
+      "value": "Usuni\u0119cie konta",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.accountRemoved": {
+      "value": "Konto zosta\u0142o usuni\u0119te.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.accountUnavailable": {
+      "value": "To konto nie jest ju\u017C dost\u0119pne.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.changePasswordAction": {
+      "value": "Zmie\u0144 has\u0142o",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.confirmationEmailSent": {
+      "value": "Wys\u0142ano e-mail potwierdzaj\u0105cy.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.confirmNewPassword": {
+      "value": "Potwierd\u017A nowe has\u0142o",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.currentPassword": {
+      "value": "Aktualne has\u0142o",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryContactName": {
+      "value": "Osoba kontaktowa przy dostawie",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryDetails": {
+      "value": "Dane dostawy",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryDetailsSaved": {
+      "value": "Dane dostawy zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryPhone": {
+      "value": "Telefon do dostawy",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.guestInfo": {
+      "value": "Z\u0142\u00F3\u017C zam\u00F3wienie na miejscu jako go\u015B\u0107 albo zaloguj si\u0119, je\u015Bli chcesz korzysta\u0107 z rezerwacji, dostawy i historii zam\u00F3wie\u0144.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.incorrectPassword": {
+      "value": "Aktualne has\u0142o jest nieprawid\u0142owe.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invalidConfirmationCode": {
+      "value": "Kod potwierdzaj\u0105cy jest nieprawid\u0142owy albo wygas\u0142.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceDetails": {
+      "value": "Dane do faktury",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceDetailsSaved": {
+      "value": "Dane do faktury zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceForCompany": {
+      "value": "Faktura dla firmy",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceForPerson": {
+      "value": "Faktura dla osoby",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.newPassword": {
+      "value": "Nowe has\u0142o",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChange": {
+      "value": "Zmiana has\u0142a",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChanged": {
+      "value": "Has\u0142o zosta\u0142o zmienione.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChangeFailed": {
+      "value": "Nie uda\u0142o si\u0119 zmieni\u0107 has\u0142a.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordRequirementsError": {
+      "value": "Nowe has\u0142o nie spe\u0142nia wymaga\u0144 bezpiecze\u0144stwa.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.receiptInvoiceEmail": {
+      "value": "E-mail do paragonu / faktury",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.removeAccount": {
+      "value": "Usu\u0144 konto",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.removeAccountHint": {
+      "value": "Najpierw popro\u015B o wiadomo\u015B\u0107 potwierdzaj\u0105c\u0105, a nast\u0119pnie wpisz tutaj kod, aby usun\u0105\u0107 konto.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.saveDeliveryDetails": {
+      "value": "Zapisz dane dostawy",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.saveInvoiceDetails": {
+      "value": "Zapisz dane do faktury",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.sendConfirmationEmail": {
+      "value": "Wy\u015Blij e-mail potwierdzaj\u0105cy",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.signInToSaveBilling": {
+      "value": "Zaloguj si\u0119, aby zapisa\u0107 dane do faktury.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "app.apiBaseUrl": {
+      "value": "Adres API",
+      "description": null,
+      "groupName": "app",
+      "isActive": true
+    },
+    "app.bootFailed": {
+      "value": "Nie uda\u0142o si\u0119 uruchomi\u0107 aplikacji",
+      "description": null,
+      "groupName": "app",
+      "isActive": true
+    },
+    "auth.accountConfirmed": {
+      "value": "Konto zosta\u0142o potwierdzone. Mo\u017Cesz si\u0119 teraz zalogowa\u0107.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.backToLogin": {
+      "value": "Powr\u00F3t do logowania",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirmationFailed": {
+      "value": "Nie uda\u0142o si\u0119 potwierdzi\u0107 konta.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirming": {
+      "value": "Potwierdzanie...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirmRegistration": {
+      "value": "Potwierd\u017A rejestracj\u0119",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.createAccount": {
+      "value": "Utw\u00F3rz konto",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.creatingAccount": {
+      "value": "Tworzenie konta...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.enterConfirmationCode": {
+      "value": "Wpisz kod potwierdzaj\u0105cy wys\u0142any na Tw\u00F3j adres email.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.forgotPassword": {
+      "value": "Zapomnia\u0142e\u015B has\u0142a?",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.invalidCredentials": {
+      "value": "Niepoprawny adres e-mail lub has\u0142o.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.login": {
+      "value": "Logowanie",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.loginFailed": {
+      "value": "Logowanie nie powiod\u0142o si\u0119.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.logout": {
+      "value": "Wyloguj",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.passwordRequirementsHint": {
+      "value": "Has\u0142o musi mie\u0107 co najmniej 8 znak\u00F3w, wielk\u0105 liter\u0119, cyfr\u0119 i znak specjalny.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.passwordResetSuccess": {
+      "value": "Has\u0142o zosta\u0142o zresetowane.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.register": {
+      "value": "Zarejestruj",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationCodeResent": {
+      "value": "Je\u015Bli ten adres e-mail istnieje, wys\u0142ano nowy kod.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationCodeSent": {
+      "value": "Kod potwierdzaj\u0105cy zosta\u0142 wys\u0142any na Tw\u00F3j email.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationFailed": {
+      "value": "Rejestracja nie powiod\u0142a si\u0119.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.requestFailed": {
+      "value": "\u017B\u0105danie nie powiod\u0142o si\u0119.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resendCode": {
+      "value": "Wy\u015Blij kod ponownie",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resendFailed": {
+      "value": "Nie uda\u0142o si\u0119 wys\u0142a\u0107 kodu ponownie.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resending": {
+      "value": "Wysy\u0142anie...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetFailed": {
+      "value": "Resetowanie has\u0142a nie powiod\u0142o si\u0119.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetLinkSent": {
+      "value": "Je\u015Bli ten adres e-mail istnieje, wys\u0142ano link do resetowania has\u0142a.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetPassword": {
+      "value": "Zresetuj has\u0142o",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resettingPassword": {
+      "value": "Resetowanie...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetToken": {
+      "value": "Token resetowania has\u0142a",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.sendResetLink": {
+      "value": "Wy\u015Blij link do resetowania",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signedIn": {
+      "value": "Zalogowano.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signedOut": {
+      "value": "Wylogowano.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signInFirst": {
+      "value": "Najpierw si\u0119 zaloguj.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signOut": {
+      "value": "Wyloguj",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.staffLogin": {
+      "value": "Logowanie pracownika",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "cart.addressLine1": {
+      "value": "Adres linia 1",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.addressLine2Optional": {
+      "value": "Adres linia 2 (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.addSomethingHint": {
+      "value": "Dodaj co\u015B z menu albo otw\u00F3rz jeden z aktywnych koszyk\u00F3w powy\u017Cej.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.availableMenuItems": {
+      "value": "Available menu items",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.backToCarts": {
+      "value": "Powr\u00F3t do koszyk\u00F3w",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressLine1": {
+      "value": "Adres rozliczeniowy linia 1",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressLine2Optional": {
+      "value": "Adres rozliczeniowy linia 2 (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressRequired": {
+      "value": "Adres rozliczeniowy jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCity": {
+      "value": "Miasto rozliczeniowe",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCityRequired": {
+      "value": "Miasto rozliczeniowe jest wymagane.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCountryOptional": {
+      "value": "Kraj rozliczeniowy (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingPostalCode": {
+      "value": "Kod pocztowy rozliczeniowy",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingPostalCodeRequired": {
+      "value": "Kod pocztowy rozliczeniowy jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cancelPayment": {
+      "value": "Anuluj p\u0142atno\u015B\u0107",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cardholderName": {
+      "value": "Imi\u0119 i nazwisko na karcie",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cardNumber": {
+      "value": "Numer karty",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chargeAmount": {
+      "value": "Kwota obci\u0105\u017Cenia",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.checkoutDetails": {
+      "value": "Szczeg\u00F3\u0142y zam\u00F3wienia",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseCart": {
+      "value": "Wybierz koszyk",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseDocumentType": {
+      "value": "Wybierz typ dokumentu",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseOrderType": {
+      "value": "Wybierz typ zam\u00F3wienia",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.choosePaymentOption": {
+      "value": "Wybierz opcj\u0119 p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.choosePersonOrCompany": {
+      "value": "Wybierz osob\u0119 lub firm\u0119",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.company": {
+      "value": "Firma",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.companyName": {
+      "value": "Nazwa firmy",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmEmailAddress": {
+      "value": "Potwierd\u017A adres email",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmOrder": {
+      "value": "Potwierd\u017A zam\u00F3wienie",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmOrderFor": {
+      "value": "Potwierd\u017A zam\u00F3wienie dla",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.countryOptional": {
+      "value": "Kraj (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryAddressRequired": {
+      "value": "Adres dostawy jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryCityRequired": {
+      "value": "Miasto dostawy jest wymagane.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryContactRequired": {
+      "value": "Imi\u0119 i nazwisko odbiorcy dostawy jest wymagane.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryFee": {
+      "value": "Op\u0142ata za dostaw\u0119",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryNoteOptional": {
+      "value": "Notatka do dostawy (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPhoneInvalid": {
+      "value": "Numer telefonu do dostawy jest niepoprawny.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPhoneRequired": {
+      "value": "Telefon do dostawy jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPostalCodeRequired": {
+      "value": "Kod pocztowy dostawy jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.details": {
+      "value": "Cart details",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.disable": {
+      "value": "Wy\u0142\u0105cz",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.document": {
+      "value": "Dokument",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.editingCartFor": {
+      "value": "Edytujesz koszyk dla",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailAddress": {
+      "value": "Adres email",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailConfirmationRequired": {
+      "value": "Potwierd\u017A sw\u00F3j adres e-mail.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailMismatch": {
+      "value": "Adresy e-mail nie s\u0105 takie same.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.empty": {
+      "value": "Ten koszyk jest pusty.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.enable": {
+      "value": "W\u0142\u0105cz",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedPrep": {
+      "value": "Szacowany czas przygotowania",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedPreparation": {
+      "value": "Przewidywany czas przygotowania",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedReadyAt": {
+      "value": "Przewidywana gotowo\u015B\u0107",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.expiry": {
+      "value": "Data wa\u017Cno\u015Bci (MM/RR)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalize": {
+      "value": "Zako\u0144cz",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalized": {
+      "value": "Cart finalized.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalizeFailed": {
+      "value": "Failed to finalize cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.fixHighlighted": {
+      "value": "Popraw pod\u015Bwietlone pola przed z\u0142o\u017Ceniem zam\u00F3wienia.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.fullName": {
+      "value": "Imi\u0119 i nazwisko",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.guestMaxActiveHint": {
+      "value": "Mo\u017Cesz mie\u0107 maksymalnie 1 aktywny koszyk.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.hour": {
+      "value": "Godzina",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.in": {
+      "value": "w",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoice": {
+      "value": "Faktura",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceAttached": {
+      "value": "Dane faktury zostan\u0105 do\u0142\u0105czone do tego zam\u00F3wienia i b\u0119dzie mo\u017Cna ich u\u017Cy\u0107 nast\u0119pnym razem.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceCompanyRequired": {
+      "value": "Nazwa firmy jest wymagana do faktury.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceEmail": {
+      "value": "Email do faktury",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceFor": {
+      "value": "Faktura dla",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoicePersonNameRequired": {
+      "value": "Pe\u0142ne imi\u0119 i nazwisko jest wymagane do faktury.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceTaxIdDigits": {
+      "value": "NIP mo\u017Ce zawiera\u0107 wy\u0142\u0105cznie cyfry.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceTaxIdRequired": {
+      "value": "NIP jest wymagany do faktury.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.itemsInCart": {
+      "value": "Items in cart",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.lines": {
+      "value": "linii",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.loadFailed": {
+      "value": "Failed to load cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.maxActiveHint": {
+      "value": "Mo\u017Cesz mie\u0107 maksymalnie 4 aktywne koszyki, po jednym na restauracj\u0119.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.minute": {
+      "value": "Minuta",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.mockPayment": {
+      "value": "P\u0142atno\u015B\u0107 testowa",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.mockPaymentHint": {
+      "value": "To jest demonstracyjna strona p\u0142atno\u015Bci. Wpisz testowe dane karty, aby kontynuowa\u0107.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.noCartSelected": {
+      "value": "Nie wybrano koszyka",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.noItems": {
+      "value": "No items in cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.openActiveCartHint": {
+      "value": "Otw\u00F3rz jeden z aktywnych koszyk\u00F3w powy\u017Cej, aby zobaczy\u0107 jego pozycje.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.openThisCart": {
+      "value": "Otw\u00F3rz ten koszyk",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlaced": {
+      "value": "Zam\u00F3wienie z\u0142o\u017Cone",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlacedMessage": {
+      "value": "Twoje zam\u00F3wienie",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlacedSuffix": {
+      "value": "zosta\u0142o z\u0142o\u017Cone.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderSummary": {
+      "value": "Podsumowanie zam\u00F3wienia",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payAtCounterHint": {
+      "value": "Podejd\u017A teraz do kasy i podaj ten numer zam\u00F3wienia podczas p\u0142atno\u015Bci.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentDetails": {
+      "value": "Dane p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentDetailsHint": {
+      "value": "Wpisz nazw\u0119 na karcie, numer karty oraz dat\u0119 wa\u017Cno\u015Bci w formacie MM/RR.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentOption": {
+      "value": "Opcja p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentRequired": {
+      "value": "Wybierz metod\u0119 p\u0142atno\u015Bci.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payNow": {
+      "value": "Zap\u0142a\u0107 teraz",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payOnDeliveryHint": {
+      "value": "Przygotuj si\u0119 do p\u0142atno\u015Bci przy dostawie.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.person": {
+      "value": "Osoba",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupNameRequired": {
+      "value": "Imi\u0119 i nazwisko do odbioru jest wymagane.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupNoteOptional": {
+      "value": "Notatka do odbioru (opcjonalnie)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupPhoneInvalid": {
+      "value": "Numer telefonu do odbioru jest niepoprawny.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupPhoneRequired": {
+      "value": "Telefon do odbioru jest wymagany.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupTimeFuture": {
+      "value": "Godzina odbioru musi by\u0107 p\u00F3\u017Aniejsza ni\u017C aktualna.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupTimeInvalid": {
+      "value": "Wybierz poprawn\u0105 godzin\u0119 odbioru.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placeOrder": {
+      "value": "Z\u0142\u00F3\u017C zam\u00F3wienie",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placeOrderFailed": {
+      "value": "Nie uda\u0142o si\u0119 z\u0142o\u017Cy\u0107 zam\u00F3wienia",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placing": {
+      "value": "Sk\u0142adanie...",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.preview": {
+      "value": "Podgl\u0105d",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.previewFailed": {
+      "value": "Failed to preview cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.processing": {
+      "value": "Przetwarzanie...",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.receiptPhysical": {
+      "value": "Paragon pozostaje fizyczny. Personel nadal mo\u017Ce p\u00F3\u017Aniej wys\u0142a\u0107 podsumowanie zam\u00F3wienia emailem.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.regularReceipt": {
+      "value": "Paragon",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeCart": {
+      "value": "Usu\u0144 koszyk",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeCartConfirm": {
+      "value": "Czy chcesz usun\u0105\u0107 ten koszyk?",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeLastItem": {
+      "value": "Usu\u0144 ostatni\u0105 pozycj\u0119",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeLastItemConfirm": {
+      "value": "To jest ostatnia pozycja w koszyku. Czy chcesz usun\u0105\u0107 ca\u0142y koszyk?",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.requestedPickupTimeToday": {
+      "value": "\u017B\u0105dany czas odbioru na dzi\u015B",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveInvoiceDataNextTime": {
+      "value": "zapisz dane faktury na nast\u0119pny raz",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveItems": {
+      "value": "Zapisz pozycje",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveItemsFailed": {
+      "value": "Failed to save cart items.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveMeta": {
+      "value": "Save Meta",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveMetaFailed": {
+      "value": "Failed to save cart meta.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.subtotal": {
+      "value": "Suma cz\u0119\u015Bciowa",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.taxId": {
+      "value": "NIP",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.thisRestaurant": {
+      "value": "tej restauracji",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.totalsAuto": {
+      "value": "Podsumowanie pojawi si\u0119 automatycznie podczas od\u015Bwie\u017Cania koszyka.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.trackOrderHint": {
+      "value": "Status mo\u017Cesz \u015Bledzi\u0107 na stronie Moje zam\u00F3wienia.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "categories.add": {
+      "value": "Dodaj kategori\u0119",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.deleteConfirm": {
+      "value": "Usun\u0105\u0107 kategori\u0119?",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.edit": {
+      "value": "Edytuj kategori\u0119",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 wczyta\u0107 kategorii.",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.none": {
+      "value": "Brak kategorii pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "common.active": {
+      "value": "Aktywne",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.add": {
+      "value": "Dodaj",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.all": {
+      "value": "Wszystko",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.allCultures": {
+      "value": "Wszystkie j\u0119zyki",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.allLanguages": {
+      "value": "Wszystkie j\u0119zyki",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "common.appAdministration": {
+      "value": "Administracja aplikacji",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.available": {
+      "value": "Dost\u0119pne",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.back": {
+      "value": "Wr\u00F3\u0107",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.cancel": {
+      "value": "Anuluj",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.change": {
+      "value": "Zmie\u0144",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.city": {
+      "value": "Miasto",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.clear": {
+      "value": "Wyczy\u015B\u0107",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.close": {
+      "value": "Zamknij",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirm": {
+      "value": "Potwierd\u017A",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirmationCode": {
+      "value": "Kod potwierdzaj\u0105cy",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirmPassword": {
+      "value": "Potwierd\u017A has\u0142o",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.connectedWorkspace": {
+      "value": "Panel codziennej pracy restauracji",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.create": {
+      "value": "Utw\u00F3rz",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.date": {
+      "value": "Date",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.delete": {
+      "value": "Usu\u0144",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.done": {
+      "value": "Gotowe",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "common.edit": {
+      "value": "Edytuj",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.email": {
+      "value": "Email",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.genericError": {
+      "value": "Co\u015B posz\u0142o nie tak",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.id": {
+      "value": "Id",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.inactive": {
+      "value": "Nieaktywne",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.invalidId": {
+      "value": "Invalid id.",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.item": {
+      "value": "Item",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.language": {
+      "value": "J\u0119zyk",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.languages": {
+      "value": "J\u0119zyki",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.loading": {
+      "value": "\u0141adowanie...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.loggedInAs": {
+      "value": "Zalogowano jako",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.message": {
+      "value": "Informacja",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.minutes": {
+      "value": "min",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.name": {
+      "value": "Nazwa",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.next": {
+      "value": "Nast\u0119pny",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.no": {
+      "value": "Nie",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.none": {
+      "value": "Brak",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.note": {
+      "value": "Note",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.number": {
+      "value": "Numer",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.open": {
+      "value": "Otw\u00F3rz",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.password": {
+      "value": "Has\u0142o",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.phone": {
+      "value": "Telefon",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.postalCode": {
+      "value": "Kod pocztowy",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.previous": {
+      "value": "Poprzedni",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.price": {
+      "value": "Price",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.quantity": {
+      "value": "Qty",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.reload": {
+      "value": "Od\u015Bwie\u017C",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.remove": {
+      "value": "Usu\u0144",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.resetFilters": {
+      "value": "Wyczy\u015B\u0107 filtry",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.restaurantOperations": {
+      "value": "Operacje restauracji",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.save": {
+      "value": "Zapisz",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.saving": {
+      "value": "Saving...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.search": {
+      "value": "Szukaj",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.seats": {
+      "value": "seats",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selected": {
+      "value": "Wybrano",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectLanguage": {
+      "value": "Wybierz j\u0119zyk",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectRestaurantOption": {
+      "value": "-- select restaurant --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectTableOption": {
+      "value": "-- select table --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectTimeOption": {
+      "value": "-- select time --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.sending": {
+      "value": "Sending...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.street": {
+      "value": "Ulica",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.time": {
+      "value": "Time",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.tryAgain": {
+      "value": "Spr\u00F3buj ponownie",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.unknownError": {
+      "value": "Nieznany b\u0142\u0105d",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.userName": {
+      "value": "Nazwa u\u017Cytkownika",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.welcomeBack": {
+      "value": "Witaj ponownie",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.working": {
+      "value": "Working...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.yes": {
+      "value": "Tak",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "Content-Type": {
+      "value": "application/json",
+      "description": null,
+      "groupName": "general",
+      "isActive": true
+    },
+    "dataAdmin.accessibleTables": {
+      "value": "Dost\u0119pne tabele",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.any": {
+      "value": "Dowolne",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.applyToSelectedTables": {
+      "value": "Zastosuj do wybranych tabel",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.bulkDeleteFailed": {
+      "value": "Nie uda\u0142o si\u0119 usun\u0105\u0107 zaznaczonych wierszy.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.columns": {
+      "value": "Kolumny",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.create": {
+      "value": "Tworzenie",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.createRow": {
+      "value": "Utw\u00F3rz wiersz",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.delete": {
+      "value": "Usuwanie",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteRowConfirm": {
+      "value": "Usu\u0144 wiersz",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteSelected": {
+      "value": "Usu\u0144 zaznaczone",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteSelectedConfirm": {
+      "value": "Usu\u0144",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleting": {
+      "value": "Usuwanie...",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deselectAll": {
+      "value": "Odznacz wszystko",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.editRow": {
+      "value": "Edytuj wiersz",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.filter": {
+      "value": "Filtr",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.fromTable": {
+      "value": "z",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.grantsSaveFailed": {
+      "value": "Nie uda\u0142o si\u0119 zapisa\u0107 uprawnie\u0144.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 administracji danymi.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.newRow": {
+      "value": "Nowy wiersz",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.noGrants": {
+      "value": "Nie skonfigurowano jeszcze \u017Cadnych uprawnie\u0144.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.noneAccessible": {
+      "value": "Brak dost\u0119pnych tabel.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.read": {
+      "value": "Odczyt",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.removeSelectedGrants": {
+      "value": "Usu\u0144 wybrane uprawnienia",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.reset": {
+      "value": "Resetuj",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.restaurantAdminGrants": {
+      "value": "Uprawnienia administratora restauracji",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.restaurantAdminGrantsInfo": {
+      "value": "Te uprawnienia dotycz\u0105 wszystkich u\u017Cytkownik\u00F3w z rol\u0105 RestaurantAdmin.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowDeleteFailed": {
+      "value": "Nie uda\u0142o si\u0119 usun\u0105\u0107 wiersza.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowSaveFailed": {
+      "value": "Nie uda\u0142o si\u0119 zapisa\u0107 wiersza.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowsLoadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 wierszy tabeli.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.saveGrants": {
+      "value": "Zapisz uprawnienia",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchColumns": {
+      "value": "Szukaj we wszystkich wy\u015Bwietlonych kolumnach",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchFailed": {
+      "value": "Nie uda\u0142o si\u0119 wyszuka\u0107 wierszy tabeli.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchTables": {
+      "value": "Szukaj tabel",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectAll": {
+      "value": "Zaznacz wszystko",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectedRows": {
+      "value": "zaznaczone wiersze",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectTables": {
+      "value": "Wybierz tabele",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.update": {
+      "value": "Aktualizacja",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.writeWithoutRead": {
+      "value": "Masz prawo zapisu do tej tabeli, ale nie prawa odczytu.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "email.orderSummary.date": {
+      "value": "Data",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.deliveryFee": {
+      "value": "Op\u0142ata za dostaw\u0119",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.invoice": {
+      "value": "Faktura",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.item": {
+      "value": "Pozycja",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.note": {
+      "value": "Uwagi",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.price": {
+      "value": "Cena",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.quantity": {
+      "value": "Ilo\u015B\u0107",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.restaurant": {
+      "value": "Restauracja",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.subject": {
+      "value": "Food Order App - podsumowanie zam\u00F3wienia #{orderNumber}",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.subtotal": {
+      "value": "Suma cz\u0119\u015Bciowa",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.table": {
+      "value": "Stolik",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.thankYou": {
+      "value": "Dzi\u0119kujemy za zam\u00F3wienie!",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.title": {
+      "value": "Podsumowanie zam\u00F3wienia #{orderNumber}",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.total": {
+      "value": "Razem",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type": {
+      "value": "Typ",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.delivery": {
+      "value": "Dostawa",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.pickup": {
+      "value": "Odbi\u00F3r osobisty",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.table": {
+      "value": "Do stolika",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "ingredients.add": {
+      "value": "Dodaj sk\u0142adnik",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.deleteConfirm": {
+      "value": "Usun\u0105\u0107 sk\u0142adnik?",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.edit": {
+      "value": "Edytuj sk\u0142adnik",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.filterAllergens": {
+      "value": "Filtruj alergeny",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 wczyta\u0107 sk\u0142adnik\u00F3w.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.nameRequired": {
+      "value": "Ka\u017Cde t\u0142umaczenie musi mie\u0107 nazw\u0119.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.noAllergensMatch": {
+      "value": "Brak alergen\u00F3w pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.none": {
+      "value": "Brak sk\u0142adnik\u00F3w pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.searchAllergens": {
+      "value": "Szukaj alergen\u00F3w",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "menu.addAsIs": {
+      "value": "Dodaj bez zmian",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addedToCart": {
+      "value": "dodano do koszyka",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addFailed": {
+      "value": "Nie uda\u0142o si\u0119 doda\u0107 do koszyka",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addIngredients": {
+      "value": "Dodaj sk\u0142adniki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addToCart": {
+      "value": "Dodaj do koszyka",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.celery": {
+      "value": "seler",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.crustaceans": {
+      "value": "skorupiaki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.dairy": {
+      "value": "nabia\u0142",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.eggs": {
+      "value": "jaja",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.fish": {
+      "value": "ryby",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.gluten": {
+      "value": "gluten",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.lupin": {
+      "value": "\u0142ubin",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.milk": {
+      "value": "mleko",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.molluscs": {
+      "value": "mi\u0119czaki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.mustard": {
+      "value": "gorczyca",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.nuts": {
+      "value": "orzechy",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.peanuts": {
+      "value": "orzeszki ziemne",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.sesame": {
+      "value": "sezam",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.soy": {
+      "value": "soja",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.sulphites": {
+      "value": "siarczyny",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergens": {
+      "value": "Alergeny",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.askCustomizeBeforeAdd": {
+      "value": "Czy chcesz zmieni\u0107 sk\u0142adniki przed dodaniem dania do koszyka?",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.basePrice": {
+      "value": "Cena podstawowa",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.chooseRestaurant": {
+      "value": "Wybierz restauracj\u0119 na stronie Restauracje, aby za\u0142adowa\u0107 menu.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.chooseSorting": {
+      "value": "Wybierz sortowanie",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.confirmCustomization": {
+      "value": "Dodaj zmodyfikowane danie",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizationExtra": {
+      "value": "Dop\u0142ata za modyfikacj\u0119",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizationUnavailable": {
+      "value": "Modyfikacja jest niedost\u0119pna",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizeIngredients": {
+      "value": "Zmie\u0144 sk\u0142adniki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.dishIngredients": {
+      "value": "Sk\u0142adniki dania",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientCount": {
+      "value": "Dodatkowo p\u0142atne sk\u0142adniki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientsTotal": {
+      "value": "\u0141\u0105czna dop\u0142ata za sk\u0142adniki",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientUnitPrice": {
+      "value": "Cena za dodatkowy sk\u0142adnik",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.fixedIngredient": {
+      "value": "Sta\u0142y sk\u0142adnik",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.ingredientSwapAvailable": {
+      "value": "Mo\u017Cliwa zmiana sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noDescription": {
+      "value": "Brak opisu.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noDishIngredients": {
+      "value": "Nie skonfigurowano sk\u0142adnik\u00F3w dania.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noExtraIngredients": {
+      "value": "Brak dodatkowych sk\u0142adnik\u00F3w.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.orderingFrom": {
+      "value": "Zamawiasz z",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.removed": {
+      "value": "Usuni\u0119to",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.saveCustomization": {
+      "value": "Zapisz zmiany sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.search": {
+      "value": "Szukaj da\u0144",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortDefault": {
+      "value": "Kolejno\u015B\u0107 domy\u015Blna",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortMenu": {
+      "value": "Sortuj menu",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortName": {
+      "value": "Nazwa",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortPriceAsc": {
+      "value": "Cena rosn\u0105co",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortPriceDesc": {
+      "value": "Cena malej\u0105co",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menuItems.add": {
+      "value": "Dodaj pozycj\u0119",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.allowedSubstituteIngredients": {
+      "value": "Dozwolone sk\u0142adniki zast\u0119pcze",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.chooseSubstituteIngredients": {
+      "value": "Wybierz sk\u0142adniki zast\u0119pcze",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.chooseSwappableIngredients": {
+      "value": "Wybierz wymienialne sk\u0142adniki",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.deleteConfirm": {
+      "value": "Usun\u0105\u0107 pozycj\u0119?",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.derivedAllergens": {
+      "value": "Alergeny wynikaj\u0105ce ze sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.dishIngredients": {
+      "value": "Sk\u0142adniki dania",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.displayLanguage": {
+      "value": "J\u0119zyk wy\u015Bwietlania",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.edit": {
+      "value": "Edytuj pozycj\u0119",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.enableIngredientSwap": {
+      "value": "W\u0142\u0105cz zamian\u0119 sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.ingredientSwapSettings": {
+      "value": "Ustawienia zamiany sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 wczyta\u0107 pozycji.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noDerivedAllergens": {
+      "value": "Wybrane sk\u0142adniki nie maj\u0105 jeszcze przypisanych alergen\u00F3w.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noDishIngredientsSelected": {
+      "value": "Nie wybrano jeszcze sk\u0142adnik\u00F3w dania.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noIngredientsMatch": {
+      "value": "\u017Badne sk\u0142adniki nie pasuj\u0105 do wyszukiwania.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.none": {
+      "value": "Brak pozycji pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noPhotoSelected": {
+      "value": "Nie wybrano przes\u0142anego zdj\u0119cia.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noSubstituteIngredientsSelected": {
+      "value": "Nie wybrano sk\u0142adnik\u00F3w zast\u0119pczych.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noSwappableIngredientsSelected": {
+      "value": "Nie wybrano wymienialnych sk\u0142adnik\u00F3w.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.photoPreview": {
+      "value": "Podgl\u0105d pozycji menu",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.photoUploadFailed": {
+      "value": "Nie uda\u0142o si\u0119 przes\u0142a\u0107 zdj\u0119cia.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.searchIngredients": {
+      "value": "Szukaj sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectDishIngredients": {
+      "value": "Wybierz sk\u0142adniki dania",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectIngredients": {
+      "value": "Wybierz sk\u0142adniki",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectSubstituteIngredients": {
+      "value": "Wybierz sk\u0142adniki zast\u0119pcze",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectSwappableDishIngredients": {
+      "value": "Wybierz wymienialne sk\u0142adniki dania",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.swap": {
+      "value": "Zamiana",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.swappableDishIngredients": {
+      "value": "Wymienialne sk\u0142adniki dania",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.turnOnIngredientSwapHint": {
+      "value": "W\u0142\u0105cz t\u0119 opcj\u0119, aby wybra\u0107 sk\u0142adniki dania oraz dozwolone zamienniki.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "mobile.reservations.activeReservations": {
+      "value": "Aktywne rezerwacje",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.at": {
+      "value": "o",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.back": {
+      "value": "Powr\u00F3t do rezerwacji",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.bookFor": {
+      "value": "Rezerwacja dla",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.bookTable": {
+      "value": "Zarezerwuj stolik",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancel": {
+      "value": "Anuluj rezerwacj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelBody": {
+      "value": "Czy na pewno chcesz anulowa\u0107 t\u0119 rezerwacj\u0119?",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelFailed": {
+      "value": "Nie uda\u0142o si\u0119 anulowa\u0107 rezerwacji",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelledBody": {
+      "value": "Stolik zosta\u0142 zwolniony.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelledTitle": {
+      "value": "Rezerwacja anulowana",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelTitle": {
+      "value": "Anuluj rezerwacj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseDate": {
+      "value": "Wybierz dat\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.choosePartySize": {
+      "value": "Wybierz liczb\u0119 os\u00F3b",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseRestaurantFirst": {
+      "value": "Najpierw wybierz restauracj\u0119.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlot": {
+      "value": "Wybierz termin",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlotBody": {
+      "value": "Najpierw wybierz szczeg\u00F3\u0142y rezerwacji.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlotTitle": {
+      "value": "Wybierz termin",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseTable": {
+      "value": "Wybierz stolik",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseTableFirst": {
+      "value": "Najpierw wybierz stolik",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.confirmQuestion": {
+      "value": "Wys\u0142a\u0107 pro\u015Bb\u0119 o rezerwacj\u0119 do",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.confirmTitle": {
+      "value": "Potwierd\u017A rezerwacj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.createFailed": {
+      "value": "Nie uda\u0142o si\u0119 utworzy\u0107 rezerwacji",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.date": {
+      "value": "Data rezerwacji",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.loadFailedTitle": {
+      "value": "Nie uda\u0142o si\u0119 wczyta\u0107 dost\u0119pno\u015Bci",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.loadingTables": {
+      "value": "\u0141adowanie stolik\u00F3w...",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.none": {
+      "value": "Brak aktywnych rezerwacji.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.noSlots": {
+      "value": "Brak dost\u0119pnych termin\u00F3w rezerwacji na ten dzie\u0144.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.notAccepting": {
+      "value": "Ta restauracja nie przyjmuje teraz rezerwacji.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.note": {
+      "value": "Notatka",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.optionalNote": {
+      "value": "Opcjonalna notatka dla restauracji",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.people": {
+      "value": "Liczba os\u00F3b",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.pickHint": {
+      "value": "Wybierz dat\u0119, stolik i dost\u0119pny slot, a nast\u0119pnie wy\u015Blij pro\u015Bb\u0119 o rezerwacj\u0119.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.requestedBody": {
+      "value": "Restauracja otrzyma\u0142a Twoj\u0105 pro\u015Bb\u0119 o rezerwacj\u0119.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.requestedTitle": {
+      "value": "Wys\u0142ano pro\u015Bb\u0119 o rezerwacj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.send": {
+      "value": "Wy\u015Blij pro\u015Bb\u0119 o rezerwacj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.sending": {
+      "value": "Wysy\u0142anie...",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.signInHint": {
+      "value": "Rezerwacje s\u0105 dost\u0119pne tylko dla zalogowanych u\u017Cytkownik\u00F3w. Utw\u00F3rz konto albo zaloguj si\u0119 w zak\u0142adce Konto.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.signInRequired": {
+      "value": "Wymagane logowanie",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.slot": {
+      "value": "Dost\u0119pny termin",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.cancelled": {
+      "value": "Anulowana",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.completed": {
+      "value": "Zako\u0144czona",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.confirmed": {
+      "value": "Potwierdzona",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.noShow": {
+      "value": "Nieobecny",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.requested": {
+      "value": "Oczekuj\u0105ca",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.seated": {
+      "value": "Usadzeni",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.table": {
+      "value": "Stolik",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.title": {
+      "value": "Rezerwacje",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.addressPlaceholder": {
+      "value": "Tutaj pojawi si\u0119 adres.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.available": {
+      "value": "Dost\u0119pne",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.cardTitle": {
+      "value": "Restauracja",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.changeRestaurant": {
+      "value": "Zmie\u0144 restauracj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.cuisine": {
+      "value": "Kuchnia",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.delivery": {
+      "value": "Dostawa",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryAddressFilter": {
+      "value": "Filtr adresu dostawy",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryFee": {
+      "value": "Op\u0142ata za dostaw\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryFilterHint": {
+      "value": "Filtrowanie adresu dostawy obecnie dopasowuje tekst adresu restauracji. Strefy dostawy oparte o odleg\u0142o\u015B\u0107 mo\u017Cna doda\u0107 p\u00F3\u017Aniej.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryHours": {
+      "value": "Godziny dostawy",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryRadius": {
+      "value": "Promie\u0144 dostawy",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.kitchenType": {
+      "value": "Typ kuchni",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.leadTime": {
+      "value": "Minimalny czas wyprzedzenia dostawy",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.menu": {
+      "value": "Menu",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.minimumDeliveryOrder": {
+      "value": "Minimalne zam\u00F3wienie z dostaw\u0105",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.none": {
+      "value": "Brak",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notAvailable": {
+      "value": "Niedost\u0119pne",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notSet": {
+      "value": "Nie ustawiono",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notSetYet": {
+      "value": "Jeszcze nie ustawiono",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.openRestaurant": {
+      "value": "Otw\u00F3rz restauracj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.orderOptions": {
+      "value": "Opcje zam\u00F3wienia",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.paymentOptions": {
+      "value": "Opcje p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.pickup": {
+      "value": "Odbi\u00F3r osobisty",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.radiusMinimum": {
+      "value": "Promie\u0144 {0} km, minimum {1}",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.reservations": {
+      "value": "Rezerwacje",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.searchPlaceholder": {
+      "value": "Szukaj po restauracji, kuchni lub adresie",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.selectRestaurant": {
+      "value": "Wybierz restauracj\u0119",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.subtitle": {
+      "value": "Go\u015Bcie mog\u0105 zamawia\u0107 na miejscu bez konta. Zaloguj si\u0119 p\u00F3\u017Aniej, aby korzysta\u0107 z rezerwacji, dostawy i historii zam\u00F3wie\u0144.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.title": {
+      "value": "Restauracje",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.toTable": {
+      "value": "Do stolika",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "myReservations.cancelFailed": {
+      "value": "Failed to cancel reservation.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.confirmCancel": {
+      "value": "Cancel this reservation?",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.confirmCreate": {
+      "value": "Are you sure you want to make this reservation?",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.createFailed": {
+      "value": "Failed to create reservation.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.disabledForRestaurant": {
+      "value": "Reservations are disabled for this restaurant.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.history": {
+      "value": "My reservation history",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.makeReservation": {
+      "value": "Make a reservation",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.noteForRestaurant": {
+      "value": "Note for restaurant",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.selectRestaurantTableTime": {
+      "value": "Select a restaurant, table and time first.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "nav.account": {
+      "value": "Konto",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.activeOrders": {
+      "value": "Aktywne zam\u00F3wienia",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.cart": {
+      "value": "Koszyk",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.categories": {
+      "value": "Kategorie",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.changePassword": {
+      "value": "Zmie\u0144 has\u0142o",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.dataGrants": {
+      "value": "Uprawnienia administratora restauracji",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.dataTables": {
+      "value": "Tabele danych",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.ingredients": {
+      "value": "Sk\u0142adniki",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.items": {
+      "value": "Pozycje",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.menu": {
+      "value": "Menu",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.myDeliveries": {
+      "value": "Moje dostawy",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.myReservations": {
+      "value": "Moje rezerwacje",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.orderHistory": {
+      "value": "Historia zam\u00F3wie\u0144",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.orders": {
+      "value": "Moje zam\u00F3wienia",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.platformSettings": {
+      "value": "Ustawienia platformy",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.reports": {
+      "value": "Raporty",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.reservations": {
+      "value": "Rezerwacje",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.restaurants": {
+      "value": "Restauracje",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.restaurantSettings": {
+      "value": "Ustawienia restauracji",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.tables": {
+      "value": "Sto\u0142y",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.users": {
+      "value": "U\u017Cytkownicy",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "notifications.close": {
+      "value": "Zamknij powiadomienie",
+      "description": null,
+      "groupName": "notifications",
+      "isActive": true
+    },
+    "orders.action.accept": {
+      "value": "Accept",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.action.changeStatus": {
+      "value": "change status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.action.sendToKitchen": {
+      "value": "Send to kitchen",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 lub po\u0142\u0105czy\u0107.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.noneForGroup": {
+      "value": "Brak aktywnych zam\u00F3wie\u0144 w tej sekcji.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.subtitle": {
+      "value": "Obs\u0142uguj zam\u00F3wienia do stolika, na odbi\u00F3r i z dostaw\u0105 w jednym widoku na \u017Cywo.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeCount": {
+      "value": "aktywnych",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeSection": {
+      "value": "Aktywne",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeTab": {
+      "value": "Aktywne zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.address": {
+      "value": "Adres",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.addressPending": {
+      "value": "Adres oczekuje",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignDriver": {
+      "value": "Assign driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignDriverFailed": {
+      "value": "Failed to assign delivery driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignedDriver": {
+      "value": "Przypisany kierowca",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billing": {
+      "value": "Billing",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingAddress": {
+      "value": "Adres rozliczeniowy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType": {
+      "value": "Typ rozliczenia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType.company": {
+      "value": "Firma",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType.person": {
+      "value": "Osoba prywatna",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.clearInvoiceRequest": {
+      "value": "Clear invoice request",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.collectPaymentFailed": {
+      "value": "Failed to collect payment and complete order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.company": {
+      "value": "Firma",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmMarkPaid": {
+      "value": "Czy na pewno oznaczy\u0107 to zam\u00F3wienie jako op\u0142acone?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmMarkPaidAndComplete": {
+      "value": "Czy na pewno oznaczy\u0107 to zam\u00F3wienie jako op\u0142acone i zako\u0144czone?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmStatusChange": {
+      "value": "Czy na pewno zmieni\u0107 status tego zam\u00F3wienia?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.created": {
+      "value": "Utworzono",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer": {
+      "value": "Klient",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.anonymous": {
+      "value": "anonimowy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.anonymousDisplay": {
+      "value": "Anonimowy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.user": {
+      "value": "u\u017Cytkownik",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.userDisplay": {
+      "value": "U\u017Cytkownik",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customerEmail": {
+      "value": "E-mail klienta",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryAddressPending": {
+      "value": "Adres dostawy oczekuje",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryContact": {
+      "value": "Kontakt dostawy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryFee": {
+      "value": "Op\u0142ata za dostaw\u0119",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryNote": {
+      "value": "Notatka dostawy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryOrder": {
+      "value": "Zam\u00F3wienie z dostaw\u0105",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryPhone": {
+      "value": "Telefon dostawy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.details": {
+      "value": "Szczeg\u00F3\u0142y",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoice": {
+      "value": "Pobierz faktur\u0119",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoiceFailed": {
+      "value": "Failed to download invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoicePdf": {
+      "value": "Download invoice PDF",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadOrderSummaryPdf": {
+      "value": "Pobierz PDF z podsumowaniem zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadSummaryFailed": {
+      "value": "Nie uda\u0142o si\u0119 pobra\u0107 podsumowania zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.driver": {
+      "value": "Kierowca",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.estimatedReady": {
+      "value": "Szacowany czas gotowo\u015Bci",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.hideDetails": {
+      "value": "Ukryj szczeg\u00F3\u0142y",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.allStatuses": {
+      "value": "Wszystkie statusy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.allTypes": {
+      "value": "Wszystkie typy zam\u00F3wie\u0144",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.applyFilters": {
+      "value": "Zastosuj filtry",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.clear": {
+      "value": "Wyczy\u015B\u0107 formularz",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.customerEmail": {
+      "value": "Email klienta",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 historii zam\u00F3wie\u0144.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.none": {
+      "value": "Brak pozycji historii pasuj\u0105cych do bie\u017C\u0105cych filtr\u00F3w.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.noneMatch": {
+      "value": "\u017Badne zam\u00F3wienia nie pasuj\u0105 do tego wyszukiwania.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.search": {
+      "value": "Szukaj w historii",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.subtitle": {
+      "value": "Zako\u0144czone i anulowane zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.historySection": {
+      "value": "Historia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.inKitchen": {
+      "value": "W kuchni",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoice": {
+      "value": "Invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDisabledForReceipt": {
+      "value": "Customer selected a regular receipt. Invoice actions are disabled for this order.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDownload": {
+      "value": "Pobieranie faktury",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDownloadWebOnly": {
+      "value": "Pobieranie faktury jest obecnie dost\u0119pne w wersji webowej.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceHint": {
+      "value": "Issuing an invoice stores a mock PDF in the backend and includes it in summary emails.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceNumber": {
+      "value": "Numer faktury",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus": {
+      "value": "Status faktury",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.issued": {
+      "value": "Wystawiona",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.notRequested": {
+      "value": "Nie zam\u00F3wiono",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.requested": {
+      "value": "Zam\u00F3wiona",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.sent": {
+      "value": "Wys\u0142ana",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatusUpdateFailed": {
+      "value": "Failed to update invoice status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.issuedAt": {
+      "value": "Wystawiono",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.issueInvoice": {
+      "value": "Issue invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.item": {
+      "value": "Pozycja",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.itemName": {
+      "value": "Nazwa pozycji",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.items": {
+      "value": "pozycje",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.lineTotal": {
+      "value": "Suma pozycji",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markAsPaid": {
+      "value": "Mark as paid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markInvoiceRequested": {
+      "value": "Mark invoice requested",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markInvoiceSent": {
+      "value": "Mark invoice sent",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markPaidFailed": {
+      "value": "Failed to mark order as paid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markPaymentCollectedAndComplete": {
+      "value": "Mark payment collected and complete",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.noneActive": {
+      "value": "Brak aktywnych zam\u00F3wie\u0144.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.noUpdates": {
+      "value": "Brak aktualizacji zam\u00F3wie\u0144.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.order": {
+      "value": "Zam\u00F3wienie",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.orderNumber": {
+      "value": "Zam\u00F3wienie",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod": {
+      "value": "Payment method",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod.counterOrDelivery": {
+      "value": "P\u0142atno\u015B\u0107 przy odbiorze lub dostawie",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod.inApp": {
+      "value": "P\u0142atno\u015B\u0107 w aplikacji",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus": {
+      "value": "Status p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.failed": {
+      "value": "Nieudane",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.paid": {
+      "value": "Op\u0142acone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.pending": {
+      "value": "Oczekuj\u0105ce",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.refunded": {
+      "value": "Zwr\u00F3cone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.unpaid": {
+      "value": "Nieop\u0142acone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupName": {
+      "value": "Nazwa odbioru",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupNote": {
+      "value": "Notatka odbioru",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupOrder": {
+      "value": "Zam\u00F3wienie na odbi\u00F3r",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupPhone": {
+      "value": "Telefon odbioru",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.price": {
+      "value": "Cena",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pushStatus": {
+      "value": "Status powiadomie\u0144",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.qty": {
+      "value": "Ilo\u015B\u0107",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.quantity": {
+      "value": "Ilo\u015B\u0107",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.readyForWaiter": {
+      "value": "Gotowe dla kelnera",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime": {
+      "value": "Po\u0142\u0105czenie z serwerem",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.connected": {
+      "value": "po\u0142\u0105czono",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.connecting": {
+      "value": "\u0142\u0105czenie...",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.disconnected": {
+      "value": "disconnected",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.error": {
+      "value": "error",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.failed": {
+      "value": "Po\u0142\u0105czenie z serwerem nie powiod\u0142o si\u0119",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receipt": {
+      "value": "Paragon",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptDestination": {
+      "value": "Adres e-mail paragonu",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptEmail": {
+      "value": "Email paragonu",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptHandledByRestaurant": {
+      "value": "Paragon jest obs\u0142ugiwany przez restauracj\u0119.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptSent": {
+      "value": "Paragon wys\u0142ano",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptSummaryHint": {
+      "value": "Receipt stays physical. Email sends the customer an order summary.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.recentUpdates": {
+      "value": "Ostatnie aktualizacje",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.refresh": {
+      "value": "Od\u015Bwie\u017C zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.requested": {
+      "value": "Zam\u00F3wiono",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.requestedPickup": {
+      "value": "\u017B\u0105dany odbi\u00F3r",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.search": {
+      "value": "Szukaj zam\u00F3wie\u0144",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sendOrderSummary": {
+      "value": "Send order summary",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sendReceiptFailed": {
+      "value": "Failed to send receipt",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sentAt": {
+      "value": "Wys\u0142ano",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.showDetails": {
+      "value": "Poka\u017C szczeg\u00F3\u0142y",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.signInHint": {
+      "value": "Historia zam\u00F3wie\u0144 jest dost\u0119pna tylko dla zalogowanych u\u017Cytkownik\u00F3w. Utw\u00F3rz konto albo zaloguj si\u0119 w zak\u0142adce Konto.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.accepted": {
+      "value": "Przyj\u0119te",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.cancelled": {
+      "value": "Anulowane",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.completed": {
+      "value": "Zako\u0144czone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.delivered": {
+      "value": "Dostarczone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.draft": {
+      "value": "Szkic",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.outForDelivery": {
+      "value": "W dostawie",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.pending": {
+      "value": "Oczekuj\u0105ce",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.pickedUp": {
+      "value": "Odebrane",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.preparing": {
+      "value": "W przygotowaniu",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.ready": {
+      "value": "Gotowe",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForDispatch": {
+      "value": "Gotowe do wydania kierowcy",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForPickup": {
+      "value": "Gotowe do odbioru",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForWaiter": {
+      "value": "Gotowe dla kelnera",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.sentToKitchen": {
+      "value": "Wys\u0142ane do kuchni",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.statusChangeFailed": {
+      "value": "Failed to change status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.statusUpdated": {
+      "value": "Zmieniono status zam\u00F3wienia",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.subtotal": {
+      "value": "Suma cz\u0119\u015Bciowa",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.summary.totalActive": {
+      "value": "Wszystkie aktywne",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.table": {
+      "value": "Stolik",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.taxId": {
+      "value": "NIP",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.total": {
+      "value": "Razem",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.totalFrom": {
+      "value": "Suma od",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.totalTo": {
+      "value": "Suma do",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.trackHint": {
+      "value": "\u015Aled\u017A aktywne zam\u00F3wienia ze wszystkich restauracji i wracaj do historii, kiedy potrzebujesz.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type": {
+      "value": "Typ",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.delivery": {
+      "value": "Dostawa",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.order": {
+      "value": "Zam\u00F3wienie",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.pickup": {
+      "value": "Odbi\u00F3r osobisty",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.table": {
+      "value": "Do stolika",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.delivery": {
+      "value": "Zam\u00F3wienia z dostaw\u0105 oczekuj\u0105ce na przygotowanie i wysy\u0142k\u0119.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.pickup": {
+      "value": "Zam\u00F3wienia na odbi\u00F3r oczekuj\u0105ce na kuchni\u0119 i wydanie.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.table": {
+      "value": "Zam\u00F3wienia do obs\u0142ugi przy stoliku.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.unassigned": {
+      "value": "-- unassigned --",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.unitPrice": {
+      "value": "Cena jednostkowa",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "page.awaitingRole.body": {
+      "value": "Twoje konto jest aktywne, ale nie przypisano mu jeszcze roli restauracyjnej.",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.awaitingRole.title": {
+      "value": "Prosz\u0119 oczekiwa\u0107 na przypisanie roli",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.changePassword": {
+      "value": "Zmiana has\u0142a",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.forgotPassword": {
+      "value": "Nie pami\u0119tasz has\u0142a?",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.platformSettings": {
+      "value": "Ustawienia platformy",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.reports": {
+      "value": "Raporty",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.resetPassword": {
+      "value": "Resetowanie has\u0142a",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.restaurantSettings": {
+      "value": "Ustawienia restauracji",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "platform.addLanguage": {
+      "value": "Dodaj j\u0119zyk",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.addText": {
+      "value": "Dodaj tekst",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.culture": {
+      "value": "Kultura",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.default": {
+      "value": "Domy\u015Blny",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.description": {
+      "value": "Opis",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.displayName": {
+      "value": "Nazwa wy\u015Bwietlana",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.group": {
+      "value": "Grupa",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.key": {
+      "value": "Klucz",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languageRequired": {
+      "value": "Kultura, nazwa wy\u015Bwietlana i nazwa natywna s\u0105 wymagane.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languages": {
+      "value": "J\u0119zyki aplikacji",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languagesSaved": {
+      "value": "J\u0119zyki zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.nativeName": {
+      "value": "Nazwa natywna",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.saveLanguages": {
+      "value": "Zapisz j\u0119zyki",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.saveTexts": {
+      "value": "Zapisz teksty",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.searchKeysOrValues": {
+      "value": "Szukaj kluczy lub warto\u015Bci",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.sort": {
+      "value": "Sortowanie",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textRequired": {
+      "value": "Klucz, kultura i warto\u015B\u0107 s\u0105 wymagane.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.texts": {
+      "value": "Zasoby tekstow aplikacji",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textsHelp": {
+      "value": "Te tlumaczenia sa przechowywane w plikach JSON i obowiazuja w aplikacji webowej oraz mobilnej.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textsSaved": {
+      "value": "T\u0142umaczenia zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.updateDraft": {
+      "value": "Zaktualizuj szkic",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.updateText": {
+      "value": "Zaktualizuj szkic",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.value": {
+      "value": "Warto\u015B\u0107",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "reports.anonymousCustomers": {
+      "value": "Anonimowi",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.anonymousOrders": {
+      "value": "Zam\u00F3wienia anonimowe",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.anonymousShare": {
+      "value": "Udzia\u0142 anonimowych",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.averageOrdersPerCustomer": {
+      "value": "\u015Ar. zam\u00F3wie\u0144 / klienta",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.cancelledOrders": {
+      "value": "Anulowane",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.clearRestaurantSelection": {
+      "value": "Odznacz wszystkie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousOrders": {
+      "value": "Anonimowe",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousRevenue": {
+      "value": "Przych\u00F3d anonimowych",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousSharePercent": {
+      "value": "Udzia\u0142 anonimowych %",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AssignedRestaurantCount": {
+      "value": "Przypisane restauracje",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AssignedRoles": {
+      "value": "Role",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AverageOrderValue": {
+      "value": "\u015Arednia warto\u015B\u0107",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.BusinessDate": {
+      "value": "Data",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CancelledOrderCount": {
+      "value": "Anulowane zam\u00F3wienia",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CancelledOrders": {
+      "value": "Anulowane",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CompletedOrderCount": {
+      "value": "Zako\u0144czone zam\u00F3wienia",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CompletedOrders": {
+      "value": "Zako\u0144czone",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Confirmed": {
+      "value": "Potwierdzone",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CustomerLabel": {
+      "value": "Klient",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Email": {
+      "value": "Email",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.GrossRevenue": {
+      "value": "Przych\u00F3d",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.IsAnonymousCustomer": {
+      "value": "Anonimowy",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.LastLoginAtUtc": {
+      "value": "Ostatnie logowanie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.LastOrderAtUtc": {
+      "value": "Ostatnie zam\u00F3wienie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.MenuItemId": {
+      "value": "ID pozycji menu",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.MenuItemName": {
+      "value": "Danie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.OrderCount": {
+      "value": "Zam\u00F3wienia",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.OrderType": {
+      "value": "Typ zam\u00F3wienia",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.QuantitySold": {
+      "value": "Sprzedana ilo\u015B\u0107",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredAtUtc": {
+      "value": "Data rejestracji",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredOrders": {
+      "value": "Zarejestrowane",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredRevenue": {
+      "value": "Przych\u00F3d zarejestrowanych",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RestaurantId": {
+      "value": "ID restauracji",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RestaurantName": {
+      "value": "Restauracja",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Revenue": {
+      "value": "Przych\u00F3d",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.SuccessfulLoginCount": {
+      "value": "Liczba logowa\u0144",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.TotalOrders": {
+      "value": "\u0141\u0105czna liczba zam\u00F3wie\u0144",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.TotalSpent": {
+      "value": "Wydane \u0142\u0105cznie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.completedOrders": {
+      "value": "Zako\u0144czone",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.customerFrequencyTitle": {
+      "value": "Cz\u0119stotliwo\u015B\u0107 zam\u00F3wie\u0144 klient\u00F3w",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.customerMixTitle": {
+      "value": "Zam\u00F3wienia zarejestrowanych vs anonimowych",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportCsv": {
+      "value": "Eksport CSV",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportExcel": {
+      "value": "Eksport Excel",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportFailed": {
+      "value": "Nie uda\u0142o si\u0119 wyeksportowa\u0107 raportu.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.fromDate": {
+      "value": "Od",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.generate": {
+      "value": "Generuj raport",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 raportu.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.loading": {
+      "value": "\u0141adowanie...",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.menuPopularityTitle": {
+      "value": "Popularno\u015B\u0107 menu",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.newAccounts": {
+      "value": "Nowe konta",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.noData": {
+      "value": "Brak danych dla wybranych filtr\u00F3w.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.noRestaurantsMatch": {
+      "value": "Brak restauracji pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.pageHint": {
+      "value": "Generuj raporty biznesowe dla pracy restauracji i eksportuj je do CSV lub Excela.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.recentlyActiveUsers": {
+      "value": "Aktywni w ostatnich 30 dniach",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.registeredCustomers": {
+      "value": "Zarejestrowani",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.registeredOrders": {
+      "value": "Zam\u00F3wienia zarejestrowanych",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.regularLogins": {
+      "value": "Regularnie loguj\u0105cy si\u0119",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.reportType": {
+      "value": "Typ raportu",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.restaurantHint": {
+      "value": "Pozostaw wszystko odznaczone, aby uwzgl\u0119dni\u0107 wszystkie dost\u0119pne restauracje.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.restaurants": {
+      "value": "Restauracje",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.rowCount": {
+      "value": "Wiersze",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.salesSummaryTitle": {
+      "value": "Zestawienie sprzeda\u017Cy",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.searchRestaurants": {
+      "value": "Szukaj restauracji",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.selectAllRestaurants": {
+      "value": "Zaznacz wszystkie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.toDate": {
+      "value": "Do",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.topDish": {
+      "value": "Najpopularniejsze danie",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalItemsSold": {
+      "value": "Sprzedane pozycje",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalOrders": {
+      "value": "Zam\u00F3wienia",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalRevenue": {
+      "value": "\u0141\u0105czny przych\u00F3d",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.uniqueCustomers": {
+      "value": "Unikalni klienci",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.uniqueMenuItems": {
+      "value": "Unikalne dania",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.userActivityTitle": {
+      "value": "Aktywno\u015B\u0107 u\u017Cytkownik\u00F3w",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.usersWithOrders": {
+      "value": "U\u017Cytkownicy z zam\u00F3wieniami",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reservations.availabilityLoadFailed": {
+      "value": "Failed to load availability.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.availableSlot": {
+      "value": "Dost\u0119pny termin",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.availableStarts": {
+      "value": "Available starts",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.bookCaller": {
+      "value": "Rezerwacja telefoniczna",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.calendar": {
+      "value": "Kalendarz rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.changeStatus": {
+      "value": "Zmie\u0144 status",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseAtLeastOneTable": {
+      "value": "Choose at least one table.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseSlot": {
+      "value": "Wybierz termin",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseTable": {
+      "value": "Wybierz stolik",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseTableAndSlot": {
+      "value": "Choose table and slot.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.clearScheduleFailed": {
+      "value": "Failed to clear reservation schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.clearWholeSchedule": {
+      "value": "Clear Whole Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmClearSchedule": {
+      "value": "Do you want to clear the whole schedule?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmDeleteSchedule": {
+      "value": "Delete this reservation schedule?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmNoShow": {
+      "value": "Are you sure you want to mark this reservation as no-show?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmOverwriteSchedule": {
+      "value": "Do you want to update the current schedule? Tables you deselected will be removed from the schedule.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmUpdateSchedulesForHours": {
+      "value": "Do you want to update the current schedules to match the new reservation hours?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.create": {
+      "value": "Utw\u00F3rz rezerwacj\u0119",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.createFailed": {
+      "value": "Failed to create reservation",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.currentSchedules": {
+      "value": "Aktualne harmonogramy",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.date": {
+      "value": "Data rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.defaultLength": {
+      "value": "Default Length",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.deleteScheduleFailed": {
+      "value": "Failed to delete schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.enabled": {
+      "value": "Reservations enabled",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.endTime": {
+      "value": "End Time",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.every": {
+      "value": "co",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.forDate": {
+      "value": "Rezerwacje na",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.generalSchedule": {
+      "value": "General Reservation Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.gracePeriod": {
+      "value": "Grace period",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guest": {
+      "value": "Go\u015B\u0107",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestEmail": {
+      "value": "E-mail go\u015Bcia",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestName": {
+      "value": "Imi\u0119 i nazwisko go\u015Bcia",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestNameRequired": {
+      "value": "Guest name is required.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestPhone": {
+      "value": "Telefon go\u015Bcia",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.holdUntilClose": {
+      "value": "Hold table until close",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.hoursHint": {
+      "value": "This is the one daily reservation window used for schedules. For after-midnight service, set an overnight window here, for example 17:00 to 01:00. Schedule rows will be split automatically across midnight.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.intervalMinutes": {
+      "value": "Interval Minutes",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadAvailabilityFailed": {
+      "value": "Nie uda\u0142o si\u0119 pobra\u0107 dost\u0119pno\u015Bci.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadDetailsFailed": {
+      "value": "Failed to load reservation details",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadFailed": {
+      "value": "Failed to load reservations.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noMatches": {
+      "value": "Brak rezerwacji pasuj\u0105cych do wyszukiwania.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noneForDay": {
+      "value": "Brak rezerwacji na ten dzie\u0144.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noPreviousMatches": {
+      "value": "Brak wcze\u015Bniejszych rezerwacji spe\u0142niaj\u0105cych aktualne filtry.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noSchedules": {
+      "value": "Nie skonfigurowano jeszcze harmonogram\u00F3w rezerwacji.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noSearchResults": {
+      "value": "Brak wynik\u00F3w wyszukiwania.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.partySize": {
+      "value": "Liczba os\u00F3b",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.previous": {
+      "value": "Poprzednie rezerwacje",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.refreshAvailability": {
+      "value": "Refresh availability",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.reservationHours": {
+      "value": "Reservation Hours",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.reservedBlocks": {
+      "value": "Reserved blocks",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveHours": {
+      "value": "Save Reservation Hours",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveSchedule": {
+      "value": "Save Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveScheduleFailed": {
+      "value": "Failed to save reservation schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveSettingsFailed": {
+      "value": "Failed to save reservation settings",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.scheduleOverwriteHint": {
+      "value": "Saving a schedule now overwrites the existing schedule for the selected tables using the reservation hours above.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.search": {
+      "value": "Szukaj rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchPlaceholder": {
+      "value": "Szukaj po go\u015Bciu, stoliku, telefonie lub notatce",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchPrevious": {
+      "value": "Szukaj wcze\u015Bniejszych rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchToday": {
+      "value": "Szukaj dzisiejszych rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.settingsButton": {
+      "value": "Ustawienia rezerwacji",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.startTime": {
+      "value": "Start time",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.cancelled": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.completed": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.noShow": {
+      "value": "No show",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.requested": {
+      "value": "Requested",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.seated": {
+      "value": "Seated",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.table": {
+      "value": "Stolik",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.tableAvailability": {
+      "value": "Table availability",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.time": {
+      "value": "Godzina",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.todays": {
+      "value": "Dzisiejsze rezerwacje",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "restaurant.addCuisine": {
+      "value": "Dodaj kuchni\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.addTable": {
+      "value": "Dodaj stolik",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.allowTableSelection": {
+      "value": "Pozw\u00F3l u\u017Cytkownikowi wybra\u0107 stolik",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignmentAutomatic": {
+      "value": "Automatyczne",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignmentManual": {
+      "value": "R\u0119czne",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignRole": {
+      "value": "Przypisz rol\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.awaitingAssignment": {
+      "value": "-- oczekuje na przypisanie --",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.choose": {
+      "value": "Wybierz restauracj\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.chooseAwaitingUser": {
+      "value": "Wybierz u\u017Cytkownika oczekuj\u0105cego na przypisanie.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.chooseCuisineFirst": {
+      "value": "Najpierw wybierz kuchni\u0119.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.create": {
+      "value": "Utw\u00F3rz restauracj\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.created": {
+      "value": "Restauracja zosta\u0142a utworzona.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.cuisineLimit": {
+      "value": "Wybierz maksymalnie 5 rodzaj\u00F3w kuchni.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.cuisineTypes": {
+      "value": "Rodzaje kuchni (do 5)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.current": {
+      "value": "Aktualna restauracja",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.defaultDuration": {
+      "value": "Domy\u015Blny czas trwania",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.defaultLanguage": {
+      "value": "J\u0119zyk domy\u015Blny",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deleteTableConfirm": {
+      "value": "Usun\u0105\u0107 stolik?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.delivery": {
+      "value": "Dostawa",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryEnabled": {
+      "value": "Dostawa w\u0142\u0105czona",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryFee": {
+      "value": "Op\u0142ata za dostaw\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryRadius": {
+      "value": "Promie\u0144 (km)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.details": {
+      "value": "Szczeg\u00F3\u0142y restauracji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.driverAssignment": {
+      "value": "Przypisywanie kierowcy",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.editDetails": {
+      "value": "Edytuj dane restauracji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.emailRequired": {
+      "value": "Adres email jest wymagany.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.endTime": {
+      "value": "Godzina zako\u0144czenia",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.extraIngredientPrice": {
+      "value": "Cena dodatkowego sk\u0142adnika",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.gracePeriod": {
+      "value": "Okres sp\u00F3\u017Anienia",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.holdUntilClose": {
+      "value": "Zajmij stolik do zamkni\u0119cia",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteByEmail": {
+      "value": "Zapro\u015B przez email",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteRemoved": {
+      "value": "Zaproszenie zosta\u0142o usuni\u0119te.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteSent": {
+      "value": "Zaproszenie zosta\u0142o wys\u0142ane.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.languages": {
+      "value": "Kultury / j\u0119zyk",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.lastStartTime": {
+      "value": "Ostatnia godzina rozpocz\u0119cia",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.leadTimeMinutes": {
+      "value": "Czas wyprzedzenia (minuty)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 wczyta\u0107 restauracji.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.managing": {
+      "value": "Zarz\u0105dzasz",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.minimumOrder": {
+      "value": "Minimalne zam\u00F3wienie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.nameRequired": {
+      "value": "Nazwa restauracji jest wymagana.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.newRestaurant": {
+      "value": "Nowa restauracja",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noCuisines": {
+      "value": "Nie wybrano jeszcze \u017Cadnej kuchni.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noneAssigned": {
+      "value": "Brak przypisanej restauracji.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noRestaurantSelected": {
+      "value": "Nie wybrano restauracji.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noStaffLinked": {
+      "value": "Brak personelu przypisanego do tej restauracji.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.onlyMainAdminCanCreate": {
+      "value": "Tylko g\u0142\u00F3wny administrator mo\u017Ce tworzy\u0107 restauracje.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.openDetails": {
+      "value": "Otw\u00F3rz stron\u0119 restauracji, aby zobaczy\u0107 szczeg\u00F3\u0142y lub j\u0105 zmieni\u0107.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payAtCounter": {
+      "value": "Zap\u0142a\u0107 przy kasie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payInApp": {
+      "value": "Zap\u0142a\u0107 w aplikacji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.paymentOptions": {
+      "value": "Opcje p\u0142atno\u015Bci",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payOnDelivery": {
+      "value": "Zap\u0142a\u0107 przy dostawie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.pickupEnabled": {
+      "value": "Odbi\u00F3r osobisty w\u0142\u0105czony",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.preorderMaxAfterStart": {
+      "value": "Maksymalny czas po rozpocz\u0119ciu",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.preorderMinOffset": {
+      "value": "Minimalne wyprzedzenie pre-orderu",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeInvite": {
+      "value": "Usu\u0144 zaproszenie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeInviteConfirm": {
+      "value": "Usun\u0105\u0107 to zaproszenie?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeRole": {
+      "value": "Usu\u0144",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeRoleConfirm": {
+      "value": "Usun\u0105\u0107 przypisanie roli?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservable": {
+      "value": "Do rezerwacji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservationRequiresPayment": {
+      "value": "Rezerwacja wymaga p\u0142atno\u015Bci w aplikacji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservations": {
+      "value": "Rezerwacje",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservationsEnabled": {
+      "value": "Rezerwacje w\u0142\u0105czone",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roleAssigned": {
+      "value": "Rola zosta\u0142a przypisana.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roleRemoved": {
+      "value": "Rola zosta\u0142a usuni\u0119ta.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roles": {
+      "value": "Role restauracji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.save": {
+      "value": "Zapisz restauracj\u0119",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.saved": {
+      "value": "Szczeg\u00F3\u0142y restauracji zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.saveTable": {
+      "value": "Zapisz stolik",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.searchCuisines": {
+      "value": "Szukaj kuchni",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.selected": {
+      "value": "Wybrana restauracja",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.selectFirst": {
+      "value": "Najpierw wybierz restauracj\u0119.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.sendInvite": {
+      "value": "Wy\u015Blij zaproszenie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.settings": {
+      "value": "Ustawienia restauracji",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.settingsSaved": {
+      "value": "Ustawienia restauracji zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.startTime": {
+      "value": "Godzina rozpocz\u0119cia",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.stateOrRole": {
+      "value": "Stan / rola",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.supportedLanguages": {
+      "value": "Obs\u0142ugiwane j\u0119zyki",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableAdded": {
+      "value": "Stolik zosta\u0142 dodany.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableDeleted": {
+      "value": "Stolik zosta\u0142 usuni\u0119ty.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableLabel": {
+      "value": "Etykieta",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableNone": {
+      "value": "Nie dodano jeszcze \u017Cadnych stolik\u00F3w.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableOrdersEnabled": {
+      "value": "Zam\u00F3wienia do stolika w\u0142\u0105czone",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableRequired": {
+      "value": "Etykieta stolika jest wymagana.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tables": {
+      "value": "Sto\u0142y",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSaved": {
+      "value": "Stolik zosta\u0142 zapisany.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSeats": {
+      "value": "Miejsca",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSort": {
+      "value": "Sortowanie",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.user": {
+      "value": "U\u017Cytkownik",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "roles.Admin": {
+      "value": "Administrator aplikacji",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Chef": {
+      "value": "Kucharz",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Customer": {
+      "value": "Klient",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.DeliveryDriver": {
+      "value": "Kierowca dostaw",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.RestaurantAdmin": {
+      "value": "Administrator restauracji",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Waiter": {
+      "value": "Kelner",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "tables.create": {
+      "value": "Utw\u00F3rz stolik",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.deleteFailed": {
+      "value": "Nie uda\u0142o si\u0119 usun\u0105\u0107 stolika.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.edit": {
+      "value": "Edytuj stolik",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 stolik\u00F3w.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.new": {
+      "value": "Nowy stolik",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.noContext": {
+      "value": "Brak kontekstu restauracji.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.none": {
+      "value": "\u017Badne stoliki nie pasuj\u0105 do tego wyszukiwania.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.restaurantTables": {
+      "value": "Stoliki restauracji",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.saveFailed": {
+      "value": "Nie uda\u0142o si\u0119 zapisa\u0107 stolika.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.search": {
+      "value": "Szukaj stolik\u00F3w",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.sortOrder": {
+      "value": "Kolejno\u015B\u0107 sortowania",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.working": {
+      "value": "Przetwarzanie...",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "take": {
+      "value": "300",
+      "description": null,
+      "groupName": "general",
+      "isActive": true
+    },
+    "ui.allActivity": {
+      "value": "Wszystkie statusy",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allAvailability": {
+      "value": "Wszystkie dost\u0119pno\u015Bci",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allCategories": {
+      "value": "Wszystkie kategorie",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allConfirmationStates": {
+      "value": "Wszystkie stany potwierdzenia",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allergens": {
+      "value": "Alergeny",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allReservableStates": {
+      "value": "Wszystkie statusy rezerwacji",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allRestaurants": {
+      "value": "Wszystkie restauracje",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allRoles": {
+      "value": "Wszystkie role",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allSwapModes": {
+      "value": "Wszystkie tryby zamiany",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allUnits": {
+      "value": "Wszystkie jednostki",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.available": {
+      "value": "Dost\u0119pne",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.category": {
+      "value": "Kategoria",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.chooseAllergens": {
+      "value": "Wybierz alergeny",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.confirmed": {
+      "value": "Potwierdzone",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.cost": {
+      "value": "Koszt",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costFrom": {
+      "value": "Koszt od",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costPerUnit": {
+      "value": "Koszt za jednostk\u0119",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costTo": {
+      "value": "Koszt do",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.culture": {
+      "value": "J\u0119zyk",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.description": {
+      "value": "Opis",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.gram": {
+      "value": "Gram",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.milliliter": {
+      "value": "Mililitr",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.noAllergensSelected": {
+      "value": "Nie wybrano alergen\u00F3w.",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.noOptionsAvailable": {
+      "value": "Brak dost\u0119pnych opcji.",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.notConfirmed": {
+      "value": "Niepotwierdzone",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.notReservable": {
+      "value": "Nierezerwowalne",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.order": {
+      "value": "Kolejno\u015B\u0107",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.photoAssetId": {
+      "value": "ID zasobu zdj\u0119cia",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.photoUpload": {
+      "value": "Prze\u015Blij zdj\u0119cie",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.piece": {
+      "value": "Sztuka",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.priceFrom": {
+      "value": "Cena od",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.priceTo": {
+      "value": "Cena do",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchAllergens": {
+      "value": "Szukaj alergen\u00F3w",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchCategories": {
+      "value": "Szukaj kategorii",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchIngredients": {
+      "value": "Szukaj sk\u0142adnik\u00F3w",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchItems": {
+      "value": "Szukaj pozycji",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.seatsFrom": {
+      "value": "Miejsca od",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.seatsTo": {
+      "value": "Miejsca do",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.sortOrder": {
+      "value": "Kolejno\u015B\u0107",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.swapDisabled": {
+      "value": "Zamiana wy\u0142\u0105czona",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.swapEnabled": {
+      "value": "Zamiana w\u0142\u0105czona",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.translations": {
+      "value": "T\u0142umaczenia",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.unavailable": {
+      "value": "Niedost\u0119pne",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.unit": {
+      "value": "Jednostka",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "users.addAssignment": {
+      "value": "Dodaj przypisanie",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.appAdmin": {
+      "value": "Administrator aplikacji",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assigning": {
+      "value": "Przypisywanie...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assignSelected": {
+      "value": "Przypisz wybranych u\u017Cytkownik\u00F3w",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assignSelectedHint": {
+      "value": "Zaznacz u\u017Cytkownik\u00F3w na li\u015Bcie, a nast\u0119pnie wybierz restauracj\u0119 i rol\u0119, aby przypisa\u0107 ich jednym dzia\u0142aniem.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.bulkAssignFailed": {
+      "value": "Nie uda\u0142o si\u0119 przypisa\u0107 wybranych u\u017Cytkownik\u00F3w.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.clearSelection": {
+      "value": "Wyczy\u015B\u0107 zaznaczenie",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.confirmed": {
+      "value": "Potwierdzony",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.count": {
+      "value": "u\u017Cytkownik\u00F3w",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.create": {
+      "value": "Utw\u00F3rz u\u017Cytkownika",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.deleteConfirm": {
+      "value": "Usu\u0144 u\u017Cytkownika",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.deleteFailed": {
+      "value": "Nie uda\u0142o si\u0119 usun\u0105\u0107 u\u017Cytkownika.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.edit": {
+      "value": "Edytuj u\u017Cytkownika",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.emailConfirmed": {
+      "value": "Email potwierdzony",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 u\u017Cytkownik\u00F3w.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.new": {
+      "value": "Nowy u\u017Cytkownik",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.noAssignments": {
+      "value": "Brak przypisa\u0144 restauracji.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.none": {
+      "value": "\u017Badni u\u017Cytkownicy nie pasuj\u0105 do tego wyszukiwania.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.passwordReset": {
+      "value": "Reset has\u0142a",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.resetFailed": {
+      "value": "Nie uda\u0142o si\u0119 wys\u0142a\u0107 resetu has\u0142a.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.resetPassword": {
+      "value": "Zresetuj has\u0142o",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.restaurantAssignments": {
+      "value": "Przypisania restauracji",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.roles": {
+      "value": "Role",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saveChanges": {
+      "value": "Zapisz zmiany",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saveFailed": {
+      "value": "Nie uda\u0142o si\u0119 zapisa\u0107 u\u017Cytkownika.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saving": {
+      "value": "Zapisywanie...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.search": {
+      "value": "Szukaj u\u017Cytkownik\u00F3w",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.select": {
+      "value": "Wybierz",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectAllListed": {
+      "value": "Zaznacz wszystkie widoczne",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectAtLeastOne": {
+      "value": "Najpierw wybierz co najmniej jednego u\u017Cytkownika.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selected": {
+      "value": "zaznaczono",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectRestaurant": {
+      "value": "wybierz restauracj\u0119",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectRestaurantForAssignment": {
+      "value": "Wybierz restauracj\u0119 do przypisania.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.sending": {
+      "value": "Wysy\u0142anie...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.userName": {
+      "value": "Nazwa u\u017Cytkownika",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "validation.categoryRequired": {
+      "value": "Kategoria jest wymagana.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.confirmationCodeRequired": {
+      "value": "Kod potwierdzaj\u0105cy jest wymagany.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.currentPasswordRequired": {
+      "value": "Aktualne has\u0142o jest wymagane.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.duplicateCultures": {
+      "value": "Nie mo\u017Cna powtarza\u0107 j\u0119zyk\u00F3w t\u0142umacze\u0144.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.emailInvalid": {
+      "value": "Wpisz poprawny adres e-mail.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.emailRequired": {
+      "value": "Email jest wymagany.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.newPasswordRequired": {
+      "value": "Nowe has\u0142o jest wymagane.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordDigit": {
+      "value": "jedn\u0105 cyfr\u0119",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordMinLength": {
+      "value": "co najmniej 8 znak\u00F3w",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordRequired": {
+      "value": "Has\u0142o jest wymagane.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordRequirements": {
+      "value": "Has\u0142o musi zawiera\u0107",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordsMismatch": {
+      "value": "Has\u0142a nie s\u0105 takie same.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordSpecial": {
+      "value": "jeden znak specjalny",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordUppercase": {
+      "value": "jedn\u0105 wielk\u0105 liter\u0119",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.priceCannotBeNegative": {
+      "value": "Cena nie mo\u017Ce by\u0107 ujemna.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.resetTokenRequired": {
+      "value": "Token resetowania has\u0142a jest wymagany.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.translationNameRequired": {
+      "value": "Ka\u017Cde t\u0142umaczenie musi mie\u0107 nazw\u0119.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.translationRequired": {
+      "value": "Wymagane jest co najmniej jedno t\u0142umaczenie.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.userNameRequired": {
+      "value": "Nazwa u\u017Cytkownika jest wymagana.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    }
+  }
+}

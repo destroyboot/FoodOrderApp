@@ -1,0 +1,6310 @@
+{
+  "entries": {
+    "account.accountRemoval": {
+      "value": "Account Removal",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.accountRemoved": {
+      "value": "Account removed.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.accountUnavailable": {
+      "value": "This account is no longer available.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.changePasswordAction": {
+      "value": "Change password",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.confirmationEmailSent": {
+      "value": "Confirmation email sent.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.confirmNewPassword": {
+      "value": "Confirm new password",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.currentPassword": {
+      "value": "Current password",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryContactName": {
+      "value": "Delivery contact name",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryDetails": {
+      "value": "Delivery Details",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryDetailsSaved": {
+      "value": "Delivery details saved.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.deliveryPhone": {
+      "value": "Delivery phone",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.guestInfo": {
+      "value": "Order on-site as a guest, or sign in when you want reservations, delivery, and account-based history.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.incorrectPassword": {
+      "value": "The current password is incorrect.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invalidConfirmationCode": {
+      "value": "The confirmation code is invalid or expired.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceDetails": {
+      "value": "Invoice Details",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceDetailsSaved": {
+      "value": "Invoice details saved.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceForCompany": {
+      "value": "Invoice for company",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.invoiceForPerson": {
+      "value": "Invoice for person",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.newPassword": {
+      "value": "New password",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChange": {
+      "value": "Password Change",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChanged": {
+      "value": "Password changed.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordChangeFailed": {
+      "value": "Change password failed",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.passwordRequirementsError": {
+      "value": "The new password does not meet the password requirements.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.receiptInvoiceEmail": {
+      "value": "Receipt / invoice email",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.removeAccount": {
+      "value": "Remove account",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.removeAccountHint": {
+      "value": "Request a confirmation email first, then enter the code here to remove the account.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.saveDeliveryDetails": {
+      "value": "Save delivery details",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.saveInvoiceDetails": {
+      "value": "Save invoice details",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.sendConfirmationEmail": {
+      "value": "Send confirmation email",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.signInToSaveBilling": {
+      "value": "Sign in to save invoice details.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "app.apiBaseUrl": {
+      "value": "API base URL",
+      "description": null,
+      "groupName": "app",
+      "isActive": true
+    },
+    "app.bootFailed": {
+      "value": "App could not start",
+      "description": null,
+      "groupName": "app",
+      "isActive": true
+    },
+    "auth.accountConfirmed": {
+      "value": "Account confirmed. You can log in now.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.backToLogin": {
+      "value": "Back to login",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirmationFailed": {
+      "value": "Confirmation failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirming": {
+      "value": "Confirming...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.confirmRegistration": {
+      "value": "Confirm registration",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.createAccount": {
+      "value": "Create account",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.creatingAccount": {
+      "value": "Creating account...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.enterConfirmationCode": {
+      "value": "Enter the confirmation code that was sent to your email address.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.forgotPassword": {
+      "value": "Forgot password?",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.invalidCredentials": {
+      "value": "Incorrect email or password.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.login": {
+      "value": "Log in",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.loginFailed": {
+      "value": "Login failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.logout": {
+      "value": "Logout",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.passwordRequirementsHint": {
+      "value": "Password must have at least 8 characters, an uppercase letter, a digit, and a special character.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.passwordResetSuccess": {
+      "value": "Password has been reset successfully.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.register": {
+      "value": "Register",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationCodeResent": {
+      "value": "If the email exists, a new code was sent.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationCodeSent": {
+      "value": "Confirmation code sent to your email.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.registrationFailed": {
+      "value": "Registration failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.requestFailed": {
+      "value": "Request failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resendCode": {
+      "value": "Resend code",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resendFailed": {
+      "value": "Resend failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resending": {
+      "value": "Resending...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetFailed": {
+      "value": "Reset failed",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetLinkSent": {
+      "value": "If this email exists, a reset link has been sent.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetPassword": {
+      "value": "Reset password",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resettingPassword": {
+      "value": "Resetting...",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.resetToken": {
+      "value": "Reset token",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.sendResetLink": {
+      "value": "Send reset link",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signedIn": {
+      "value": "Signed in.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signedOut": {
+      "value": "Signed out.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signInFirst": {
+      "value": "Sign in first.",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.signOut": {
+      "value": "Sign out",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "auth.staffLogin": {
+      "value": "Staff Login",
+      "description": null,
+      "groupName": "auth",
+      "isActive": true
+    },
+    "cart.addressLine1": {
+      "value": "Address line 1",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.addressLine2Optional": {
+      "value": "Address line 2 (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.addSomethingHint": {
+      "value": "Add something from the menu or open one of your active carts above.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.availableMenuItems": {
+      "value": "Available menu items",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.backToCarts": {
+      "value": "Back to carts",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressLine1": {
+      "value": "Billing address line 1",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressLine2Optional": {
+      "value": "Billing address line 2 (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingAddressRequired": {
+      "value": "Billing address line 1 is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCity": {
+      "value": "Billing city",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCityRequired": {
+      "value": "Billing city is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingCountryOptional": {
+      "value": "Billing country (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingPostalCode": {
+      "value": "Billing postal code",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.billingPostalCodeRequired": {
+      "value": "Billing postal code is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cancelPayment": {
+      "value": "Cancel payment",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cardholderName": {
+      "value": "Cardholder name",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.cardNumber": {
+      "value": "Card number",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chargeAmount": {
+      "value": "Charge amount",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.checkoutDetails": {
+      "value": "Checkout details",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseCart": {
+      "value": "Choose a cart",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseDocumentType": {
+      "value": "Choose document type",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.chooseOrderType": {
+      "value": "Choose order type",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.choosePaymentOption": {
+      "value": "Choose payment option",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.choosePersonOrCompany": {
+      "value": "Choose person or company",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.company": {
+      "value": "Company",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.companyName": {
+      "value": "Company name",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmEmailAddress": {
+      "value": "Confirm email address",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmOrder": {
+      "value": "Confirm order",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.confirmOrderFor": {
+      "value": "Confirm your order for",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.countryOptional": {
+      "value": "Country (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryAddressRequired": {
+      "value": "Delivery address line 1 is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryCityRequired": {
+      "value": "Delivery city is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryContactRequired": {
+      "value": "Delivery contact name is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryFee": {
+      "value": "Delivery fee",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryNoteOptional": {
+      "value": "Delivery note (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPhoneInvalid": {
+      "value": "Delivery phone looks invalid.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPhoneRequired": {
+      "value": "Delivery phone is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.deliveryPostalCodeRequired": {
+      "value": "Delivery postal code is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.details": {
+      "value": "Cart details",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.disable": {
+      "value": "Disable",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.document": {
+      "value": "Document",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.editingCartFor": {
+      "value": "Editing cart for",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailAddress": {
+      "value": "Email address",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailConfirmationRequired": {
+      "value": "Confirm your email address.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.emailMismatch": {
+      "value": "Email addresses do not match.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.empty": {
+      "value": "This cart is empty.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.enable": {
+      "value": "Enable",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedPrep": {
+      "value": "Estimated prep",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedPreparation": {
+      "value": "Estimated preparation",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.estimatedReadyAt": {
+      "value": "Estimated ready at",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.expiry": {
+      "value": "Expiry (MM/YY)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalize": {
+      "value": "Finalize",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalized": {
+      "value": "Cart finalized.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.finalizeFailed": {
+      "value": "Failed to finalize cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.fixHighlighted": {
+      "value": "Please fix the highlighted fields before placing the order.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.fullName": {
+      "value": "Full name",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.guestMaxActiveHint": {
+      "value": "You can keep a maximum of 1 active cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.hour": {
+      "value": "Hour",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.in": {
+      "value": "in",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoice": {
+      "value": "Invoice",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceAttached": {
+      "value": "Invoice details will be attached to this order and can be reused next time.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceCompanyRequired": {
+      "value": "Company name is required for invoice.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceEmail": {
+      "value": "Invoice email",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceFor": {
+      "value": "Invoice for",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoicePersonNameRequired": {
+      "value": "Full name is required for invoice.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceTaxIdDigits": {
+      "value": "Tax ID / NIP must contain only digits.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.invoiceTaxIdRequired": {
+      "value": "Tax ID / NIP is required for invoice.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.itemsInCart": {
+      "value": "Items in cart",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.lines": {
+      "value": "line",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.loadFailed": {
+      "value": "Failed to load cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.maxActiveHint": {
+      "value": "You can keep up to 4 active carts, one per restaurant.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.minute": {
+      "value": "Minute",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.mockPayment": {
+      "value": "Mock Payment",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.mockPaymentHint": {
+      "value": "This is a demo payment page. Enter mock card details to continue.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.noCartSelected": {
+      "value": "No cart selected",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.noItems": {
+      "value": "No items in cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.openActiveCartHint": {
+      "value": "Open one of your active carts above to see its items.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.openThisCart": {
+      "value": "Open this cart",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlaced": {
+      "value": "Order placed",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlacedMessage": {
+      "value": "Your order",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderPlacedSuffix": {
+      "value": "has been placed.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.orderSummary": {
+      "value": "Order summary",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payAtCounterHint": {
+      "value": "Please go to the counter and refer to this order number when paying.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentDetails": {
+      "value": "Payment details",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentDetailsHint": {
+      "value": "Enter a card name, a numeric card number, and expiry in MM/YY format.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentOption": {
+      "value": "Payment option",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.paymentRequired": {
+      "value": "Choose a payment option.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payNow": {
+      "value": "Pay now",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.payOnDeliveryHint": {
+      "value": "Please be ready to pay on delivery.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.person": {
+      "value": "Person",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupNameRequired": {
+      "value": "Pickup name is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupNoteOptional": {
+      "value": "Pickup note (optional)",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupPhoneInvalid": {
+      "value": "Pickup phone looks invalid.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupPhoneRequired": {
+      "value": "Pickup phone is required.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupTimeFuture": {
+      "value": "Pickup time must be later than the current time.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.pickupTimeInvalid": {
+      "value": "Choose a valid pickup time.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placeOrder": {
+      "value": "Place order",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placeOrderFailed": {
+      "value": "Could not place order",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.placing": {
+      "value": "Placing...",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.preview": {
+      "value": "Preview",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.previewFailed": {
+      "value": "Failed to preview cart.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.processing": {
+      "value": "Processing...",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.receiptPhysical": {
+      "value": "Regular receipt stays physical. Staff can still send an order summary by email later.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.regularReceipt": {
+      "value": "Regular receipt",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeCart": {
+      "value": "Remove cart",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeCartConfirm": {
+      "value": "Do you want to remove this cart?",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeLastItem": {
+      "value": "Remove last item",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.removeLastItemConfirm": {
+      "value": "This is the last item in the cart. Do you want to remove the whole cart?",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.requestedPickupTimeToday": {
+      "value": "Requested pickup time for today",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveInvoiceDataNextTime": {
+      "value": "save invoice data for next time",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveItems": {
+      "value": "Save items",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveItemsFailed": {
+      "value": "Failed to save cart items.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveMeta": {
+      "value": "Save Meta",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.saveMetaFailed": {
+      "value": "Failed to save cart meta.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.subtotal": {
+      "value": "Subtotal",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.taxId": {
+      "value": "Tax ID / NIP",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.thisRestaurant": {
+      "value": "this restaurant",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.totalsAuto": {
+      "value": "Totals will appear automatically as the cart refreshes.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "cart.trackOrderHint": {
+      "value": "You can track the status on the My Orders page.",
+      "description": null,
+      "groupName": "cart",
+      "isActive": true
+    },
+    "categories.add": {
+      "value": "Add category",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.deleteConfirm": {
+      "value": "Delete category?",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.edit": {
+      "value": "Edit category",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.loadFailed": {
+      "value": "Failed to load categories.",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "categories.none": {
+      "value": "No categories match this search.",
+      "description": null,
+      "groupName": "categories",
+      "isActive": true
+    },
+    "common.active": {
+      "value": "Active",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.add": {
+      "value": "Add",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.all": {
+      "value": "All",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.allCultures": {
+      "value": "All cultures",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.allLanguages": {
+      "value": "All languages",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "common.appAdministration": {
+      "value": "Application administration",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.available": {
+      "value": "Available",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.back": {
+      "value": "Back",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.cancel": {
+      "value": "Cancel",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.change": {
+      "value": "Change",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.city": {
+      "value": "City",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.clear": {
+      "value": "Clear",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.close": {
+      "value": "Close",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirm": {
+      "value": "Confirm",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirmationCode": {
+      "value": "Confirmation code",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.confirmPassword": {
+      "value": "Confirm password",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.connectedWorkspace": {
+      "value": "Workspace for daily restaurant operations",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.create": {
+      "value": "Create",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.date": {
+      "value": "Date",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.delete": {
+      "value": "Delete",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.done": {
+      "value": "Done",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "common.edit": {
+      "value": "Edit",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.email": {
+      "value": "Email",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.genericError": {
+      "value": "Something went wrong",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.id": {
+      "value": "Id",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.inactive": {
+      "value": "Inactive",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.invalidId": {
+      "value": "Invalid id.",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.item": {
+      "value": "Item",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.language": {
+      "value": "Language",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.languages": {
+      "value": "Languages",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.loading": {
+      "value": "Loading...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.loggedInAs": {
+      "value": "Logged in as",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.message": {
+      "value": "Message",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.minutes": {
+      "value": "min",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.name": {
+      "value": "Name",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.next": {
+      "value": "Next",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.no": {
+      "value": "No",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.none": {
+      "value": "none",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.note": {
+      "value": "Note",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.number": {
+      "value": "Number",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.open": {
+      "value": "Open",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.password": {
+      "value": "Password",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.phone": {
+      "value": "Phone",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.postalCode": {
+      "value": "Postal code",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.previous": {
+      "value": "Previous",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.price": {
+      "value": "Price",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.quantity": {
+      "value": "Qty",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.reload": {
+      "value": "Reload",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.remove": {
+      "value": "Remove",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.resetFilters": {
+      "value": "Reset filters",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.restaurantOperations": {
+      "value": "Restaurant operations",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.save": {
+      "value": "Save",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.saving": {
+      "value": "Saving...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.search": {
+      "value": "Search",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.seats": {
+      "value": "seats",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selected": {
+      "value": "Selected",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectLanguage": {
+      "value": "Select language",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectRestaurantOption": {
+      "value": "-- select restaurant --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectTableOption": {
+      "value": "-- select table --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.selectTimeOption": {
+      "value": "-- select time --",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.sending": {
+      "value": "Sending...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.street": {
+      "value": "Street",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.time": {
+      "value": "Time",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.tryAgain": {
+      "value": "Try again",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.unknownError": {
+      "value": "Unknown error",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.userName": {
+      "value": "User name",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.welcomeBack": {
+      "value": "Welcome back",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.working": {
+      "value": "Working...",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.yes": {
+      "value": "Yes",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "Content-Type": {
+      "value": "application/json",
+      "description": null,
+      "groupName": "general",
+      "isActive": true
+    },
+    "dataAdmin.accessibleTables": {
+      "value": "Accessible tables",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.any": {
+      "value": "Any",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.applyToSelectedTables": {
+      "value": "Apply to selected tables",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.bulkDeleteFailed": {
+      "value": "Failed to delete selected rows.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.columns": {
+      "value": "Columns",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.create": {
+      "value": "Create",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.createRow": {
+      "value": "Create row",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.delete": {
+      "value": "Delete",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteRowConfirm": {
+      "value": "Delete row",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteSelected": {
+      "value": "Delete selected",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleteSelectedConfirm": {
+      "value": "Delete",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deleting": {
+      "value": "Deleting...",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.deselectAll": {
+      "value": "Deselect all",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.editRow": {
+      "value": "Edit row",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.filter": {
+      "value": "Filter",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.fromTable": {
+      "value": "from",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.grantsSaveFailed": {
+      "value": "Failed to save grants.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.loadFailed": {
+      "value": "Failed to load data admin.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.newRow": {
+      "value": "New row",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.noGrants": {
+      "value": "No grants configured yet.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.noneAccessible": {
+      "value": "No accessible tables.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.read": {
+      "value": "Read",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.removeSelectedGrants": {
+      "value": "Remove selected grants",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.reset": {
+      "value": "Reset",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.restaurantAdminGrants": {
+      "value": "Restaurant admin grants",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.restaurantAdminGrantsInfo": {
+      "value": "These permissions apply to all users with the RestaurantAdmin role.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowDeleteFailed": {
+      "value": "Failed to delete row.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowSaveFailed": {
+      "value": "Failed to save row.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.rowsLoadFailed": {
+      "value": "Failed to load table rows.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.saveGrants": {
+      "value": "Save grants",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchColumns": {
+      "value": "Search all listed columns",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchFailed": {
+      "value": "Failed to search table rows.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.searchTables": {
+      "value": "Search tables",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectAll": {
+      "value": "Select all",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectedRows": {
+      "value": "selected row(s)",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.selectTables": {
+      "value": "Select tables",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.update": {
+      "value": "Update",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.writeWithoutRead": {
+      "value": "You have write access to this table, but not read access.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "email.orderSummary.date": {
+      "value": "Date",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.deliveryFee": {
+      "value": "Delivery fee",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.invoice": {
+      "value": "Invoice",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.item": {
+      "value": "Item",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.note": {
+      "value": "Note",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.price": {
+      "value": "Price",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.quantity": {
+      "value": "Quantity",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.restaurant": {
+      "value": "Restaurant",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.subject": {
+      "value": "Food Order App - order summary #{orderNumber}",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.subtotal": {
+      "value": "Subtotal",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.table": {
+      "value": "Table",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.thankYou": {
+      "value": "Thank you for your order!",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.title": {
+      "value": "Order summary #{orderNumber}",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.total": {
+      "value": "Total",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type": {
+      "value": "Type",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.delivery": {
+      "value": "Delivery",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.pickup": {
+      "value": "Pickup",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "email.orderSummary.type.table": {
+      "value": "Table order",
+      "description": null,
+      "groupName": "email",
+      "isActive": true
+    },
+    "ingredients.add": {
+      "value": "Add ingredient",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.deleteConfirm": {
+      "value": "Delete ingredient?",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.edit": {
+      "value": "Edit ingredient",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.filterAllergens": {
+      "value": "Filter allergens",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.loadFailed": {
+      "value": "Failed to load ingredients.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.nameRequired": {
+      "value": "Every translation must have a name.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.noAllergensMatch": {
+      "value": "No allergens match this search.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.none": {
+      "value": "No ingredients match this search.",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "ingredients.searchAllergens": {
+      "value": "Search allergens",
+      "description": null,
+      "groupName": "ingredients",
+      "isActive": true
+    },
+    "menu.addAsIs": {
+      "value": "Add as is",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addedToCart": {
+      "value": "added to cart",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addFailed": {
+      "value": "Could not add to cart",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addIngredients": {
+      "value": "Add ingredients",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.addToCart": {
+      "value": "Add to cart",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.celery": {
+      "value": "celery",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.crustaceans": {
+      "value": "crustaceans",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.dairy": {
+      "value": "dairy",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.eggs": {
+      "value": "eggs",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.fish": {
+      "value": "fish",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.gluten": {
+      "value": "gluten",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.lupin": {
+      "value": "lupin",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.milk": {
+      "value": "milk",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.molluscs": {
+      "value": "molluscs",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.mustard": {
+      "value": "mustard",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.nuts": {
+      "value": "nuts",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.peanuts": {
+      "value": "peanuts",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.sesame": {
+      "value": "sesame",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.soy": {
+      "value": "soy",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergen.sulphites": {
+      "value": "sulphites",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.allergens": {
+      "value": "Allergens",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.askCustomizeBeforeAdd": {
+      "value": "Do you want to customize this dish before adding it to the cart?",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.basePrice": {
+      "value": "Base price",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.chooseRestaurant": {
+      "value": "Choose a restaurant from the Restaurants page to load the menu.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.chooseSorting": {
+      "value": "Choose sorting",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.confirmCustomization": {
+      "value": "Add customized item",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizationExtra": {
+      "value": "Customization extra",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizationUnavailable": {
+      "value": "Customization unavailable",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.customizeIngredients": {
+      "value": "Customize ingredients",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.dishIngredients": {
+      "value": "Dish ingredients",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientCount": {
+      "value": "Charged extra ingredients",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientsTotal": {
+      "value": "Extra ingredients total",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.extraIngredientUnitPrice": {
+      "value": "Price per extra ingredient",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.fixedIngredient": {
+      "value": "Fixed",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.ingredientSwapAvailable": {
+      "value": "Ingredient changes available",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noDescription": {
+      "value": "No description yet.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noDishIngredients": {
+      "value": "No dish ingredients configured.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.noExtraIngredients": {
+      "value": "No extra ingredients available.",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.orderingFrom": {
+      "value": "Ordering from",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.removed": {
+      "value": "Removed",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.saveCustomization": {
+      "value": "Save ingredient changes",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.search": {
+      "value": "Search dishes",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortDefault": {
+      "value": "Default order",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortMenu": {
+      "value": "Sort menu",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortName": {
+      "value": "Name",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortPriceAsc": {
+      "value": "Price low to high",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menu.sortPriceDesc": {
+      "value": "Price high to low",
+      "description": null,
+      "groupName": "menu",
+      "isActive": true
+    },
+    "menuItems.add": {
+      "value": "Add item",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.allowedSubstituteIngredients": {
+      "value": "Allowed substitute ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.chooseSubstituteIngredients": {
+      "value": "Choose substitute ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.chooseSwappableIngredients": {
+      "value": "Choose swappable ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.deleteConfirm": {
+      "value": "Delete item?",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.derivedAllergens": {
+      "value": "Derived allergens",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.dishIngredients": {
+      "value": "Dish ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.displayLanguage": {
+      "value": "Display language",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.edit": {
+      "value": "Edit item",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.enableIngredientSwap": {
+      "value": "Enable ingredient swap",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.ingredientSwapSettings": {
+      "value": "Ingredient swap settings",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.loadFailed": {
+      "value": "Failed to load items.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noDerivedAllergens": {
+      "value": "No allergens derived from the selected ingredients yet.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noDishIngredientsSelected": {
+      "value": "No dish ingredients selected yet.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noIngredientsMatch": {
+      "value": "No ingredients match this search.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.none": {
+      "value": "No items match this search.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noPhotoSelected": {
+      "value": "No uploaded photo selected.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noSubstituteIngredientsSelected": {
+      "value": "No substitute ingredients selected.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.noSwappableIngredientsSelected": {
+      "value": "No swappable ingredients selected.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.photoPreview": {
+      "value": "Menu item preview",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.photoUploadFailed": {
+      "value": "Photo upload failed.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.searchIngredients": {
+      "value": "Search ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectDishIngredients": {
+      "value": "Select dish ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectIngredients": {
+      "value": "Select ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectSubstituteIngredients": {
+      "value": "Select substitute ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.selectSwappableDishIngredients": {
+      "value": "Select swappable dish ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.swap": {
+      "value": "Swap",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.swappableDishIngredients": {
+      "value": "Swappable dish ingredients",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "menuItems.turnOnIngredientSwapHint": {
+      "value": "Turn this on to choose default dish ingredients and allowed substitute ingredients.",
+      "description": null,
+      "groupName": "menuItems",
+      "isActive": true
+    },
+    "mobile.reservations.activeReservations": {
+      "value": "Active reservations",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.at": {
+      "value": "at",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.back": {
+      "value": "Back to reservations",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.bookFor": {
+      "value": "Book for",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.bookTable": {
+      "value": "Book a table",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancel": {
+      "value": "Cancel reservation",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelBody": {
+      "value": "Are you sure you want to cancel this reservation?",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelFailed": {
+      "value": "Could not cancel reservation",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelledBody": {
+      "value": "The table has been released.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelledTitle": {
+      "value": "Reservation cancelled",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.cancelTitle": {
+      "value": "Cancel reservation",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseDate": {
+      "value": "Choose date",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.choosePartySize": {
+      "value": "Choose party size",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseRestaurantFirst": {
+      "value": "Choose a restaurant from the selector first.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlot": {
+      "value": "Choose slot",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlotBody": {
+      "value": "Pick the reservation details first.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseSlotTitle": {
+      "value": "Choose slot",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseTable": {
+      "value": "Choose table",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.chooseTableFirst": {
+      "value": "Choose table first",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.confirmQuestion": {
+      "value": "Send reservation request to",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.confirmTitle": {
+      "value": "Confirm reservation",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.createFailed": {
+      "value": "Could not create reservation",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.date": {
+      "value": "Reservation date",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.loadFailedTitle": {
+      "value": "Could not load availability",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.loadingTables": {
+      "value": "Loading tables...",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.none": {
+      "value": "No active reservations yet.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.noSlots": {
+      "value": "No reservation slots are available for this date.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.notAccepting": {
+      "value": "This restaurant is not accepting reservations right now.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.note": {
+      "value": "Note",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.optionalNote": {
+      "value": "Optional note for the restaurant",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.people": {
+      "value": "People",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.pickHint": {
+      "value": "Pick a date, choose a table and available slot, then send a reservation request.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.requestedBody": {
+      "value": "The restaurant received your reservation request.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.requestedTitle": {
+      "value": "Reservation requested",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.send": {
+      "value": "Send reservation request",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.sending": {
+      "value": "Sending...",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.signInHint": {
+      "value": "Reservations are available only for logged in users. Create an account or log in from the Account tab.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.signInRequired": {
+      "value": "Sign in required",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.slot": {
+      "value": "Available slot",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.cancelled": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.completed": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.noShow": {
+      "value": "No show",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.requested": {
+      "value": "Requested",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.status.seated": {
+      "value": "Seated",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.table": {
+      "value": "Table",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.reservations.title": {
+      "value": "Reservations",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.addressPlaceholder": {
+      "value": "Address will appear here.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.available": {
+      "value": "Available",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.cardTitle": {
+      "value": "Restaurant",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.changeRestaurant": {
+      "value": "Change restaurant",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.cuisine": {
+      "value": "Cuisine",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.delivery": {
+      "value": "Delivery",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryAddressFilter": {
+      "value": "Delivery address filter",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryFee": {
+      "value": "Delivery fee",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryFilterHint": {
+      "value": "Delivery address filtering currently matches restaurant address text. Distance-based delivery zones can sit on top of this later.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryHours": {
+      "value": "Delivery hours",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.deliveryRadius": {
+      "value": "Delivery radius",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.kitchenType": {
+      "value": "Kitchen type",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.leadTime": {
+      "value": "Minimum delivery lead time",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.menu": {
+      "value": "Menu",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.minimumDeliveryOrder": {
+      "value": "Minimum delivery order",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.none": {
+      "value": "None",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notAvailable": {
+      "value": "Not available",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notSet": {
+      "value": "Not set",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.notSetYet": {
+      "value": "Not set yet",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.openRestaurant": {
+      "value": "Open restaurant",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.orderOptions": {
+      "value": "Order options",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.paymentOptions": {
+      "value": "Payment options",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.pickup": {
+      "value": "Pick up",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.radiusMinimum": {
+      "value": "Radius {0} km, minimum {1}",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.reservations": {
+      "value": "Reservations",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.searchPlaceholder": {
+      "value": "Search by restaurant, cuisine, or address",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.selectRestaurant": {
+      "value": "Select restaurant",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.subtitle": {
+      "value": "Guests can order on-site without an account. Sign in later for reservations, delivery, and order history.",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.title": {
+      "value": "Restaurants",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "mobile.restaurants.toTable": {
+      "value": "To table",
+      "description": null,
+      "groupName": "mobile",
+      "isActive": true
+    },
+    "myReservations.cancelFailed": {
+      "value": "Failed to cancel reservation.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.confirmCancel": {
+      "value": "Cancel this reservation?",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.confirmCreate": {
+      "value": "Are you sure you want to make this reservation?",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.createFailed": {
+      "value": "Failed to create reservation.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.disabledForRestaurant": {
+      "value": "Reservations are disabled for this restaurant.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.history": {
+      "value": "My reservation history",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.makeReservation": {
+      "value": "Make a reservation",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.noteForRestaurant": {
+      "value": "Note for restaurant",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "myReservations.selectRestaurantTableTime": {
+      "value": "Select a restaurant, table and time first.",
+      "description": null,
+      "groupName": "myReservations",
+      "isActive": true
+    },
+    "nav.account": {
+      "value": "Account",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.activeOrders": {
+      "value": "Active Orders",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.cart": {
+      "value": "Cart",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.categories": {
+      "value": "Categories",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.changePassword": {
+      "value": "Change Password",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.dataGrants": {
+      "value": "Restaurant Admin Grants",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.dataTables": {
+      "value": "Data Tables",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.ingredients": {
+      "value": "Ingredients",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.items": {
+      "value": "Items",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.menu": {
+      "value": "Menu",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.myDeliveries": {
+      "value": "My Deliveries",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.myReservations": {
+      "value": "My Reservations",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.orderHistory": {
+      "value": "Order History",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.orders": {
+      "value": "My Orders",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.platformSettings": {
+      "value": "Platform Settings",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.reports": {
+      "value": "Reports",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.reservations": {
+      "value": "Reservations",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.restaurants": {
+      "value": "Restaurants",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.restaurantSettings": {
+      "value": "Restaurant Settings",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.tables": {
+      "value": "Tables",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "nav.users": {
+      "value": "Users",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
+    "notifications.close": {
+      "value": "Close notification",
+      "description": null,
+      "groupName": "notifications",
+      "isActive": true
+    },
+    "orders.action.accept": {
+      "value": "Accept",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.action.changeStatus": {
+      "value": "change status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.action.sendToKitchen": {
+      "value": "Send to kitchen",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.loadFailed": {
+      "value": "Failed to load/connect",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.noneForGroup": {
+      "value": "No active orders in this section.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.active.subtitle": {
+      "value": "Keep the floor moving with one live view for table service, pickup, and delivery.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeCount": {
+      "value": "active",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeSection": {
+      "value": "Active",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.activeTab": {
+      "value": "Active orders",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.address": {
+      "value": "Address",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.addressPending": {
+      "value": "Address pending",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignDriver": {
+      "value": "Assign driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignDriverFailed": {
+      "value": "Failed to assign delivery driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.assignedDriver": {
+      "value": "Assigned driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billing": {
+      "value": "Billing",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingAddress": {
+      "value": "Billing address",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType": {
+      "value": "Billing type",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType.company": {
+      "value": "Company",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.billingType.person": {
+      "value": "Person",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.clearInvoiceRequest": {
+      "value": "Clear invoice request",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.collectPaymentFailed": {
+      "value": "Failed to collect payment and complete order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.company": {
+      "value": "Company",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmMarkPaid": {
+      "value": "Are you sure you want to mark this order as paid?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmMarkPaidAndComplete": {
+      "value": "Are you sure you want to mark this order as paid and completed?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.confirmStatusChange": {
+      "value": "Are you sure you want to change this order status?",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.created": {
+      "value": "Created",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer": {
+      "value": "Customer",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.anonymous": {
+      "value": "anonymous",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.anonymousDisplay": {
+      "value": "Anonymous",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.user": {
+      "value": "user",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customer.userDisplay": {
+      "value": "User",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.customerEmail": {
+      "value": "Customer email",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryAddressPending": {
+      "value": "Delivery address pending",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryContact": {
+      "value": "Delivery contact",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryFee": {
+      "value": "Delivery fee",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryNote": {
+      "value": "Delivery note",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryOrder": {
+      "value": "Delivery order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.deliveryPhone": {
+      "value": "Delivery phone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.details": {
+      "value": "Details",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoice": {
+      "value": "Download invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoiceFailed": {
+      "value": "Failed to download invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadInvoicePdf": {
+      "value": "Download invoice PDF",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadOrderSummaryPdf": {
+      "value": "Download order summary PDF",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.downloadSummaryFailed": {
+      "value": "Failed to download order summary",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.driver": {
+      "value": "Driver",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.estimatedReady": {
+      "value": "Estimated ready",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.hideDetails": {
+      "value": "Hide details",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.allStatuses": {
+      "value": "All statuses",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.allTypes": {
+      "value": "All order types",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.applyFilters": {
+      "value": "Apply filters",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.clear": {
+      "value": "Clear form",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.customerEmail": {
+      "value": "Customer email",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.loadFailed": {
+      "value": "Failed to load order history",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.none": {
+      "value": "No history entries match the current filters.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.noneMatch": {
+      "value": "No orders match this search.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.search": {
+      "value": "Search history",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.history.subtitle": {
+      "value": "Completed and cancelled orders",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.historySection": {
+      "value": "History",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.inKitchen": {
+      "value": "In kitchen",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoice": {
+      "value": "Invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDisabledForReceipt": {
+      "value": "Customer selected a regular receipt. Invoice actions are disabled for this order.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDownload": {
+      "value": "Invoice download",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceDownloadWebOnly": {
+      "value": "Invoice download is currently available in the web build.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceHint": {
+      "value": "Issuing an invoice stores a mock PDF in the backend and includes it in summary emails.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceNumber": {
+      "value": "Invoice number",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus": {
+      "value": "Invoice status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.issued": {
+      "value": "Issued",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.notRequested": {
+      "value": "Not requested",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.requested": {
+      "value": "Requested",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatus.sent": {
+      "value": "Sent",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.invoiceStatusUpdateFailed": {
+      "value": "Failed to update invoice status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.issuedAt": {
+      "value": "Issued at",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.issueInvoice": {
+      "value": "Issue invoice",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.item": {
+      "value": "Item",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.itemName": {
+      "value": "Item name",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.items": {
+      "value": "item",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.lineTotal": {
+      "value": "Line total",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markAsPaid": {
+      "value": "Mark as paid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markInvoiceRequested": {
+      "value": "Mark invoice requested",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markInvoiceSent": {
+      "value": "Mark invoice sent",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markPaidFailed": {
+      "value": "Failed to mark order as paid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.markPaymentCollectedAndComplete": {
+      "value": "Mark payment collected and complete",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.noneActive": {
+      "value": "No active orders right now.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.noUpdates": {
+      "value": "No order updates yet.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.order": {
+      "value": "Order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.orderNumber": {
+      "value": "Order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod": {
+      "value": "Payment method",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod.counterOrDelivery": {
+      "value": "Pay on delivery / counter",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentMethod.inApp": {
+      "value": "Pay in app",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus": {
+      "value": "Payment status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.failed": {
+      "value": "Failed",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.paid": {
+      "value": "Paid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.pending": {
+      "value": "Pending",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.refunded": {
+      "value": "Refunded",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.paymentStatus.unpaid": {
+      "value": "Unpaid",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupName": {
+      "value": "Pickup name",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupNote": {
+      "value": "Pickup note",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupOrder": {
+      "value": "Pickup order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pickupPhone": {
+      "value": "Pickup phone",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.price": {
+      "value": "Price",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.pushStatus": {
+      "value": "Push status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.qty": {
+      "value": "Qty",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.quantity": {
+      "value": "Quantity",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.readyForWaiter": {
+      "value": "Ready for waiter",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime": {
+      "value": "Connection to the server",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.connected": {
+      "value": "connected",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.connecting": {
+      "value": "connecting...",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.disconnected": {
+      "value": "disconnected",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.error": {
+      "value": "error",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.realtime.failed": {
+      "value": "Realtime failed",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receipt": {
+      "value": "Receipt",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptDestination": {
+      "value": "Receipt email",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptEmail": {
+      "value": "Receipt email",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptHandledByRestaurant": {
+      "value": "Receipt is handled by the restaurant.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptSent": {
+      "value": "Receipt sent",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.receiptSummaryHint": {
+      "value": "Receipt stays physical. Email sends the customer an order summary.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.recentUpdates": {
+      "value": "Recent updates",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.refresh": {
+      "value": "Refresh orders",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.requested": {
+      "value": "Requested",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.requestedPickup": {
+      "value": "Requested pickup",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.search": {
+      "value": "Search orders",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sendOrderSummary": {
+      "value": "Send order summary",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sendReceiptFailed": {
+      "value": "Failed to send receipt",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.sentAt": {
+      "value": "Sent at",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.showDetails": {
+      "value": "Show details",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.signInHint": {
+      "value": "Order history is available only to logged in users. Use the Account tab to sign in.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status": {
+      "value": "Status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.accepted": {
+      "value": "Accepted",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.cancelled": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.completed": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.delivered": {
+      "value": "Delivered",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.draft": {
+      "value": "Draft",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.outForDelivery": {
+      "value": "Out for delivery",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.pending": {
+      "value": "Pending",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.pickedUp": {
+      "value": "Picked up",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.preparing": {
+      "value": "Preparing",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.ready": {
+      "value": "Ready",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForDispatch": {
+      "value": "Ready for dispatch",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForPickup": {
+      "value": "Ready for pickup",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.readyForWaiter": {
+      "value": "Ready for waiter",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.status.sentToKitchen": {
+      "value": "Sent to kitchen",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.statusChangeFailed": {
+      "value": "Failed to change status",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.statusUpdated": {
+      "value": "Order status updated",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.subtotal": {
+      "value": "Subtotal",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.summary.totalActive": {
+      "value": "Total active",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.table": {
+      "value": "Table",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.taxId": {
+      "value": "Tax ID",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.total": {
+      "value": "Total",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.totalFrom": {
+      "value": "Total from",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.totalTo": {
+      "value": "Total to",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.trackHint": {
+      "value": "Track active orders across all restaurants and revisit your order history when you need it.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type": {
+      "value": "Type",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.delivery": {
+      "value": "Delivery",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.order": {
+      "value": "Order",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.pickup": {
+      "value": "Pickup",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.type.table": {
+      "value": "Table",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.delivery": {
+      "value": "Delivery orders waiting on preparation and dispatch.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.pickup": {
+      "value": "Pickup orders waiting on kitchen and handoff.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.typeDescription.table": {
+      "value": "Dine-in orders waiting on table service.",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.unassigned": {
+      "value": "-- unassigned --",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "orders.unitPrice": {
+      "value": "Unit price",
+      "description": null,
+      "groupName": "orders",
+      "isActive": true
+    },
+    "page.awaitingRole.body": {
+      "value": "Your account is active, but no restaurant role has been assigned yet.",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.awaitingRole.title": {
+      "value": "Please await your role assignment",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.changePassword": {
+      "value": "Change Password",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.forgotPassword": {
+      "value": "Forgot Password",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.platformSettings": {
+      "value": "Platform Settings",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.reports": {
+      "value": "Reports",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.resetPassword": {
+      "value": "Reset Password",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "page.restaurantSettings": {
+      "value": "Restaurant Settings",
+      "description": null,
+      "groupName": "page",
+      "isActive": true
+    },
+    "platform.addLanguage": {
+      "value": "Add language",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.addText": {
+      "value": "Add text",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.culture": {
+      "value": "Culture",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.default": {
+      "value": "Default",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.description": {
+      "value": "Description",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.displayName": {
+      "value": "Display name",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.group": {
+      "value": "Group",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.key": {
+      "value": "Key",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languageRequired": {
+      "value": "Culture, display name and native name are required.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languages": {
+      "value": "App languages",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.languagesSaved": {
+      "value": "Languages saved.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.nativeName": {
+      "value": "Native name",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.saveLanguages": {
+      "value": "Save languages",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.saveTexts": {
+      "value": "Save texts",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.searchKeysOrValues": {
+      "value": "Search keys or values",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.sort": {
+      "value": "Sort",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textRequired": {
+      "value": "Key, culture and value are required.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.texts": {
+      "value": "App text resources",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textsHelp": {
+      "value": "These translations are stored in JSON resource files and apply across the web and mobile apps.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.textsSaved": {
+      "value": "Translations saved.",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.updateDraft": {
+      "value": "Update draft",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.updateText": {
+      "value": "Update draft",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "platform.value": {
+      "value": "Value",
+      "description": null,
+      "groupName": "platform",
+      "isActive": true
+    },
+    "reports.anonymousCustomers": {
+      "value": "Anonymous",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.anonymousOrders": {
+      "value": "Anonymous orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.anonymousShare": {
+      "value": "Anonymous share",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.averageOrdersPerCustomer": {
+      "value": "Avg orders / customer",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.cancelledOrders": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.clearRestaurantSelection": {
+      "value": "Clear selection",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousOrders": {
+      "value": "Anonymous",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousRevenue": {
+      "value": "Anonymous revenue",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AnonymousSharePercent": {
+      "value": "Anonymous share %",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AssignedRestaurantCount": {
+      "value": "Restaurant assignments",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AssignedRoles": {
+      "value": "Roles",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.AverageOrderValue": {
+      "value": "Average order",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.BusinessDate": {
+      "value": "Date",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CancelledOrderCount": {
+      "value": "Cancelled orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CancelledOrders": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CompletedOrderCount": {
+      "value": "Completed orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CompletedOrders": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.CustomerLabel": {
+      "value": "Customer",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Email": {
+      "value": "Email",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.GrossRevenue": {
+      "value": "Revenue",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.IsAnonymousCustomer": {
+      "value": "Anonymous",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.LastLoginAtUtc": {
+      "value": "Last login",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.LastOrderAtUtc": {
+      "value": "Last order",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.MenuItemId": {
+      "value": "Menu item ID",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.MenuItemName": {
+      "value": "Dish",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.OrderCount": {
+      "value": "Orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.OrderType": {
+      "value": "Order type",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.QuantitySold": {
+      "value": "Quantity sold",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredAtUtc": {
+      "value": "Registered at",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredOrders": {
+      "value": "Registered",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RegisteredRevenue": {
+      "value": "Registered revenue",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RestaurantId": {
+      "value": "Restaurant ID",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.RestaurantName": {
+      "value": "Restaurant",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.Revenue": {
+      "value": "Revenue",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.SuccessfulLoginCount": {
+      "value": "Login count",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.TotalOrders": {
+      "value": "Total orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.columns.TotalSpent": {
+      "value": "Spend",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.completedOrders": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.customerFrequencyTitle": {
+      "value": "Customer frequency",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.customerMixTitle": {
+      "value": "Registered vs anonymous orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportCsv": {
+      "value": "Export CSV",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportExcel": {
+      "value": "Export Excel",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.exportFailed": {
+      "value": "Failed to export report.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.fromDate": {
+      "value": "From",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.generate": {
+      "value": "Generate report",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.loadFailed": {
+      "value": "Failed to load report.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.loading": {
+      "value": "Loading...",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.menuPopularityTitle": {
+      "value": "Menu popularity",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.newAccounts": {
+      "value": "New accounts",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.noData": {
+      "value": "No data found for the selected filters.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.noRestaurantsMatch": {
+      "value": "No restaurants match the search.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.pageHint": {
+      "value": "Generate business reports for restaurant operations and export them to CSV or Excel.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.recentlyActiveUsers": {
+      "value": "Active in last 30 days",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.registeredCustomers": {
+      "value": "Registered",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.registeredOrders": {
+      "value": "Registered orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.regularLogins": {
+      "value": "Regular logins",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.reportType": {
+      "value": "Report type",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.restaurantHint": {
+      "value": "Leave everything unchecked to include all accessible restaurants.",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.restaurants": {
+      "value": "Restaurants",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.rowCount": {
+      "value": "Rows",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.salesSummaryTitle": {
+      "value": "Sales summary",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.searchRestaurants": {
+      "value": "Search restaurants",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.selectAllRestaurants": {
+      "value": "Select all",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.toDate": {
+      "value": "To",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.topDish": {
+      "value": "Top dish",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalItemsSold": {
+      "value": "Items sold",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalOrders": {
+      "value": "Orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.totalRevenue": {
+      "value": "Total revenue",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.uniqueCustomers": {
+      "value": "Unique customers",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.uniqueMenuItems": {
+      "value": "Unique dishes",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.userActivityTitle": {
+      "value": "User activity",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reports.usersWithOrders": {
+      "value": "Users with orders",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
+    "reservations.availabilityLoadFailed": {
+      "value": "Failed to load availability.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.availableSlot": {
+      "value": "Available slot",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.availableStarts": {
+      "value": "Available starts",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.bookCaller": {
+      "value": "Book for a caller",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.calendar": {
+      "value": "Reservation calendar",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.changeStatus": {
+      "value": "Change status",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseAtLeastOneTable": {
+      "value": "Choose at least one table.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseSlot": {
+      "value": "Choose slot",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseTable": {
+      "value": "Choose table",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.chooseTableAndSlot": {
+      "value": "Choose table and slot.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.clearScheduleFailed": {
+      "value": "Failed to clear reservation schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.clearWholeSchedule": {
+      "value": "Clear Whole Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmClearSchedule": {
+      "value": "Do you want to clear the whole schedule?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmDeleteSchedule": {
+      "value": "Delete this reservation schedule?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmNoShow": {
+      "value": "Are you sure you want to mark this reservation as no-show?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmOverwriteSchedule": {
+      "value": "Do you want to update the current schedule? Tables you deselected will be removed from the schedule.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.confirmUpdateSchedulesForHours": {
+      "value": "Do you want to update the current schedules to match the new reservation hours?",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.create": {
+      "value": "Create reservation",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.createFailed": {
+      "value": "Failed to create reservation",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.currentSchedules": {
+      "value": "Current schedules",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.date": {
+      "value": "Reservation date",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.defaultLength": {
+      "value": "Default Length",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.deleteScheduleFailed": {
+      "value": "Failed to delete schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.enabled": {
+      "value": "Reservations enabled",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.endTime": {
+      "value": "End Time",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.every": {
+      "value": "every",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.forDate": {
+      "value": "Reservations for",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.generalSchedule": {
+      "value": "General Reservation Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.gracePeriod": {
+      "value": "Grace period",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guest": {
+      "value": "Guest",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestEmail": {
+      "value": "Guest email",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestName": {
+      "value": "Guest name",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestNameRequired": {
+      "value": "Guest name is required.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.guestPhone": {
+      "value": "Guest phone",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.holdUntilClose": {
+      "value": "Hold table until close",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.hoursHint": {
+      "value": "This is the one daily reservation window used for schedules. For after-midnight service, set an overnight window here, for example 17:00 to 01:00. Schedule rows will be split automatically across midnight.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.intervalMinutes": {
+      "value": "Interval Minutes",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadAvailabilityFailed": {
+      "value": "Could not load availability.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadDetailsFailed": {
+      "value": "Failed to load reservation details",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.loadFailed": {
+      "value": "Failed to load reservations.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noMatches": {
+      "value": "No reservations match this search.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noneForDay": {
+      "value": "No reservations for this day.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noPreviousMatches": {
+      "value": "No previous reservations match the current filters.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noSchedules": {
+      "value": "No reservation schedules configured yet.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.noSearchResults": {
+      "value": "No search results yet.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.partySize": {
+      "value": "Party size",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.previous": {
+      "value": "Previous reservations",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.refreshAvailability": {
+      "value": "Refresh availability",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.reservationHours": {
+      "value": "Reservation Hours",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.reservedBlocks": {
+      "value": "Reserved blocks",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveHours": {
+      "value": "Save Reservation Hours",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveSchedule": {
+      "value": "Save Schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveScheduleFailed": {
+      "value": "Failed to save reservation schedule",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.saveSettingsFailed": {
+      "value": "Failed to save reservation settings",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.scheduleOverwriteHint": {
+      "value": "Saving a schedule now overwrites the existing schedule for the selected tables using the reservation hours above.",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.search": {
+      "value": "Search reservations",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchPlaceholder": {
+      "value": "Search by guest, table, phone, note",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchPrevious": {
+      "value": "Search previous reservations",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.searchToday": {
+      "value": "Search today\u0027s reservations",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.settingsButton": {
+      "value": "Reservation settings",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.startTime": {
+      "value": "Start time",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.cancelled": {
+      "value": "Cancelled",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.completed": {
+      "value": "Completed",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.noShow": {
+      "value": "No show",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.requested": {
+      "value": "Requested",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.status.seated": {
+      "value": "Seated",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.table": {
+      "value": "Table",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.tableAvailability": {
+      "value": "Table availability",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.time": {
+      "value": "Time",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "reservations.todays": {
+      "value": "Today\u0027s reservations",
+      "description": null,
+      "groupName": "reservations",
+      "isActive": true
+    },
+    "restaurant.addCuisine": {
+      "value": "Add cuisine",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.addTable": {
+      "value": "Add table",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.allowTableSelection": {
+      "value": "Allow user table selection",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignmentAutomatic": {
+      "value": "Automatic",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignmentManual": {
+      "value": "Manual",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.assignRole": {
+      "value": "Assign role",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.awaitingAssignment": {
+      "value": "-- awaiting assignment --",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.choose": {
+      "value": "Choose a restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.chooseAwaitingUser": {
+      "value": "Choose a user waiting for assignment.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.chooseCuisineFirst": {
+      "value": "Choose a cuisine first.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.create": {
+      "value": "Create restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.created": {
+      "value": "Restaurant created.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.cuisineLimit": {
+      "value": "Choose up to 5 cuisine types.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.cuisineTypes": {
+      "value": "Cuisine types (up to 5)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.current": {
+      "value": "Current restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.defaultDuration": {
+      "value": "Default duration",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.defaultLanguage": {
+      "value": "Default language",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deleteTableConfirm": {
+      "value": "Delete table?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.delivery": {
+      "value": "Delivery",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryEnabled": {
+      "value": "Delivery enabled",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryFee": {
+      "value": "Delivery fee",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.deliveryRadius": {
+      "value": "Radius (km)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.details": {
+      "value": "Restaurant details",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.driverAssignment": {
+      "value": "Driver assignment",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.editDetails": {
+      "value": "Edit restaurant details",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.emailRequired": {
+      "value": "Email is required.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.endTime": {
+      "value": "End time",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.extraIngredientPrice": {
+      "value": "Extra ingredient price",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.gracePeriod": {
+      "value": "Grace period",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.holdUntilClose": {
+      "value": "Hold table until close",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteByEmail": {
+      "value": "Invite by email",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteRemoved": {
+      "value": "Invite removed.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.inviteSent": {
+      "value": "Invitation sent.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.languages": {
+      "value": "Cultures / Language",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.lastStartTime": {
+      "value": "Last start time",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.leadTimeMinutes": {
+      "value": "Lead time (minutes)",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.loadFailed": {
+      "value": "Failed to load restaurants",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.managing": {
+      "value": "Managing",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.minimumOrder": {
+      "value": "Minimum order",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.nameRequired": {
+      "value": "Restaurant name is required.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.newRestaurant": {
+      "value": "New restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noCuisines": {
+      "value": "No cuisines selected yet.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noneAssigned": {
+      "value": "No restaurant assigned.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noRestaurantSelected": {
+      "value": "No restaurant selected.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.noStaffLinked": {
+      "value": "No staff linked to this restaurant yet.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.onlyMainAdminCanCreate": {
+      "value": "Only main admins can create restaurants.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.openDetails": {
+      "value": "Open the restaurant page to view details or change it.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payAtCounter": {
+      "value": "Pay at counter",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payInApp": {
+      "value": "Pay in app",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.paymentOptions": {
+      "value": "Payment Options",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.payOnDelivery": {
+      "value": "Pay on delivery",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.pickupEnabled": {
+      "value": "Pickup enabled",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.preorderMaxAfterStart": {
+      "value": "Preorder max after start",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.preorderMinOffset": {
+      "value": "Preorder min offset",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeInvite": {
+      "value": "Remove invite",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeInviteConfirm": {
+      "value": "Remove this invite?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeRole": {
+      "value": "Remove",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.removeRoleConfirm": {
+      "value": "Remove role assignment?",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservable": {
+      "value": "Reservable",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservationRequiresPayment": {
+      "value": "Reservation requires in-app payment",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservations": {
+      "value": "Reservations",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.reservationsEnabled": {
+      "value": "Reservations enabled",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roleAssigned": {
+      "value": "Role assigned.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roleRemoved": {
+      "value": "Role removed.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.roles": {
+      "value": "Restaurant Roles",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.save": {
+      "value": "Save restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.saved": {
+      "value": "Restaurant details saved.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.saveTable": {
+      "value": "Save table",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.searchCuisines": {
+      "value": "Search cuisines",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.selected": {
+      "value": "Selected restaurant",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.selectFirst": {
+      "value": "Select a restaurant first.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.sendInvite": {
+      "value": "Send invite",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.settings": {
+      "value": "Restaurant settings",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.settingsSaved": {
+      "value": "Restaurant settings saved.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.startTime": {
+      "value": "Start time",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.stateOrRole": {
+      "value": "State / Role",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.supportedLanguages": {
+      "value": "Supported languages",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableAdded": {
+      "value": "Table added.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableDeleted": {
+      "value": "Table deleted.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableLabel": {
+      "value": "Label",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableNone": {
+      "value": "No tables added yet.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableOrdersEnabled": {
+      "value": "Table orders enabled",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableRequired": {
+      "value": "Table label is required.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tables": {
+      "value": "Tables",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSaved": {
+      "value": "Table saved.",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSeats": {
+      "value": "Seats",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.tableSort": {
+      "value": "Sort",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "restaurant.user": {
+      "value": "User",
+      "description": null,
+      "groupName": "restaurant",
+      "isActive": true
+    },
+    "roles.Admin": {
+      "value": "Application Admin",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Chef": {
+      "value": "Chef",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Customer": {
+      "value": "Customer",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.DeliveryDriver": {
+      "value": "Delivery Driver",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.RestaurantAdmin": {
+      "value": "Restaurant Admin",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "roles.Waiter": {
+      "value": "Waiter",
+      "description": null,
+      "groupName": "roles",
+      "isActive": true
+    },
+    "tables.create": {
+      "value": "Create Table",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.deleteFailed": {
+      "value": "Failed to delete table",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.edit": {
+      "value": "Edit Table",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.loadFailed": {
+      "value": "Failed to load tables",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.new": {
+      "value": "New Table",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.noContext": {
+      "value": "No restaurant context available.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.none": {
+      "value": "No tables match this search.",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.restaurantTables": {
+      "value": "Restaurant Tables",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.saveFailed": {
+      "value": "Failed to save table",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.search": {
+      "value": "Search tables",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.sortOrder": {
+      "value": "Sort Order",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "tables.working": {
+      "value": "Working...",
+      "description": null,
+      "groupName": "tables",
+      "isActive": true
+    },
+    "take": {
+      "value": "300",
+      "description": null,
+      "groupName": "general",
+      "isActive": true
+    },
+    "ui.allActivity": {
+      "value": "All activity",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allAvailability": {
+      "value": "All availability",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allCategories": {
+      "value": "All categories",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allConfirmationStates": {
+      "value": "All confirmation states",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allergens": {
+      "value": "Allergens",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allReservableStates": {
+      "value": "All reservable states",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allRestaurants": {
+      "value": "All restaurants",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allRoles": {
+      "value": "All roles",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allSwapModes": {
+      "value": "All swap modes",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.allUnits": {
+      "value": "All units",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.available": {
+      "value": "Available",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.category": {
+      "value": "Category",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.chooseAllergens": {
+      "value": "Choose allergens",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.cost": {
+      "value": "Cost",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costFrom": {
+      "value": "Cost from",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costPerUnit": {
+      "value": "Cost per unit",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.costTo": {
+      "value": "Cost to",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.culture": {
+      "value": "Culture",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.description": {
+      "value": "Description",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.gram": {
+      "value": "Gram",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.milliliter": {
+      "value": "Milliliter",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.noAllergensSelected": {
+      "value": "No allergens selected.",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.noOptionsAvailable": {
+      "value": "No options available.",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.notConfirmed": {
+      "value": "Not confirmed",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.notReservable": {
+      "value": "Not reservable",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.order": {
+      "value": "Order",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.photoAssetId": {
+      "value": "Photo asset ID",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.photoUpload": {
+      "value": "Photo upload",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.piece": {
+      "value": "Piece",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.priceFrom": {
+      "value": "Price from",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.priceTo": {
+      "value": "Price to",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchAllergens": {
+      "value": "Search allergens",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchCategories": {
+      "value": "Search categories",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchIngredients": {
+      "value": "Search ingredients",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.searchItems": {
+      "value": "Search items",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.seatsFrom": {
+      "value": "Seats from",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.seatsTo": {
+      "value": "Seats to",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.sortOrder": {
+      "value": "Sort order",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.swapDisabled": {
+      "value": "Swap disabled",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.swapEnabled": {
+      "value": "Swap enabled",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.translations": {
+      "value": "Translations",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.unavailable": {
+      "value": "Unavailable",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "ui.unit": {
+      "value": "Unit",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
+    "users.addAssignment": {
+      "value": "Add assignment",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.appAdmin": {
+      "value": "App Admin",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assigning": {
+      "value": "Assigning...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assignSelected": {
+      "value": "Assign selected users",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.assignSelectedHint": {
+      "value": "Select users in the list below, then choose a restaurant and a role to assign them in one action.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.bulkAssignFailed": {
+      "value": "Failed to assign selected users",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.clearSelection": {
+      "value": "Clear selection",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.confirmed": {
+      "value": "Confirmed",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.count": {
+      "value": "users",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.create": {
+      "value": "Create user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.deleteConfirm": {
+      "value": "Delete user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.deleteFailed": {
+      "value": "Failed to delete user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.edit": {
+      "value": "Edit user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.emailConfirmed": {
+      "value": "Email confirmed",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.loadFailed": {
+      "value": "Failed to load users",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.new": {
+      "value": "New user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.noAssignments": {
+      "value": "No restaurant assignments.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.none": {
+      "value": "No users match this search.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.passwordReset": {
+      "value": "Password reset",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.resetFailed": {
+      "value": "Failed to send password reset",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.resetPassword": {
+      "value": "Reset password",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.restaurantAssignments": {
+      "value": "Restaurant assignments",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.roles": {
+      "value": "Roles",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saveChanges": {
+      "value": "Save changes",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saveFailed": {
+      "value": "Failed to save user",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.saving": {
+      "value": "Saving...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.search": {
+      "value": "Search users",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.select": {
+      "value": "Select",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectAllListed": {
+      "value": "Select all listed",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectAtLeastOne": {
+      "value": "Select at least one user first.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selected": {
+      "value": "selected",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectRestaurant": {
+      "value": "select restaurant",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.selectRestaurantForAssignment": {
+      "value": "Select a restaurant for the assignment.",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.sending": {
+      "value": "Sending...",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "users.userName": {
+      "value": "User Name",
+      "description": null,
+      "groupName": "users",
+      "isActive": true
+    },
+    "validation.categoryRequired": {
+      "value": "Category is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.confirmationCodeRequired": {
+      "value": "Confirmation code is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.currentPasswordRequired": {
+      "value": "Current password is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.duplicateCultures": {
+      "value": "Duplicate cultures are not allowed.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.emailInvalid": {
+      "value": "Enter a valid email address.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.emailRequired": {
+      "value": "Email is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.newPasswordRequired": {
+      "value": "New password is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordDigit": {
+      "value": "one digit",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordMinLength": {
+      "value": "at least 8 characters",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordRequired": {
+      "value": "Password is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordRequirements": {
+      "value": "Password must contain",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordsMismatch": {
+      "value": "Passwords do not match.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordSpecial": {
+      "value": "one special character",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.passwordUppercase": {
+      "value": "one uppercase letter",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.priceCannotBeNegative": {
+      "value": "Price cannot be negative.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.resetTokenRequired": {
+      "value": "Reset token is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.translationNameRequired": {
+      "value": "Each translation must have a name.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.translationRequired": {
+      "value": "At least one translation is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    },
+    "validation.userNameRequired": {
+      "value": "User name is required.",
+      "description": null,
+      "groupName": "validation",
+      "isActive": true
+    }
+  }
+}

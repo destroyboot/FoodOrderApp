@@ -1,7 +1,9 @@
-﻿using Core.Data.Enums;
+using Core.Data.Enums;
 using Core.Interfaces;
+using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
 
 namespace API.Controllers
@@ -12,11 +14,13 @@ namespace API.Controllers
     {
         private readonly IOrderRepository _orders;
         private readonly IAsyncQueryExecutor _q;
+        private readonly AppDbContext _db;
 
-        public OrdersController(IOrderRepository orders, IAsyncQueryExecutor q)
+        public OrdersController(IOrderRepository orders, IAsyncQueryExecutor q, AppDbContext db)
         {
             _orders = orders;
             _q = q;
+            _db = db;
         }
 
         private string? CustomerId => User?.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -36,7 +40,6 @@ namespace API.Controllers
             return key!;
         }
 
-        // Active orders for current user/guest
         [HttpGet("my/active")]
         [AllowAnonymous]
         public async Task<IActionResult> MyActive(CancellationToken ct)
@@ -52,9 +55,17 @@ namespace API.Controllers
                 .Select(o => new
                 {
                     o.Id,
+                    DisplayOrderNumber = o.DailyRestaurantOrderNumber.HasValue ? o.DailyRestaurantOrderNumber.Value.ToString("0000") : o.Id.ToString(),
                     o.Status,
                     o.OrderType,
                     o.TableNumber,
+                    o.PickupContactName,
+                    o.PickupPhone,
+                    o.DeliveryContactName,
+                    o.DeliveryPhone,
+                    o.DeliveryAddressLine1,
+                    o.DeliveryCity,
+                    o.ScheduledFor,
                     o.Total,
                     o.CreatedAt,
                     ItemCount = o.Items.Sum(i => i.Quantity)
@@ -64,7 +75,6 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        // Order history for current user/guest
         [HttpGet("my/history")]
         [AllowAnonymous]
         public async Task<IActionResult> MyHistory([FromQuery] int take = 50, CancellationToken ct = default)
@@ -82,9 +92,17 @@ namespace API.Controllers
                 .Select(o => new
                 {
                     o.Id,
+                    DisplayOrderNumber = o.DailyRestaurantOrderNumber.HasValue ? o.DailyRestaurantOrderNumber.Value.ToString("0000") : o.Id.ToString(),
                     o.Status,
                     o.OrderType,
                     o.TableNumber,
+                    o.PickupContactName,
+                    o.PickupPhone,
+                    o.DeliveryContactName,
+                    o.DeliveryPhone,
+                    o.DeliveryAddressLine1,
+                    o.DeliveryCity,
+                    o.ScheduledFor,
                     o.Total,
                     o.CreatedAt,
                     ItemCount = o.Items.Sum(i => i.Quantity)
@@ -94,7 +112,6 @@ namespace API.Controllers
             return Ok(result);
         }
 
-        // Order details (owner only)
         [HttpGet("{id:int}")]
         [AllowAnonymous]
         public async Task<IActionResult> MyOrderDetails(int id, CancellationToken ct)
@@ -106,18 +123,41 @@ namespace API.Controllers
                 .Select(o => new
                 {
                     o.Id,
+                    DisplayOrderNumber = o.DailyRestaurantOrderNumber.HasValue ? o.DailyRestaurantOrderNumber.Value.ToString("0000") : o.Id.ToString(),
                     o.Status,
                     o.OrderType,
                     o.TableNumber,
+                    o.PickupContactName,
+                    o.PickupPhone,
+                    o.PickupNote,
+                    o.DeliveryContactName,
+                    o.DeliveryPhone,
+                    o.DeliveryAddressLine1,
+                    o.DeliveryAddressLine2,
+                    o.DeliveryCity,
+                    o.DeliveryPostalCode,
+                    o.DeliveryCountry,
+                    o.DeliveryNote,
+                    o.ReceiptEmail,
+                    InvoiceNumber = o.InvoiceDocument != null ? o.InvoiceDocument.InvoiceNumber : null,
+                    HasInvoiceDocument = o.InvoiceDocument != null,
                     o.Subtotal,
                     o.DeliveryFee,
                     o.Total,
                     o.EstimatedPreparationMinutes,
                     o.EstimatedReadyAt,
+                    o.ScheduledFor,
                     o.CreatedAt,
                     Items = o.Items.Select(i => new
                     {
                         i.MenuItemId,
+                        MenuItemName = _db.MenuItems
+                            .Where(m => m.Id == i.MenuItemId)
+                            .Select(m => m.Translations
+                                .OrderBy(t => t.Culture == "pl-PL" ? 0 : 1)
+                                .Select(t => t.Name)
+                                .FirstOrDefault())
+                            .FirstOrDefault(),
                         i.Quantity,
                         i.UnitPrice,
                         i.Note
@@ -128,6 +168,25 @@ namespace API.Controllers
             if (result is null) throw new KeyNotFoundException("Order not found.");
 
             return Ok(result);
+        }
+
+        [HttpGet("{id:int}/invoice-pdf")]
+        [AllowAnonymous]
+        public async Task<IActionResult> MyInvoicePdf(int id, CancellationToken ct)
+        {
+            var ownerKey = ResolveOwnerKey();
+
+            var order = await _db.Orders
+                .Include(o => o.InvoiceDocument)
+                .FirstOrDefaultAsync(o => o.Id == id && o.CustomerId == ownerKey && o.Status != OrderStatus.Draft, ct);
+
+            if (order is null)
+                throw new KeyNotFoundException("Order not found.");
+
+            if (order.InvoiceDocument is null)
+                throw new InvalidOperationException("Invoice is not available for this order.");
+
+            return File(order.InvoiceDocument.PdfBytes, order.InvoiceDocument.ContentType, order.InvoiceDocument.FileName);
         }
     }
 }

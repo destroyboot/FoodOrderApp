@@ -8,6 +8,7 @@ namespace Core.Contracts.Menu
 {
     public class MenuCategoryCreateDto
     {
+        public int RestaurantId { get; set; }
         public bool IsActive { get; set; } = true;
         public int SortOrder { get; set; } = 0;
 

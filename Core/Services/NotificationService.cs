@@ -1,11 +1,7 @@
-﻿using Core.Data.Entities;
+using Core.Data.Entities;
 using Core.Data.Enums;
 using Core.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Core.Services
 {
@@ -14,12 +10,21 @@ namespace Core.Services
         private readonly INotificationRepository _repo;
         private readonly IAsyncQueryExecutor _q;
         private readonly IUnitOfWork _uow;
+        private readonly IPushNotificationService _pushNotifications;
+        private readonly ILogger<NotificationService> _logger;
 
-        public NotificationService(INotificationRepository repo, IAsyncQueryExecutor q, IUnitOfWork uow)
+        public NotificationService(
+            INotificationRepository repo,
+            IAsyncQueryExecutor q,
+            IUnitOfWork uow,
+            IPushNotificationService pushNotifications,
+            ILogger<NotificationService> logger)
         {
             _repo = repo;
             _q = q;
             _uow = uow;
+            _pushNotifications = pushNotifications;
+            _logger = logger;
         }
 
         public async Task CreateAsync(
@@ -33,7 +38,7 @@ namespace Core.Services
             if (string.IsNullOrWhiteSpace(ownerKey))
                 throw new InvalidOperationException("OwnerKey is required.");
 
-            var n = new Notification
+            var notification = new Notification
             {
                 OwnerKey = ownerKey,
                 Type = type,
@@ -44,22 +49,32 @@ namespace Core.Services
                 CreatedAt = DateTime.UtcNow
             };
 
-            await _repo.AddAsync(n, ct);
+            await _repo.AddAsync(notification, ct);
             await _uow.SaveChangesAsync(ct);
+
+            try
+            {
+                await _pushNotifications.SendToOwnerAsync(ownerKey, title, body, payloadJson, ct);
+            }
+            catch (Exception ex)
+            {
+                // Order/notification workflows should not fail because remote push delivery had an issue.
+                _logger.LogWarning(ex, "Push notification delivery failed for owner {OwnerKey}.", ownerKey);
+            }
         }
 
         public async Task MarkReadAsync(string ownerKey, int notificationId, CancellationToken ct = default)
         {
-            var n = await _q.FirstOrDefaultAsync(
+            var notification = await _q.FirstOrDefaultAsync(
                 _repo.Query(tracked: true).Where(x => x.Id == notificationId && x.OwnerKey == ownerKey),
                 ct);
 
-            if (n is null) throw new KeyNotFoundException("Notification not found.");
+            if (notification is null) throw new KeyNotFoundException("Notification not found.");
 
-            if (!n.IsRead)
+            if (!notification.IsRead)
             {
-                n.IsRead = true;
-                n.ReadAt = DateTime.UtcNow;
+                notification.IsRead = true;
+                notification.ReadAt = DateTime.UtcNow;
                 await _uow.SaveChangesAsync(ct);
             }
         }
@@ -73,10 +88,10 @@ namespace Core.Services
             if (unread.Count == 0) return;
 
             var now = DateTime.UtcNow;
-            foreach (var n in unread)
+            foreach (var notification in unread)
             {
-                n.IsRead = true;
-                n.ReadAt = now;
+                notification.IsRead = true;
+                notification.ReadAt = now;
             }
 
             await _uow.SaveChangesAsync(ct);

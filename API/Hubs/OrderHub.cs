@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace API.Hubs
 {
-    [Authorize(Roles = "Admin,Waiter,Chef")] // staff only
+    [Authorize(Roles = "Admin,RestaurantAdmin,Waiter,Chef,DeliveryDriver")]
     public class OrderHub : Hub
     {
-        // Later: groups per RestaurantId etc.
+        // Server publishes order events through IHubContext<OrderHub>.
     }
 }

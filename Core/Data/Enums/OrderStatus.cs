@@ -14,6 +14,10 @@ namespace Core.Data.Enums
         Preparing = 3,
         Ready = 4,
         Completed = 5,
-        Cancelled = 6
+        Cancelled = 6,
+        SentToKitchen = 7,
+        ReadyForWaiter = 8,
+        Delivered = 9,
+        OutForDelivery = 10
     }
 }

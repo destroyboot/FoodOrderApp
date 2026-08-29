@@ -1,6 +1,8 @@
 using API.Events;
 using API.Hubs;
+using API.Localization;
 using API.Middleware;
+using API.Support;
 using API.Swagger;
 using Core.Interfaces;
 using Core.Services;
@@ -9,17 +11,27 @@ using Infrastructure.Email;
 using Infrastructure.Persistence;
 using Infrastructure.Querying;
 using Infrastructure.Repositories;
+using Infrastructure.Notifications;
 using Infrastructure.Seeding;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.ComponentModel;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseUrls(
+    "https://localhost:7234",
+    "http://0.0.0.0:5271"
+);
+builder.Logging.ClearProviders();
+builder.Logging.AddConsole();
+builder.Logging.AddDebug();
 
 #region Kod
 builder.Services.AddDbContext<AppDbContext>(opt =>
@@ -31,6 +43,8 @@ builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 builder.Services.AddScoped<IMenuItemRepository, MenuItemRepository>();
 builder.Services.AddScoped<IMenuCategoryRepository, MenuCategoryRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IRestaurantTableRepository, RestaurantTableRepository>();
 builder.Services.AddScoped<IMenuService, MenuService>();
 builder.Services.AddScoped<IShoppingCartService, ShoppingCartService>();
 builder.Services.AddScoped<IAdminOrderService, AdminOrderService>();
@@ -38,9 +52,17 @@ builder.Services.AddSignalR();
 builder.Services.AddSingleton<IOrderEventPublisher, SignalROrderEventPublisher>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddScoped<IPushNotificationService, ExpoPushNotificationService>();
 builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IOrderStatusEmailService, OrderStatusEmailService>();
+builder.Services.AddScoped<IAppLocalizationFileStore, AppLocalizationFileStore>();
+builder.Services.AddScoped<IOrderSummaryEmailComposer, OrderSummaryEmailComposer>();
+
+builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
+{
+    opt.TokenLifespan = TimeSpan.FromMinutes(20);
+});
 
 builder.Services
     .AddIdentityCore<ApplicationUser>(options =>
@@ -112,7 +134,21 @@ builder.Services.AddCors(options =>
     options.AddPolicy("WebAppCors", policy =>
     {
         policy
-            .WithOrigins("https://localhost:7243")
+            .SetIsOriginAllowed(origin =>
+            {
+                if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                {
+                    return false;
+                }
+
+                if (uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase) ||
+                    uri.Host.Equals("127.0.0.1"))
+                {
+                    return true;
+                }
+
+                return false;
+            })
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
@@ -134,10 +170,24 @@ using (var scope = app.Services.CreateScope())
     var users = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
     var roles = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
     await DatabaseSeeder.SeedAsync(db);
-    await IdentitySeeder.SeedAsync(users, roles);
+    await IdentitySeeder.SeedAsync(db, users, roles);
 }
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
+
+// Uploaded menu photos live outside wwwroot so adding a photo cannot trigger a
+// project-content reload while the API is running under a debugger.
+var uploadsRoot = Path.Combine(app.Environment.ContentRootPath, "App_Data", "Uploads");
+Directory.CreateDirectory(uploadsRoot);
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(uploadsRoot),
+    RequestPath = "/uploads"
+});
+app.UseStaticFiles();
 app.UseCors("WebAppCors");
 
 app.UseAuthentication();

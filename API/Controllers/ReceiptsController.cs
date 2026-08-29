@@ -1,9 +1,12 @@
-﻿using Core.Data.Enums;
+using API.Support;
+using Core.Contracts.Orders;
+using Core.Models;
+using Core.Data.Enums;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
-using System.Text;
 
 namespace API.Controllers
 {
@@ -14,12 +17,16 @@ namespace API.Controllers
         private readonly IOrderRepository _orders;
         private readonly IAsyncQueryExecutor _q;
         private readonly IEmailSender _email;
+        private readonly Infrastructure.Persistence.AppDbContext _db;
+        private readonly IOrderSummaryEmailComposer _orderEmails;
 
-        public ReceiptsController(IOrderRepository orders, IAsyncQueryExecutor q, IEmailSender email)
+        public ReceiptsController(IOrderRepository orders, IAsyncQueryExecutor q, IEmailSender email, Infrastructure.Persistence.AppDbContext db, IOrderSummaryEmailComposer orderEmails)
         {
             _orders = orders;
             _q = q;
             _email = email;
+            _db = db;
+            _orderEmails = orderEmails;
         }
 
         private string? CustomerId => User?.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -39,101 +46,47 @@ namespace API.Controllers
             return key!;
         }
 
-        public record SendReceiptRequest(string? Email);
-
-        /// <summary>
-        /// Sends receipt email for an order.
-        /// If body.Email is null, uses Order.ReceiptEmail.
-        /// Owner-only (JWT or X-Guest-Token).
-        /// </summary>
         [HttpPost("{id:int}/send-receipt")]
         [AllowAnonymous]
-        public async Task<IActionResult> SendReceipt(int id, [FromBody] SendReceiptRequest req, CancellationToken ct)
+        public async Task<IActionResult> SendReceipt(int id, [FromBody] SendReceiptRequestDto? req, CancellationToken ct)
         {
             var ownerKey = ResolveOwnerKey();
 
-            var order = await _q.FirstOrDefaultAsync(
-                _orders.Query()
-                    .Where(o => o.Id == id && o.CustomerId == ownerKey && o.Status != OrderStatus.Draft)
-                    .Select(o => new
-                    {
-                        o.Id,
-                        o.Status,
-                        o.OrderType,
-                        o.TableNumber,
-                        o.Subtotal,
-                        o.DeliveryFee,
-                        o.Total,
-                        o.CreatedAt,
-                        o.ReceiptEmail,
-                        Items = o.Items.Select(i => new { i.MenuItemId, i.Quantity, i.UnitPrice, i.Note }).ToList()
-                    }),
-                ct);
+            var order = await _db.Orders
+                .Include(o => o.BillingDetails)
+                .Include(o => o.InvoiceDocument)
+                .Include(o => o.Items)
+                .Include(o => o.Restaurant)
+                .FirstOrDefaultAsync(o => o.Id == id && o.CustomerId == ownerKey && o.Status != OrderStatus.Draft, ct);
 
             if (order is null)
                 throw new KeyNotFoundException("Order not found.");
 
-            var toEmail = (req.Email ?? order.ReceiptEmail)?.Trim();
+            var toEmail = (req?.Email ?? order.ReceiptEmail ?? order.BillingDetails?.ReceiptEmail)?.Trim();
             if (string.IsNullOrWhiteSpace(toEmail))
                 throw new InvalidOperationException("No email provided. Set ReceiptEmail in cart meta or pass Email in request body.");
 
-            var html = BuildReceiptHtml(order);
+            var emailModel = await _orderEmails.ComposeAsync(order, order.InvoiceDocument, ct);
+            var attachments = order.InvoiceDocument is null
+                ? null
+                : new[]
+                {
+                    new EmailAttachment
+                    {
+                        FileName = order.InvoiceDocument.FileName,
+                        ContentType = order.InvoiceDocument.ContentType,
+                        ContentBytes = order.InvoiceDocument.PdfBytes
+                    }
+                };
 
             await _email.SendAsync(
                 toEmail: toEmail,
-                subject: $"Food Order App – Receipt for Order #{order.Id}",
-                htmlBody: html,
+                subject: emailModel.Subject,
+                htmlBody: OrderSummaryEmailBuilder.Build(emailModel),
+                attachments: attachments,
                 ct: ct);
 
             return Ok(new { sentTo = toEmail });
-        }
-
-        private static string BuildReceiptHtml(dynamic order)
-        {
-            var sb = new StringBuilder();
-
-            sb.Append("<html><body style='font-family:Arial,sans-serif;'>");
-            sb.Append($"<h2>Receipt – Order #{order.Id}</h2>");
-            sb.Append($"<p><b>Date:</b> {order.CreatedAt:u}<br/>");
-            sb.Append($"<b>Status:</b> {order.Status}<br/>");
-            sb.Append($"<b>Type:</b> {order.OrderType}<br/>");
-            if (!string.IsNullOrWhiteSpace((string?)order.TableNumber))
-                sb.Append($"<b>Table:</b> {order.TableNumber}<br/>");
-            sb.Append("</p>");
-
-            sb.Append("<table style='border-collapse:collapse;width:100%;max-width:700px;'>");
-            sb.Append("<tr>");
-            sb.Append("<th style='border-bottom:1px solid #ccc;text-align:left;padding:6px;'>Item</th>");
-            sb.Append("<th style='border-bottom:1px solid #ccc;text-align:right;padding:6px;'>Qty</th>");
-            sb.Append("<th style='border-bottom:1px solid #ccc;text-align:right;padding:6px;'>Unit</th>");
-            sb.Append("<th style='border-bottom:1px solid #ccc;text-align:right;padding:6px;'>Line</th>");
-            sb.Append("</tr>");
-
-            foreach (var i in order.Items)
-            {
-                decimal line = (decimal)i.UnitPrice * (int)i.Quantity;
-                sb.Append("<tr>");
-                sb.Append($"<td style='padding:6px;'>MenuItem #{i.MenuItemId}</td>");
-                sb.Append($"<td style='padding:6px;text-align:right;'>{i.Quantity}</td>");
-                sb.Append($"<td style='padding:6px;text-align:right;'>{((decimal)i.UnitPrice):0.00}</td>");
-                sb.Append($"<td style='padding:6px;text-align:right;'>{line:0.00}</td>");
-                sb.Append("</tr>");
-
-                if (!string.IsNullOrWhiteSpace((string?)i.Note))
-                    sb.Append($"<tr><td colspan='4' style='padding:6px;color:#555;'>Note: {i.Note}</td></tr>");
-            }
-
-            sb.Append("</table>");
-
-            sb.Append("<hr/>");
-            sb.Append($"<p><b>Subtotal:</b> {((decimal)order.Subtotal):0.00}<br/>");
-            sb.Append($"<b>Delivery fee:</b> {((decimal)order.DeliveryFee):0.00}<br/>");
-            sb.Append($"<b>Total:</b> {((decimal)order.Total):0.00}</p>");
-
-            sb.Append("<p style='color:#777;'>Thank you for your order!</p>");
-            sb.Append("</body></html>");
-
-            return sb.ToString();
         }
     }
 }

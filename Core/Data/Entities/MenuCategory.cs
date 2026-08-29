@@ -9,8 +9,11 @@ namespace Core.Data.Entities
     public class MenuCategory
     {
         public int Id { get; set; }
+        public int RestaurantId { get; set; }
         public bool IsActive { get; set; } = true;
         public int SortOrder { get; set; } = 0;
+
+        public Restaurant? Restaurant { get; set; }
 
         public ICollection<MenuCategoryTranslation> Translations { get; set; }
             = new List<MenuCategoryTranslation>();
