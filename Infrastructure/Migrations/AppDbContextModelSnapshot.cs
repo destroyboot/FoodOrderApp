@@ -92,6 +92,35 @@ namespace Infrastructure.Migrations
                     b.ToTable("Allergens");
                 });
 
+            modelBuilder.Entity("Core.Data.Entities.AllergenTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AllergenId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Culture")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AllergenId", "Culture")
+                        .IsUnique();
+
+                    b.ToTable("AllergenTranslations");
+                });
+
             modelBuilder.Entity("Core.Data.Entities.AppLanguage", b =>
                 {
                     b.Property<int>("Id")
@@ -157,6 +186,35 @@ namespace Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Cuisines");
+                });
+
+            modelBuilder.Entity("Core.Data.Entities.CuisineTranslation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("CuisineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Culture")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CuisineId", "Culture")
+                        .IsUnique();
+
+                    b.ToTable("CuisineTranslations");
                 });
 
             modelBuilder.Entity("Core.Data.Entities.Ingredient", b =>
@@ -1662,6 +1720,24 @@ namespace Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Data.Entities.AllergenTranslation", b =>
+                {
+                    b.HasOne("Core.Data.Entities.Allergen", null)
+                        .WithMany("Translations")
+                        .HasForeignKey("AllergenId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Data.Entities.CuisineTranslation", b =>
+                {
+                    b.HasOne("Core.Data.Entities.Cuisine", null)
+                        .WithMany("Translations")
+                        .HasForeignKey("CuisineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Core.Data.Entities.Ingredient", b =>
                 {
                     b.HasOne("Core.Data.Entities.Restaurant", "Restaurant")
@@ -1966,6 +2042,16 @@ namespace Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Data.Entities.Allergen", b =>
+                {
+                    b.Navigation("Translations");
+                });
+
+            modelBuilder.Entity("Core.Data.Entities.Cuisine", b =>
+                {
+                    b.Navigation("Translations");
                 });
 
             modelBuilder.Entity("Core.Data.Entities.Ingredient", b =>

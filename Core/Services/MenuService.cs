@@ -30,7 +30,6 @@ namespace Core.Services
             _uow = uow;
         }
 
-        // ---------- Categories ----------
         public async Task<int> CreateCategoryAsync(MenuCategoryCreateDto dto, string userId, CancellationToken ct = default)
         {
             ValidateCategoryTranslations(dto.Translations);
@@ -65,7 +64,6 @@ namespace Core.Services
             entity.IsActive = dto.IsActive;
             entity.SortOrder = dto.SortOrder;
 
-            // Replace-all translations
             entity.Translations.Clear();
             foreach (var t in dto.Translations)
             {
@@ -106,7 +104,8 @@ namespace Core.Services
                         x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Name).FirstOrDefault()
                         ?? x.Translations.Where(t => t.Culture == x.Restaurant!.Settings!.DefaultCulture).Select(t => t.Name).FirstOrDefault()
                         ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
-                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault()
+                        ?? $"Category #{x.Id}",
                     Description =
                         x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Description).FirstOrDefault()
                         ?? x.Translations.Where(t => t.Culture == x.Restaurant!.Settings!.DefaultCulture).Select(t => t.Description).FirstOrDefault()
@@ -139,7 +138,8 @@ namespace Core.Services
 
                     Name =
                         x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
-                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault()
+                        ?? $"Category #{x.Id}",
 
                     Description =
                         x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault()
@@ -202,8 +202,6 @@ namespace Core.Services
 
             await _uow.SaveChangesAsync(ct);
         }
-
-        // ---------- Items ----------
 
         public async Task<IReadOnlyList<MenuItemDto>> GetItemsAsync(string? culture, int? restaurantId = null, CancellationToken ct = default)
         {
@@ -315,7 +313,8 @@ namespace Core.Services
                     Name =
                         x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Name).FirstOrDefault()
                         ?? x.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
-                        ?? x.Translations.Select(t => t.Name).FirstOrDefault(),
+                        ?? x.Translations.Select(t => t.Name).FirstOrDefault()
+                        ?? $"Menu item #{x.Id}",
 
                     Description =
                         x.Translations.Where(t => t.Culture == requestedCulture).Select(t => t.Description).FirstOrDefault()
@@ -352,7 +351,6 @@ namespace Core.Services
         {
             ValidateItem(dto);
 
-            // Optional: check category exists
             var catExists = await _q.AnyAsync(_categories.Query().Where(c => c.Id == dto.MenuCategoryId && c.IsActive), ct);
             if (!catExists) throw new InvalidOperationException("MenuCategory does not exist or is inactive.");
 
@@ -391,7 +389,6 @@ namespace Core.Services
             entity.PhotoAssetId = dto.PhotoAssetId;
             entity.PhotoPath = NormalizePhotoPath(dto.PhotoPath);
 
-            // Replace-all translations
             entity.Translations.Clear();
             foreach (var t in dto.Translations)
             {
@@ -483,7 +480,6 @@ namespace Core.Services
                     await _uow.SaveChangesAsync(ct);
                 }
 
-        // ---------- Validation helpers ----------
         private static void ValidateCategoryTranslations(List<MenuCategoryTranslationDto> tr)
         {
             if (tr is null || tr.Count == 0) throw new InvalidOperationException("Translations are required.");

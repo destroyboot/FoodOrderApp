@@ -261,7 +261,8 @@ namespace API.Controllers
             [FromQuery] DateTime? date,
             [FromQuery] string? search,
             CancellationToken ct,
-            [FromQuery] bool historyOnly = false)
+            [FromQuery] bool historyOnly = false,
+            [FromQuery] int? take = null)
         {
             if (restaurantId.HasValue)
                 await EnsureCanAccessRestaurantAsync(restaurantId.Value, ct);
@@ -300,8 +301,19 @@ namespace API.Controllers
                 query = query.Where(x => x.StartAt < DateTime.UtcNow);
             }
 
-            var result = await query
-                .OrderByDescending(x => x.StartAt)
+            IQueryable<Reservation> resultQuery = query.OrderByDescending(x => x.StartAt);
+            var effectiveTake = take.HasValue
+                ? Math.Clamp(take.Value, 1, 500)
+                : historyOnly || !string.IsNullOrWhiteSpace(search)
+                    ? 200
+                    : (int?)null;
+
+            if (effectiveTake.HasValue)
+            {
+                resultQuery = resultQuery.Take(effectiveTake.Value);
+            }
+
+            var result = await resultQuery
                 .ToListAsync(ct);
 
             return Ok(result.Select(x => MapReservation(x)).ToList());

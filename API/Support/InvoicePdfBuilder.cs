@@ -21,7 +21,7 @@ namespace API.Support
 
             foreach (var item in invoice.Items)
             {
-                lines.Add($"- MenuItem #{item.MenuItemId} x{item.Quantity} @ {((decimal)item.UnitPrice).ToString("0.00", CultureInfo.InvariantCulture)} = {((decimal)item.LineTotal).ToString("0.00", CultureInfo.InvariantCulture)}");
+                lines.Add($"- {item.Name} x{item.Quantity}, unit {((decimal)item.UnitPrice).ToString("0.00", CultureInfo.InvariantCulture)} = {((decimal)item.LineTotal).ToString("0.00", CultureInfo.InvariantCulture)}");
                 if (!string.IsNullOrWhiteSpace((string?)item.Note))
                     lines.Add($"  Note: {item.Note}");
             }
@@ -30,8 +30,6 @@ namespace API.Support
             lines.Add($"Subtotal: {((decimal)invoice.Subtotal).ToString("0.00", CultureInfo.InvariantCulture)}");
             lines.Add($"Delivery fee: {((decimal)invoice.DeliveryFee).ToString("0.00", CultureInfo.InvariantCulture)}");
             lines.Add($"Total: {((decimal)invoice.Total).ToString("0.00", CultureInfo.InvariantCulture)}");
-            lines.Add(" ");
-            lines.Add("Mock invoice PDF generated for development/testing.");
 
             var content = BuildContentStream(lines);
             return BuildPdf(content);

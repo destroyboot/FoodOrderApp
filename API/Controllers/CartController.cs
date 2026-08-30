@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text;
 
 namespace API.Controllers
 {
@@ -203,11 +204,13 @@ namespace API.Controllers
             if (existing is not null)
             {
                 order.InvoiceDocument = existing;
+                await RefreshLegacyInvoicePdfAsync(order, existing, ct);
                 return existing;
             }
 
             var generatedAt = DateTime.UtcNow;
             var invoiceNumber = $"INV-{generatedAt:yyyyMMdd}-{order.Id}";
+            var itemNames = await LoadMenuItemNamesAsync(order, ct);
             var document = new OrderInvoiceDocument
             {
                 OrderId = order.Id,
@@ -238,6 +241,7 @@ namespace API.Controllers
                     Items = order.Items.Select(i => new
                     {
                         i.MenuItemId,
+                        Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
                         i.Quantity,
                         i.UnitPrice,
                         i.Note,
@@ -250,6 +254,66 @@ namespace API.Controllers
             order.InvoiceDocument = document;
             await _db.SaveChangesAsync(ct);
             return document;
+        }
+
+        private async Task RefreshLegacyInvoicePdfAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        {
+            if (!ContainsLegacyMenuItemPlaceholder(document))
+                return;
+
+            var itemNames = await LoadMenuItemNamesAsync(order, ct);
+            document.PdfBytes = InvoicePdfBuilder.Build(new
+            {
+                InvoiceNumber = document.InvoiceNumber,
+                OrderId = order.Id,
+                CreatedAt = order.CreatedAt,
+                CustomerName = order.BillingDetails?.CustomerType == BillingCustomerType.Company
+                    ? order.BillingDetails?.CompanyName ?? "Customer"
+                    : order.BillingDetails?.PersonName ?? "Customer",
+                Address = string.Join(", ", new[]
+                {
+                    order.BillingDetails?.BillingAddressLine1,
+                    order.BillingDetails?.BillingAddressLine2,
+                    order.BillingDetails?.BillingCity,
+                    order.BillingDetails?.BillingPostalCode,
+                    order.BillingDetails?.BillingCountry
+                }.Where(x => !string.IsNullOrWhiteSpace(x))),
+                TaxId = order.BillingDetails?.TaxId ?? "-",
+                Subtotal = order.Subtotal,
+                DeliveryFee = order.DeliveryFee,
+                Total = order.Total,
+                Items = order.Items.Select(i => new
+                {
+                    i.MenuItemId,
+                    Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
+                    i.Quantity,
+                    i.UnitPrice,
+                    i.Note,
+                    LineTotal = i.UnitPrice * i.Quantity
+                }).ToList()
+            });
+            document.ContentType = "application/pdf";
+            document.GeneratedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync(ct);
+        }
+
+        private static bool ContainsLegacyMenuItemPlaceholder(OrderInvoiceDocument document)
+            => Encoding.ASCII.GetString(document.PdfBytes).Contains("MenuItem #", StringComparison.Ordinal);
+
+        private async Task<Dictionary<int, string>> LoadMenuItemNamesAsync(Order order, CancellationToken ct)
+        {
+            var ids = order.Items.Select(item => item.MenuItemId).Distinct().ToArray();
+            return await _db.MenuItems
+                .Where(menuItem => ids.Contains(menuItem.Id))
+                .Select(menuItem => new
+                {
+                    menuItem.Id,
+                    Name = menuItem.Translations
+                        .OrderBy(translation => translation.Culture == "pl-PL" ? 0 : 1)
+                        .Select(translation => translation.Name)
+                        .FirstOrDefault()
+                })
+                .ToDictionaryAsync(item => item.Id, item => item.Name ?? $"Menu item #{item.Id}", ct);
         }
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.CSharp.RuntimeBinder;
 using System.Text;
 
 namespace API.Support
@@ -29,7 +30,7 @@ namespace API.Support
             {
                 decimal line = (decimal)i.UnitPrice * (int)i.Quantity;
                 sb.Append("<tr>");
-                sb.Append($"<td style='padding:6px;'>MenuItem #{i.MenuItemId}</td>");
+                sb.Append($"<td style='padding:6px;'>{ItemName(i)}</td>");
                 sb.Append($"<td style='padding:6px;text-align:right;'>{i.Quantity}</td>");
                 sb.Append($"<td style='padding:6px;text-align:right;'>{((decimal)i.UnitPrice):0.00}</td>");
                 sb.Append($"<td style='padding:6px;text-align:right;'>{line:0.00}</td>");
@@ -50,6 +51,20 @@ namespace API.Support
             sb.Append("</body></html>");
 
             return sb.ToString();
+        }
+
+        private static string ItemName(dynamic item)
+        {
+            try
+            {
+                return string.IsNullOrWhiteSpace((string?)item.Name)
+                    ? $"Menu item #{item.MenuItemId}"
+                    : item.Name;
+            }
+            catch (RuntimeBinderException)
+            {
+                return $"Menu item #{item.MenuItemId}";
+            }
         }
     }
 }

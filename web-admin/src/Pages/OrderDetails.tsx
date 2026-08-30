@@ -1,67 +1,163 @@
-import { useEffect, useState, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import { api } from "../api";
-import { OrderStatus, orderStatusLabel } from "../orderStatus";
+import { useEffect, useRef, useState } from "react";
 import type { HubConnection } from "@microsoft/signalr";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { api } from "../api";
+import { getToken, getUserRoles } from "../auth";
+import { useI18n } from "../i18n";
+import { OrderStatus } from "../orderStatus";
+import { normalizeOrderId } from "../realtime/normalizeOrderStatus";
 import { startOrdersHub } from "../realtime/ordersHub";
 import type { StatusChangedPayload } from "../realtime/ordersHub";
-import { normalizeOrderId } from "../realtime/normalizeOrderStatus";
+import { BillingPanel } from "./orderDetails/BillingPanel";
+import { OrderActionsPanel } from "./orderDetails/OrderActionsPanel";
+import { OrderInfoPanel } from "./orderDetails/OrderInfoPanel";
+import { OrderItemsTable } from "./orderDetails/OrderItemsTable";
+import type { DeliveryDriverOptionDto, OrderDetailsDto } from "./orderDetails/types";
 
-type OrderItem = {
-  menuItemId: number;
-  quantity: number;
-  unitPrice: number;
-  note: string | null;
-};
+function getStatusActions(orderType: number, roles: string[], t: (key: string, fallback: string) => string) {
+  const isChefOnly = roles.includes("Chef")
+    && !roles.includes("Admin")
+    && !roles.includes("RestaurantAdmin")
+    && !roles.includes("Waiter")
+    && !roles.includes("DeliveryDriver");
+  const isWaiterOnly = roles.includes("Waiter")
+    && !roles.includes("Admin")
+    && !roles.includes("RestaurantAdmin")
+    && !roles.includes("Chef")
+    && !roles.includes("DeliveryDriver");
 
-type OrderDetailsDto = {
-  id: number;
-  status: string | number;
-  orderType: string | number;
-  tableNumber: string | null;
-  subtotal: number;
-  deliveryFee: number;
-  total: number;
-  createdAt: string;
-  items: OrderItem[];
-};
+  if (isChefOnly) {
+    return [
+      { status: OrderStatus.Preparing, label: t("orders.status.preparing", "Preparing") },
+      { status: OrderStatus.ReadyForWaiter, label: t("orders.status.readyForWaiter", "Ready for waiter") },
+    ];
+  }
+
+  if (isWaiterOnly) {
+    if (orderType === 1) {
+      return [
+        { status: OrderStatus.Accepted, label: t("orders.action.accept", "Accept") },
+        { status: OrderStatus.SentToKitchen, label: t("orders.action.sendToKitchen", "Send to kitchen") },
+        { status: OrderStatus.Ready, label: t("orders.status.readyForPickup", "Ready for pickup") },
+        { status: OrderStatus.Completed, label: t("orders.status.completed", "Completed") },
+        { status: OrderStatus.Cancelled, label: t("common.cancel", "Cancel") },
+      ];
+    }
+
+    return [
+      { status: OrderStatus.Accepted, label: t("orders.action.accept", "Accept") },
+      { status: OrderStatus.SentToKitchen, label: t("orders.action.sendToKitchen", "Send to kitchen") },
+      { status: OrderStatus.Ready, label: orderType === 2 ? t("orders.status.readyForDispatch", "Ready for dispatch") : t("orders.status.ready", "Ready") },
+      { status: OrderStatus.Completed, label: t("orders.status.completed", "Completed") },
+      { status: OrderStatus.Cancelled, label: t("common.cancel", "Cancel") },
+    ];
+  }
+
+  if (orderType === 1) {
+    return [
+      { status: OrderStatus.Accepted, label: t("orders.action.accept", "Accept") },
+      { status: OrderStatus.SentToKitchen, label: t("orders.action.sendToKitchen", "Send to kitchen") },
+      { status: OrderStatus.Preparing, label: t("orders.status.preparing", "Preparing") },
+      { status: OrderStatus.Ready, label: t("orders.status.readyForPickup", "Ready for pickup") },
+      { status: OrderStatus.Completed, label: t("orders.status.completed", "Completed") },
+      { status: OrderStatus.Cancelled, label: t("common.cancel", "Cancel") },
+    ];
+  }
+
+  if (orderType === 2) {
+    return [
+      { status: OrderStatus.Accepted, label: t("orders.action.accept", "Accept") },
+      { status: OrderStatus.SentToKitchen, label: t("orders.action.sendToKitchen", "Send to kitchen") },
+      { status: OrderStatus.Preparing, label: t("orders.status.preparing", "Preparing") },
+      { status: OrderStatus.Ready, label: t("orders.status.readyForDispatch", "Ready for dispatch") },
+      { status: OrderStatus.OutForDelivery, label: t("orders.status.outForDelivery", "Out for delivery") },
+      { status: OrderStatus.Delivered, label: t("orders.status.delivered", "Delivered") },
+      { status: OrderStatus.Completed, label: t("orders.status.completed", "Completed") },
+      { status: OrderStatus.Cancelled, label: t("common.cancel", "Cancel") },
+    ];
+  }
+
+  return [
+    { status: OrderStatus.Accepted, label: t("orders.action.accept", "Accept") },
+    { status: OrderStatus.SentToKitchen, label: t("orders.action.sendToKitchen", "Send to kitchen") },
+    { status: OrderStatus.Preparing, label: t("orders.status.preparing", "Preparing") },
+    { status: OrderStatus.Ready, label: t("orders.status.ready", "Ready") },
+    { status: OrderStatus.ReadyForWaiter, label: t("orders.status.readyForWaiter", "Ready for waiter") },
+    { status: OrderStatus.Delivered, label: t("orders.status.delivered", "Delivered") },
+    { status: OrderStatus.Completed, label: t("orders.status.completed", "Completed") },
+    { status: OrderStatus.Cancelled, label: t("common.cancel", "Cancel") },
+  ];
+}
 
 export default function OrderDetails() {
+  const { t } = useI18n();
+  const roles = getUserRoles();
+  const isDriverOnly = roles.includes("DeliveryDriver")
+    && !roles.includes("Admin")
+    && !roles.includes("RestaurantAdmin")
+    && !roles.includes("Waiter")
+    && !roles.includes("Chef");
+  const isChefOnly = roles.includes("Chef")
+    && !roles.includes("Admin")
+    && !roles.includes("RestaurantAdmin")
+    && !roles.includes("Waiter")
+    && !roles.includes("DeliveryDriver");
+  const location = useLocation();
+  const isHistoryView = Boolean((location.state as { historyView?: boolean } | null)?.historyView);
   const { id } = useParams();
   const nav = useNavigate();
   const [data, setData] = useState<OrderDetailsDto | null>(null);
   const [err, setErr] = useState<string | null>(null);
+  const [drivers, setDrivers] = useState<DeliveryDriverOptionDto[]>([]);
+  const [assigningDriver, setAssigningDriver] = useState(false);
   const orderId = Number(id);
   const connRef = useRef<HubConnection | null>(null);
-  const [rtState, setRtState] = useState("connecting…");
-  
+  const [rtState, setRtState] = useState(t("orders.realtime.connecting", "connecting..."));
 
   async function load() {
     setErr(null);
     const dto = await api<OrderDetailsDto>(`/api/admin/orders/${orderId}`);
     setData(dto);
+    if (Number(dto.orderType) === 2) {
+      const driverOptions = await api<DeliveryDriverOptionDto[]>(`/api/admin/orders/${orderId}/delivery-drivers`);
+      setDrivers(driverOptions);
+    } else {
+      setDrivers([]);
+    }
   }
 
   useEffect(() => {
     let mounted = true;
-  
+
     async function init() {
       await load();
-  
-      connRef.current = await startOrdersHub({
-        onNewOrder: () => {}, // not needed here
+
+      const conn = await startOrdersHub({
+        onNewOrder: () => {},
         onOrderStatusChanged: (p: StatusChangedPayload) => {
           const oid = normalizeOrderId((p as any).orderId);
-          if (oid === orderId) load().catch(() => {});
-                  },
-        onConnected: () => setRtState("connected"),
-        onDisconnected: () => setRtState("disconnected"),
-        onError: (e) => console.error("SignalR error", e),
+          if (oid === orderId) {
+            void load();
+          }
+        },
+        onConnected: () => setRtState(t("orders.realtime.connected", "connected")),
+        onDisconnected: () => setRtState(t("orders.realtime.disconnected", "disconnected")),
+        onError: () => setRtState(t("orders.realtime.error", "error")),
       });
+
+      if (!mounted) {
+        void conn.stop();
+        return;
+      }
+
+      connRef.current = conn;
     }
-  
-    init().catch((e: any) => setErr(e.message || "Realtime failed"));
-  
+
+    init().catch((e: any) => {
+      if (!mounted) return;
+      setErr(e.message || t("orders.realtime.failed", "Realtime failed"));
+    });
+
     return () => {
       mounted = false;
       connRef.current?.stop();
@@ -70,72 +166,194 @@ export default function OrderDetails() {
   }, [orderId]);
 
   async function changeStatus(newStatus: OrderStatus) {
+    const nextLabel = getStatusActions(Number(data?.orderType ?? 0), roles, t).find((action) => action.status === newStatus)?.label ?? t("orders.action.changeStatus", "change status");
+    if (!window.confirm(t("orders.confirmStatusChange", `Are you sure you want to ${nextLabel.toLowerCase()} for order #${orderId}?`))) {
+      return;
+    }
+
     setErr(null);
     try {
       await api<void>(`/api/admin/orders/${orderId}/status?newStatus=${newStatus}`, {
         method: "PATCH",
       });
+      if (newStatus === OrderStatus.Cancelled) {
+        nav("/orders");
+        return;
+      }
+
       await load();
     } catch (e: any) {
-      setErr(e.message || "Failed to change status");
+      setErr(e.message || t("orders.statusChangeFailed", "Failed to change status"));
     }
   }
 
-  if (!Number.isFinite(orderId)) return <div style={{ maxWidth: 1100, margin: "0 auto" }}>Invalid id.</div>;
+  async function assignDriver(userId: string) {
+    setErr(null);
+    setAssigningDriver(true);
+    try {
+      const query = userId ? `?userId=${encodeURIComponent(userId)}` : "";
+      await api<void>(`/api/admin/orders/${orderId}/assign-delivery-driver${query}`, {
+        method: "PATCH",
+      });
+      await load();
+    } catch (e: any) {
+      setErr(e.message || t("orders.assignDriverFailed", "Failed to assign delivery driver"));
+    } finally {
+      setAssigningDriver(false);
+    }
+  }
+
+  async function collectPaymentAndComplete() {
+    if (!window.confirm(t("orders.confirmMarkPaidAndComplete", `Are you sure you want to mark order #${orderId} as paid and completed?`))) {
+      return;
+    }
+
+    setErr(null);
+    try {
+      await api<void>(`/api/admin/orders/${orderId}/collect-payment-and-complete`, {
+        method: "PATCH",
+      });
+      await load();
+    } catch (e: any) {
+      setErr(e.message || t("orders.collectPaymentFailed", "Failed to collect payment and complete order"));
+    }
+  }
+
+  async function markPaid() {
+    if (!window.confirm(t("orders.confirmMarkPaid", `Are you sure you want to mark order #${orderId} as paid?`))) {
+      return;
+    }
+
+    setErr(null);
+    try {
+      await api<void>(`/api/admin/orders/${orderId}/mark-paid`, {
+        method: "PATCH",
+      });
+      await load();
+    } catch (e: any) {
+      setErr(e.message || t("orders.markPaidFailed", "Failed to mark order as paid"));
+    }
+  }
+
+  async function updateInvoiceStatus(status: number) {
+    setErr(null);
+    try {
+      await api<void>(`/api/admin/orders/${orderId}/invoice-status?status=${status}`, {
+        method: "PATCH",
+      });
+      await load();
+    } catch (e: any) {
+      setErr(e.message || t("orders.invoiceStatusUpdateFailed", "Failed to update invoice status"));
+    }
+  }
+
+  async function sendSummary() {
+    setErr(null);
+    try {
+      await api<{ sentTo: string }>(`/api/admin/orders/${orderId}/send-receipt`, {
+        method: "POST",
+      });
+      await load();
+    } catch (e: any) {
+      setErr(e.message || t("orders.sendReceiptFailed", "Failed to send receipt"));
+    }
+  }
+
+  async function downloadInvoice() {
+    try {
+      const token = getToken();
+      const res = await fetch(`/api/admin/orders/${orderId}/invoice-pdf`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${data?.invoiceNumber ?? `invoice-${orderId}`}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e: any) {
+      setErr(e.message || t("orders.downloadInvoiceFailed", "Failed to download invoice"));
+    }
+  }
+
+  async function downloadSummaryPdf() {
+    try {
+      const token = getToken();
+      const res = await fetch(`/api/admin/orders/${orderId}/summary-pdf`, {
+        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      });
+
+      if (!res.ok) {
+        throw new Error(`HTTP ${res.status}`);
+      }
+
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `order-summary-${data?.displayOrderNumber ?? orderId}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch (e: any) {
+      setErr(e.message || t("orders.downloadSummaryFailed", "Failed to download order summary"));
+    }
+  }
+
+  const invoiceRequested = (data?.billingDetails?.invoiceStatus ?? 0) !== 0 || !!data?.hasInvoiceDocument;
+
+  if (!Number.isFinite(orderId)) {
+    return <div className="page-stack">{t("common.invalidId", "Invalid id.")}</div>;
+  }
 
   return (
-    <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-      <button onClick={() => nav("/orders")}>← Back</button>
-      <h2>Order #{orderId}</h2>
-      {err && <div style={{ color: "crimson" }}>{err}</div>}
+    <div className="page-stack">
+      <button onClick={() => nav(isHistoryView ? "/orders/history" : "/orders")}>{t("common.back", "Back")}</button>
+      <h2>{t("orders.order", "Order")} #{data?.displayOrderNumber ?? orderId}</h2>
+      {err && <div className="alert-error">{err}</div>}
       {!data ? (
-        <div>Loading…</div>
+        <div>{t("common.loading", "Loading...")}</div>
       ) : (
         <>
-          <div style={{ marginBottom: 12 }}>
-            <div><b>Status:</b> {orderStatusLabel(data.status)}</div>
-            <div><b>Type:</b> {String(data.orderType)}</div>
-            <div><b>Table:</b> {data.tableNumber ?? "-"}</div>
-            <div><b>Created:</b> {new Date(data.createdAt).toLocaleString()}</div>
-            <div style={{ color: "#666" }}>Realtime: {rtState}</div>
-          </div>
+          <OrderInfoPanel data={data} realtimeState={rtState} t={t} />
 
-          <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 16 }}>
-            <button onClick={() => changeStatus(OrderStatus.Accepted)}>Accept</button>
-            <button onClick={() => changeStatus(OrderStatus.Preparing)}>Preparing</button>
-            <button onClick={() => changeStatus(OrderStatus.Ready)}>Ready</button>
-            <button onClick={() => changeStatus(OrderStatus.Completed)}>Completed</button>
-            <button onClick={() => changeStatus(OrderStatus.Cancelled)}>Cancel</button>
-          </div>
+          <OrderActionsPanel
+            data={data}
+            statusActions={getStatusActions(Number(data.orderType), roles, t)}
+            isHistoryView={isHistoryView}
+            isDriverOnly={isDriverOnly}
+            drivers={drivers}
+            assigningDriver={assigningDriver}
+            onChangeStatus={(status) => void changeStatus(status)}
+            onCollectPaymentAndComplete={() => void collectPaymentAndComplete()}
+            onAssignDriver={(userId) => void assignDriver(userId)}
+            t={t}
+          />
 
-          <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse" }}>
-            <thead>
-              <tr style={{ borderBottom: "1px solid #ccc" }}>
-                <th align="left">MenuItemId</th>
-                <th align="right">Qty</th>
-                <th align="right">Unit</th>
-                <th align="left">Note</th>
-                <th align="right">Line</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.items.map((i, idx) => (
-                <tr key={idx} style={{ borderBottom: "1px solid #eee" }}>
-                  <td>{i.menuItemId}</td>
-                  <td align="right">{i.quantity}</td>
-                  <td align="right">{Number(i.unitPrice).toFixed(2)}</td>
-                  <td>{i.note ?? "-"}</td>
-                  <td align="right">{(i.quantity * i.unitPrice).toFixed(2)}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <OrderItemsTable data={data} t={t} />
 
-          <div style={{ marginTop: 16 }}>
-            <div><b>Subtotal:</b> {Number(data.subtotal).toFixed(2)}</div>
-            <div><b>Delivery fee:</b> {Number(data.deliveryFee).toFixed(2)}</div>
-            <div><b>Total:</b> {Number(data.total).toFixed(2)}</div>
-          </div>
+          {!isDriverOnly && !isChefOnly ? (
+            <BillingPanel
+              data={data}
+              invoiceRequested={invoiceRequested}
+              isHistoryView={isHistoryView}
+              onMarkPaid={() => void markPaid()}
+              onSendSummary={() => void sendSummary()}
+              onDownloadSummaryPdf={() => void downloadSummaryPdf()}
+              onUpdateInvoiceStatus={(status) => void updateInvoiceStatus(status)}
+              onDownloadInvoice={() => void downloadInvoice()}
+              t={t}
+            />
+          ) : null}
         </>
       )}
     </div>

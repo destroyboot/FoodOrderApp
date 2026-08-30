@@ -41,7 +41,6 @@ namespace API.Controllers
             return key!;
         }
 
-        // List newest first
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Get([FromQuery] int take = 50, CancellationToken ct = default)

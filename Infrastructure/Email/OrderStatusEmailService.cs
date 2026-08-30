@@ -28,10 +28,8 @@ namespace Infrastructure.Email
             OrderStatus newStatus,
             CancellationToken ct = default)
         {
-            // ownerKey for logged-in users is the Identity userId.
-            // for guests it is a random token -> FindByIdAsync returns null => no email.
             var user = await _users.FindByIdAsync(ownerKey);
-            if (user is null) return; // guest token or unknown
+            if (user is null) return;
 
             if (!user.EmailConfirmed) return;
             if (!user.WantsOrderStatusEmails) return;

@@ -11,14 +11,10 @@ namespace Core.Data.Entities
         public int Id { get; set; }
         public int MenuCategoryId { get; set; }
         public int SortOrder { get; set; } = 0;
-
-        // Current price (you can add history later)
         public decimal CurrentPrice { get; set; }
 
         public bool IsAvailable { get; set; } = true;
         public bool EnableIngredientSwap { get; set; } = false;
-
-        // Optional reference to uploaded photo (you’ll add Asset entity later)
         public int? PhotoAssetId { get; set; }
         public string? PhotoPath { get; set; }
 

@@ -3091,7 +3091,7 @@
       "isActive": true
     },
     "orders.active.subtitle": {
-      "value": "Keep the floor moving with one live view for table service, pickup, and delivery.",
+      "value": "Live view for table service, pickup, and delivery.",
       "description": null,
       "groupName": "orders",
       "isActive": true
@@ -5347,7 +5347,7 @@
       "isActive": true
     },
     "restaurant.onlyMainAdminCanCreate": {
-      "value": "Only main admins can create restaurants.",
+      "value": "Only application admins can create restaurants.",
       "description": null,
       "groupName": "restaurant",
       "isActive": true

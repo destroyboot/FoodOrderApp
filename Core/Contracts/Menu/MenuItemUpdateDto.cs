@@ -13,8 +13,6 @@ namespace Core.Contracts.Menu
         public bool IsAvailable { get; set; }
         public int? PhotoAssetId { get; set; }
         public string? PhotoPath { get; set; }
-
-        // Updating translations is allowed here too
         public List<MenuItemTranslationDto> Translations { get; set; } = new();
     }
 }

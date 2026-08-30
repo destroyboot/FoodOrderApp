@@ -178,7 +178,7 @@ namespace API.Controllers
                 await connection.OpenAsync(ct);
 
             var columns = string.Join(", ", table.Columns.Select(x => $"[{x.ColumnName}]"));
-            var sql = $"SELECT TOP 200 {columns} FROM [{table.TableName}]";
+            var sql = $"SELECT TOP 100 {columns} FROM [{table.TableName}]";
 
             var command = new SqlCommand();
             command.Connection = connection;
@@ -455,7 +455,7 @@ namespace API.Controllers
 
         private string GetCurrentUserId() =>
             User.FindFirstValue(ClaimTypes.NameIdentifier)
-            ?? throw new InvalidOperationException("Missing user id.");
+            ?? throw new InvalidOperationException("User id is missing");
 
         private List<TableAccessDefinition> GetTableDefinitions()
         {
@@ -577,7 +577,7 @@ namespace API.Controllers
                 await connection.OpenAsync(ct);
 
             var command = new SqlCommand { Connection = connection };
-            var sql = $"SELECT TOP 200 [{primaryKeyColumnName}], [{labelColumnName}] FROM [{principalTableName}]";
+            var sql = $"SELECT TOP 100 [{primaryKeyColumnName}], [{labelColumnName}] FROM [{principalTableName}]";
 
             if (!User.IsInRole("Admin") && restaurantIdColumnName is not null)
             {

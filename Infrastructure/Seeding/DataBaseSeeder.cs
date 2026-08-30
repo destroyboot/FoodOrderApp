@@ -9,6 +9,7 @@ namespace Infrastructure.Seeding
         public static async Task SeedAsync(AppDbContext db)
         {
             await EnsureAppLanguagesAsync(db);
+            await EnsureCuisinesAsync(db);
             await EnsureAllergensAsync(db);
             await db.SaveChangesAsync();
 
@@ -121,23 +122,25 @@ namespace Infrastructure.Seeding
 
         private static async Task EnsureAllergensAsync(AppDbContext db)
         {
-            var existing = await db.Allergens.ToListAsync();
-            var defaults = new (string Code, string Name, int SortOrder)[]
+            var existing = await db.Allergens
+                .Include(x => x.Translations)
+                .ToListAsync();
+            var defaults = new (string Code, string Name, string PlName, string EnName, int SortOrder)[]
             {
-                ("gluten", "Gluten", 1),
-                ("crustaceans", "Crustaceans", 2),
-                ("eggs", "Eggs", 3),
-                ("fish", "Fish", 4),
-                ("peanuts", "Peanuts", 5),
-                ("soy", "Soy", 6),
-                ("milk", "Milk", 7),
-                ("nuts", "Nuts", 8),
-                ("celery", "Celery", 9),
-                ("mustard", "Mustard", 10),
-                ("sesame", "Sesame", 11),
-                ("sulphites", "Sulphites", 12),
-                ("lupin", "Lupin", 13),
-                ("molluscs", "Molluscs", 14),
+                ("gluten", "Gluten", "Gluten", "Gluten", 1),
+                ("crustaceans", "Crustaceans", "Skorupiaki", "Crustaceans", 2),
+                ("eggs", "Eggs", "Jaja", "Eggs", 3),
+                ("fish", "Fish", "Ryby", "Fish", 4),
+                ("peanuts", "Peanuts", "Orzeszki ziemne", "Peanuts", 5),
+                ("soy", "Soy", "Soja", "Soy", 6),
+                ("milk", "Milk", "Mleko", "Milk", 7),
+                ("nuts", "Nuts", "Orzechy", "Nuts", 8),
+                ("celery", "Celery", "Seler", "Celery", 9),
+                ("mustard", "Mustard", "Gorczyca", "Mustard", 10),
+                ("sesame", "Sesame", "Sezam", "Sesame", 11),
+                ("sulphites", "Sulphites", "Siarczyny", "Sulphites", 12),
+                ("lupin", "Lupin", "Łubin", "Lupin", 13),
+                ("molluscs", "Molluscs", "Mięczaki", "Molluscs", 14),
             };
 
             foreach (var item in defaults)
@@ -152,6 +155,7 @@ namespace Infrastructure.Seeding
                         IsActive = true,
                         SortOrder = item.SortOrder
                     });
+                    entity = db.Allergens.Local.First(x => x.Code == item.Code);
                 }
                 else
                 {
@@ -159,7 +163,87 @@ namespace Infrastructure.Seeding
                     entity.IsActive = true;
                     entity.SortOrder = item.SortOrder;
                 }
+
+                EnsureAllergenTranslation(entity, "pl-PL", item.PlName);
+                EnsureAllergenTranslation(entity, "en-US", item.EnName);
             }
+        }
+
+        private static async Task EnsureCuisinesAsync(AppDbContext db)
+        {
+            var existing = await db.Cuisines
+                .Include(x => x.Translations)
+                .ToListAsync();
+            var defaults = new (string Code, string PlName, string EnName, int SortOrder)[]
+            {
+                ("Polish", "Polska", "Polish", 1),
+                ("Italian", "Włoska", "Italian", 2),
+                ("Japanese", "Japońska", "Japanese", 3),
+                ("Sushi", "Sushi", "Sushi", 4),
+                ("Pierogi", "Pierogi", "Pierogi", 5),
+                ("American", "Amerykańska", "American", 6),
+                ("Mexican", "Meksykańska", "Mexican", 7),
+                ("Indian", "Indyjska", "Indian", 8),
+                ("Thai", "Tajska", "Thai", 9),
+                ("Vegetarian", "Wegetariańska", "Vegetarian", 10),
+                ("Vegan", "Wegańska", "Vegan", 11),
+                ("Cafe", "Kawiarnia", "Cafe", 12),
+            };
+
+            foreach (var item in defaults)
+            {
+                var entity = existing.FirstOrDefault(x => x.Name == item.Code);
+                if (entity is null)
+                {
+                    db.Cuisines.Add(new Cuisine
+                    {
+                        Name = item.Code,
+                        IsActive = true,
+                        SortOrder = item.SortOrder
+                    });
+                    entity = db.Cuisines.Local.First(x => x.Name == item.Code);
+                }
+                else
+                {
+                    entity.IsActive = true;
+                    entity.SortOrder = item.SortOrder;
+                }
+
+                EnsureCuisineTranslation(entity, "pl-PL", item.PlName);
+                EnsureCuisineTranslation(entity, "en-US", item.EnName);
+            }
+        }
+
+        private static void EnsureCuisineTranslation(Cuisine cuisine, string culture, string name)
+        {
+            var translation = cuisine.Translations.FirstOrDefault(x => x.Culture == culture);
+            if (translation is null)
+            {
+                cuisine.Translations.Add(new CuisineTranslation
+                {
+                    Culture = culture,
+                    Name = name
+                });
+                return;
+            }
+
+            translation.Name = name;
+        }
+
+        private static void EnsureAllergenTranslation(Allergen allergen, string culture, string name)
+        {
+            var translation = allergen.Translations.FirstOrDefault(x => x.Culture == culture);
+            if (translation is null)
+            {
+                allergen.Translations.Add(new AllergenTranslation
+                {
+                    Culture = culture,
+                    Name = name
+                });
+                return;
+            }
+
+            translation.Name = name;
         }
 
         private static void EnsureLanguage(

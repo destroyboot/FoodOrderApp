@@ -284,6 +284,17 @@ FakesAssemblies/
 # Node.js Tools for Visual Studio
 .ntvs_analysis.dat
 node_modules/
+dist/
+*.tsbuildinfo
+
+# Local Codex/build scratch files
+.codex/
+.codex_temp/
+
+# Local runtime uploads
+API/App_Data/Uploads/
+API/wwwroot/uploads/
+mobile-app/.expo/
 
 # Visual Studio 6 build log
 *.plg

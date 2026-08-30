@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Text;
 using System.Text.Json;
 
 namespace API.Controllers
@@ -505,7 +506,7 @@ namespace API.Controllers
 
             var body = dto.Body?.Trim();
             if (string.IsNullOrWhiteSpace(body))
-                throw new InvalidOperationException("Comment body is required.");
+                throw new InvalidOperationException("Comment is required.");
 
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var role = User.FindAll(ClaimTypes.Role).Select(c => c.Value).FirstOrDefault();
@@ -771,11 +772,13 @@ namespace API.Controllers
             if (existing is not null)
             {
                 order.InvoiceDocument = existing;
+                await RefreshLegacyInvoicePdfAsync(order, existing, ct);
                 return existing;
             }
 
             var generatedAt = DateTime.UtcNow;
             var invoiceNumber = $"INV-{generatedAt:yyyyMMdd}-{order.Id}";
+            var itemNames = await LoadMenuItemNamesAsync(order, ct);
             var document = new OrderInvoiceDocument
             {
                 OrderId = order.Id,
@@ -783,7 +786,7 @@ namespace API.Controllers
                 FileName = $"{invoiceNumber}.pdf",
                 ContentType = "application/pdf",
                 GeneratedAt = generatedAt,
-                PdfBytes = InvoicePdfBuilder.Build(CreateInvoicePdfModel(order, invoiceNumber))
+                PdfBytes = InvoicePdfBuilder.Build(CreateInvoicePdfModel(order, invoiceNumber, itemNames))
             };
 
             _db.OrderInvoiceDocuments.Add(document);
@@ -792,7 +795,7 @@ namespace API.Controllers
             return document;
         }
 
-        private static object CreateInvoicePdfModel(Order order, string invoiceNumber)
+        private static object CreateInvoicePdfModel(Order order, string invoiceNumber, IReadOnlyDictionary<int, string> itemNames)
         {
             var customerName = order.BillingDetails?.CustomerType == BillingCustomerType.Company
                 ? order.BillingDetails?.CompanyName
@@ -820,6 +823,7 @@ namespace API.Controllers
                 Items = order.Items.Select(i => new
                 {
                     i.MenuItemId,
+                    Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
                     i.Quantity,
                     i.UnitPrice,
                     i.Note,
@@ -827,6 +831,21 @@ namespace API.Controllers
                 }).ToList()
             };
         }
+
+        private async Task RefreshLegacyInvoicePdfAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        {
+            if (!ContainsLegacyMenuItemPlaceholder(document))
+                return;
+
+            var itemNames = await LoadMenuItemNamesAsync(order, ct);
+            document.PdfBytes = InvoicePdfBuilder.Build(CreateInvoicePdfModel(order, document.InvoiceNumber, itemNames));
+            document.ContentType = "application/pdf";
+            document.GeneratedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync(ct);
+        }
+
+        private static bool ContainsLegacyMenuItemPlaceholder(OrderInvoiceDocument document)
+            => Encoding.ASCII.GetString(document.PdfBytes).Contains("MenuItem #", StringComparison.Ordinal);
 
         private async Task<object> CreateOrderEmailModelAsync(Order order, OrderInvoiceDocument? invoiceDocument, CancellationToken ct)
         {

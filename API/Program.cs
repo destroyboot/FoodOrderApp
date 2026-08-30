@@ -35,7 +35,9 @@ builder.Logging.AddDebug();
 
 #region Kod
 builder.Services.AddDbContext<AppDbContext>(opt =>
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    opt.UseSqlServer(
+        builder.Configuration.GetConnectionString("DefaultConnection"),
+        sql => sql.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery)));
 
 builder.Services.AddScoped<IAsyncQueryExecutor, EfAsyncQueryExecutor>();
 builder.Services.AddScoped<IUnitOfWork, EfUnitOfWork>();
@@ -177,9 +179,6 @@ if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
-
-// Uploaded menu photos live outside wwwroot so adding a photo cannot trigger a
-// project-content reload while the API is running under a debugger.
 var uploadsRoot = Path.Combine(app.Environment.ContentRootPath, "App_Data", "Uploads");
 Directory.CreateDirectory(uploadsRoot);
 app.UseStaticFiles(new StaticFileOptions
@@ -190,6 +189,7 @@ app.UseStaticFiles(new StaticFileOptions
 app.UseStaticFiles();
 app.UseCors("WebAppCors");
 
+app.UseMiddleware<RequestTimingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 

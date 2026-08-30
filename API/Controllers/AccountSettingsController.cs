@@ -41,7 +41,7 @@ namespace API.Controllers
         public async Task<IActionResult> RequestEmailChange([FromBody] RequestEmailChangeDto dto, CancellationToken ct)
         {
             var newEmail = (dto.NewEmail ?? "").Trim().ToLowerInvariant();
-            if (string.IsNullOrWhiteSpace(newEmail)) throw new InvalidOperationException("NewEmail is required.");
+            if (string.IsNullOrWhiteSpace(newEmail)) throw new InvalidOperationException("New Email is required.");
 
             var existing = await _users.FindByEmailAsync(newEmail);
             if (existing is not null)

@@ -12,7 +12,6 @@ namespace API.Swagger
                 context.MethodInfo.GetCustomAttributes(true).OfType<AllowAnonymousAttribute>().Any()
                 || context.MethodInfo.DeclaringType?.GetCustomAttributes(true).OfType<AllowAnonymousAttribute>().Any() == true;
 
-            // Special case: account/claim needs X-Guest-Token even though it's authorized
             var isClaimEndpoint =
                 context.MethodInfo.Name.Equals("ClaimGuestOrders", StringComparison.OrdinalIgnoreCase);
 

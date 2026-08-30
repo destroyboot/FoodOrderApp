@@ -378,7 +378,7 @@ namespace Core.Services
                     MenuItemId = item.MenuItemId,
                     Quantity = item.Quantity,
                     Note = CombineNotes(item.Note, customization.DisplayNote),
-                    UnitPrice = 0m, // draft
+                    UnitPrice = 0m,
                     ExtraCharge = customization.ExtraCharge,
                     CustomizationsJson = customization.Json
                 });
@@ -570,7 +570,6 @@ namespace Core.Services
             cart.EstimatedReadyAt = minutes > 0 ? DateTime.UtcNow.AddMinutes(minutes) : null;
             AssignDailyRestaurantOrderNumber(cart);
 
-            // Transition Draft -> Pending
             cart.Status = OrderStatus.Pending;
 
             cart.PaymentStatus = cart.PaymentMethod == PaymentMethod.InApp
@@ -593,7 +592,6 @@ namespace Core.Services
                 }),
                 ct: ct);
 
-            // ✅ SignalR event publish (via interface)
             await _events.PublishNewOrderAsync(
                 orderId: cart.Id,
                 status: cart.Status,
@@ -612,7 +610,6 @@ namespace Core.Services
             };
         }
 
-        // ---------------- Helpers ----------------
 
         private static string NormalizeOwnerKey(string? customerId, string? guestToken)
         {

@@ -58,7 +58,6 @@ namespace Core.Services
             }
             catch (Exception ex)
             {
-                // Order/notification workflows should not fail because remote push delivery had an issue.
                 _logger.LogWarning(ex, "Push notification delivery failed for owner {OwnerKey}.", ownerKey);
             }
         }

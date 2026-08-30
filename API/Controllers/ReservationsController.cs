@@ -272,7 +272,6 @@ namespace API.Controllers
                 }
                 catch (InvalidOperationException)
                 {
-                    // Try the next matching table.
                 }
             }
 

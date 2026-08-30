@@ -5,15 +5,13 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      // Your API endpoints
       "/api": {
-        target: "https://localhost:7234",
+        target: "https://127.0.0.1:7234",
         changeOrigin: true,
         secure: false,
       },
-      // Your SignalR hub
       "/hubs": {
-        target: "https://localhost:7234",
+        target: "https://127.0.0.1:7234",
         changeOrigin: true,
         secure: false,
         ws: true,

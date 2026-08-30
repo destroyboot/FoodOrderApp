@@ -28,13 +28,11 @@ export async function startOrdersHub(
   const token = getToken();
   if (!token) throw new Error("Missing token.");
 
-  // IMPORTANT: use relative hub URL so Vite proxy can forward /hubs to API.
   const conn = new signalR.HubConnectionBuilder()
     .withUrl("/hubs/orders", {
       accessTokenFactory: () => token,
     })
     .withAutomaticReconnect()
-    .configureLogging(signalR.LogLevel.Information)
     .build();
 
   conn.on("NewOrder", handlers.onNewOrder);

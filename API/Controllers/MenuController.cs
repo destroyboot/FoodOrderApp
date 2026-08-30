@@ -75,7 +75,8 @@ namespace API.Controllers
                     Name =
                         m.Translations.Where(t => t.Culture == culture).Select(t => t.Name).FirstOrDefault()
                         ?? m.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Name).FirstOrDefault()
-                        ?? m.Translations.Select(t => t.Name).FirstOrDefault(),
+                        ?? m.Translations.Select(t => t.Name).FirstOrDefault()
+                        ?? $"Menu item #{m.Id}",
                     Description =
                         m.Translations.Where(t => t.Culture == culture).Select(t => t.Description).FirstOrDefault()
                         ?? m.Translations.Where(t => t.Culture == DefaultCulture).Select(t => t.Description).FirstOrDefault(),

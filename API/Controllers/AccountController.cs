@@ -28,11 +28,7 @@ namespace API.Controllers
         private string? GuestToken =>
             Request.Headers.TryGetValue("X-Guest-Token", out var v) ? v.ToString() : null;
 
-        /// <summary>
-        /// Claims guest orders (and the draft cart) into the authenticated user's account.
-        /// Send X-Guest-Token header + Bearer JWT.
-        /// </summary>
-        [Authorize] // any logged-in user
+        [Authorize]
         [HttpPost("claim")]
         public async Task<IActionResult> ClaimGuestOrders(CancellationToken ct)
         {

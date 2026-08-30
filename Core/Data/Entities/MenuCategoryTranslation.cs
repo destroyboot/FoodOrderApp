@@ -10,11 +10,8 @@ namespace Core.Data.Entities
     {
         public int Id { get; set; }
         public int MenuCategoryId { get; set; }
-
-        // "pl-PL" / "en-US"
         public string Culture { get; set; } = default!;
         public string Name { get; set; } = default!;
-
         public string? Description { get; set; }
     }
 }

@@ -11,6 +11,8 @@ namespace Core.Contracts.Restaurants
         public string? HouseNumber { get; set; }
         public string? CuisineType { get; set; }
         public List<string> CuisineTypes { get; set; } = new();
+        public string? CuisineTypeDisplay { get; set; }
+        public List<string> CuisineTypeDisplays { get; set; } = new();
         public bool IsActive { get; set; }
         public bool EnableTableOrders { get; set; }
         public bool EnableTakeawayOrders { get; set; }

@@ -25,7 +25,9 @@ namespace Infrastructure.Persistence
 
         public DbSet<Restaurant> Restaurants => Set<Restaurant>();
         public DbSet<Cuisine> Cuisines => Set<Cuisine>();
+        public DbSet<CuisineTranslation> CuisineTranslations => Set<CuisineTranslation>();
         public DbSet<Allergen> Allergens => Set<Allergen>();
+        public DbSet<AllergenTranslation> AllergenTranslations => Set<AllergenTranslation>();
         public DbSet<AppLanguage> AppLanguages => Set<AppLanguage>();
         public DbSet<RestaurantSettings> RestaurantSettings => Set<RestaurantSettings>();
         public DbSet<RestaurantTable> RestaurantTables => Set<RestaurantTable>();
@@ -70,11 +72,33 @@ namespace Infrastructure.Persistence
                 e.HasIndex(x => x.Name).IsUnique();
             });
 
+            b.Entity<CuisineTranslation>(e =>
+            {
+                e.Property(x => x.Culture).HasMaxLength(20).IsRequired();
+                e.Property(x => x.Name).HasMaxLength(120).IsRequired();
+                e.HasIndex(x => new { x.CuisineId, x.Culture }).IsUnique();
+                e.HasOne<Cuisine>()
+                    .WithMany(x => x.Translations)
+                    .HasForeignKey(x => x.CuisineId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            });
+
             b.Entity<Allergen>(e =>
             {
                 e.Property(x => x.Code).HasMaxLength(50).IsRequired();
                 e.Property(x => x.Name).HasMaxLength(120).IsRequired();
                 e.HasIndex(x => x.Code).IsUnique();
+            });
+
+            b.Entity<AllergenTranslation>(e =>
+            {
+                e.Property(x => x.Culture).HasMaxLength(20).IsRequired();
+                e.Property(x => x.Name).HasMaxLength(120).IsRequired();
+                e.HasIndex(x => new { x.AllergenId, x.Culture }).IsUnique();
+                e.HasOne<Allergen>()
+                    .WithMany(x => x.Translations)
+                    .HasForeignKey(x => x.AllergenId)
+                    .OnDelete(DeleteBehavior.Cascade);
             });
 
             b.Entity<AppLanguage>(e =>
@@ -231,7 +255,6 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(x => x.RestaurantId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            // MenuCategory -> Translations (1 to many)
             b.Entity<MenuCategoryTranslation>()
                 .HasIndex(x => new { x.MenuCategoryId, x.Culture })
                 .IsUnique();
@@ -242,7 +265,6 @@ namespace Infrastructure.Persistence
                 .HasForeignKey(x => x.MenuCategoryId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // MenuItem -> Translations (1 to many)
             b.Entity<MenuItemTranslation>()
                 .HasIndex(x => new { x.MenuItemId, x.Culture })
                 .IsUnique();
@@ -289,7 +311,6 @@ namespace Infrastructure.Persistence
                     .OnDelete(DeleteBehavior.Restrict);
             });
 
-            // MenuItem -> MenuCategory (many to one)
             b.Entity<MenuItem>()
                 .HasOne(x => x.Category)
                 .WithMany()
@@ -302,7 +323,6 @@ namespace Infrastructure.Persistence
                 e.HasIndex(x => new { x.MenuCategoryId, x.SortOrder, x.Id });
             });
 
-            // Order -> OrderItem (1 to many)
             b.Entity<OrderItem>()
                 .HasOne<Order>()
                 .WithMany(o => o.Items)
@@ -363,7 +383,6 @@ namespace Infrastructure.Persistence
                     .OnDelete(DeleteBehavior.Cascade);
             });
 
-            // Money/price fields
             b.Entity<MenuItem>()
                 .Property(x => x.CurrentPrice)
                 .HasPrecision(18, 2);
@@ -440,7 +459,6 @@ namespace Infrastructure.Persistence
                 .Property(x => x.CustomizationsJson)
                 .HasMaxLength(4000);
 
-            // Helpful indexes
             b.Entity<Order>()
                 .HasIndex(o => new { o.Status, o.CreatedAt });
 
@@ -453,7 +471,6 @@ namespace Infrastructure.Persistence
             b.Entity<MenuCategory>()
                 .HasIndex(c => new { c.RestaurantId, c.IsActive, c.SortOrder });
 
-            //Notifcation
             b.Entity<Notification>(e =>
             {
                 e.HasKey(x => x.Id);

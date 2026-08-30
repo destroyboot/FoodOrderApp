@@ -37,24 +37,24 @@ namespace API.Controllers
         }
 
         [HttpGet("allergens")]
-        public async Task<ActionResult<IReadOnlyList<AllergenDto>>> GetAllergens(CancellationToken ct)
+        public async Task<ActionResult<IReadOnlyList<AllergenDto>>> GetAllergens([FromQuery] string? culture, CancellationToken ct)
         {
             var items = await _db.Allergens
                 .AsNoTracking()
+                .Include(x => x.Translations)
                 .Where(x => x.IsActive)
                 .OrderBy(x => x.SortOrder)
                 .ThenBy(x => x.Name)
-                .Select(x => new AllergenDto
-                {
-                    Id = x.Id,
-                    Code = x.Code,
-                    Name = x.Name,
-                    IsActive = x.IsActive,
-                    SortOrder = x.SortOrder
-                })
                 .ToListAsync(ct);
 
-            return Ok(items);
+            return Ok(items.Select(x => new AllergenDto
+            {
+                Id = x.Id,
+                Code = x.Code,
+                Name = ResolveAllergenName(x, culture),
+                IsActive = x.IsActive,
+                SortOrder = x.SortOrder
+            }).ToList());
         }
 
         [HttpPost]
@@ -391,6 +391,21 @@ namespace API.Controllers
                     Name = t.Name
                 }).ToList()
             };
+        }
+
+        private static string ResolveAllergenName(Allergen item, string? culture)
+        {
+            var resolvedCulture = string.IsNullOrWhiteSpace(culture) ? "pl-PL" : culture.Trim();
+            return item.Translations
+                .Where(t => t.Culture == resolvedCulture)
+                .Select(t => t.Name)
+                .FirstOrDefault()
+                ?? item.Translations
+                    .Where(t => t.Culture == "pl-PL")
+                    .Select(t => t.Name)
+                    .FirstOrDefault()
+                ?? item.Translations.Select(t => t.Name).FirstOrDefault()
+                ?? item.Name;
         }
 
         private static void Validate(IngredientUpsertDto dto)

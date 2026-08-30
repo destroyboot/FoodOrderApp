@@ -14,8 +14,6 @@ namespace Core.Data.Entities
         public string Culture { get; set; } = default!;
         public string Name { get; set; } = default!;
         public string? Description { get; set; }
-
-        // For product page MUST: allergens
         public string? Allergens { get; set; }
     }
 }

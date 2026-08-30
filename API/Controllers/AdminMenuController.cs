@@ -38,7 +38,7 @@ namespace API.Controllers
 
         private string UserId =>
             User.FindFirstValue(ClaimTypes.NameIdentifier)
-            ?? throw new InvalidOperationException("Missing user id.");
+            ?? throw new InvalidOperationException("Usaer id is missing");
 
         private bool IsMasterAdmin => User.IsInRole("Admin");
 

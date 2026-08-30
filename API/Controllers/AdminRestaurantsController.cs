@@ -45,7 +45,7 @@ namespace API.Controllers
         private bool IsMasterAdmin => User.IsInRole("Admin");
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<RestaurantDto>>> GetRestaurants(CancellationToken ct)
+        public async Task<ActionResult<IReadOnlyList<RestaurantDto>>> GetRestaurants([FromQuery] string? culture, CancellationToken ct)
         {
             var query = _db.Restaurants.AsNoTracking();
 
@@ -81,6 +81,12 @@ namespace API.Controllers
                 })
                 .ToListAsync(ct);
 
+            var cuisines = await _db.Cuisines
+                .AsNoTracking()
+                .Include(x => x.Translations)
+                .Where(x => x.IsActive)
+                .ToListAsync(ct);
+
             return Ok(result.Select(r => new RestaurantDto
             {
                 Id = r.Id,
@@ -92,6 +98,8 @@ namespace API.Controllers
                 HouseNumber = r.HouseNumber,
                 CuisineType = r.CuisineType,
                 CuisineTypes = SplitCuisineTypes(r.CuisineType),
+                CuisineTypeDisplay = JoinCuisineTypeDisplays(r.CuisineType, cuisines, culture),
+                CuisineTypeDisplays = ResolveCuisineTypeDisplays(r.CuisineType, cuisines, culture),
                 IsActive = r.IsActive,
                 EnableTableOrders = r.EnableTableOrders,
                 EnableTakeawayOrders = r.EnableTakeawayOrders,
@@ -140,17 +148,24 @@ namespace API.Controllers
         }
 
         [HttpGet("cuisines")]
-        public async Task<ActionResult<IReadOnlyList<string>>> GetCuisineOptions(CancellationToken ct)
+        public async Task<ActionResult<IReadOnlyList<CuisineDto>>> GetCuisineOptions([FromQuery] string? culture, CancellationToken ct)
         {
             var items = await _db.Cuisines
                 .AsNoTracking()
+                .Include(x => x.Translations)
                 .Where(x => x.IsActive)
                 .OrderBy(x => x.SortOrder)
                 .ThenBy(x => x.Name)
-                .Select(x => x.Name)
                 .ToListAsync(ct);
 
-            return Ok(items);
+            return Ok(items.Select(x => new CuisineDto
+            {
+                Id = x.Id,
+                Code = x.Name,
+                Name = ResolveCuisineName(x, culture) ?? x.Name,
+                IsActive = x.IsActive,
+                SortOrder = x.SortOrder
+            }).ToList());
         }
 
         [HttpPost]
@@ -188,6 +203,8 @@ namespace API.Controllers
                 HouseNumber = restaurant.HouseNumber,
                 CuisineType = restaurant.CuisineType,
                 CuisineTypes = SplitCuisineTypes(restaurant.CuisineType),
+                CuisineTypeDisplay = restaurant.CuisineType,
+                CuisineTypeDisplays = SplitCuisineTypes(restaurant.CuisineType),
                 IsActive = restaurant.IsActive
             });
         }
@@ -763,5 +780,34 @@ namespace API.Controllers
             => string.IsNullOrWhiteSpace(value)
                 ? new List<string>()
                 : value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).ToList();
+
+        private static string? JoinCuisineTypeDisplays(string? value, IReadOnlyCollection<Cuisine> cuisines, string? culture)
+        {
+            var displays = ResolveCuisineTypeDisplays(value, cuisines, culture);
+            return displays.Count == 0 ? null : string.Join(", ", displays);
+        }
+
+        private static List<string> ResolveCuisineTypeDisplays(string? value, IReadOnlyCollection<Cuisine> cuisines, string? culture)
+            => SplitCuisineTypes(value)
+                .Select(code => ResolveCuisineName(cuisines.FirstOrDefault(c => string.Equals(c.Name, code, StringComparison.OrdinalIgnoreCase)), culture) ?? code)
+                .ToList();
+
+        private static string? ResolveCuisineName(Cuisine? item, string? culture)
+        {
+            if (item is null)
+                return null;
+
+            var resolvedCulture = string.IsNullOrWhiteSpace(culture) ? "pl-PL" : culture.Trim();
+            return item.Translations
+                .Where(t => t.Culture == resolvedCulture)
+                .Select(t => t.Name)
+                .FirstOrDefault()
+                ?? item.Translations
+                    .Where(t => t.Culture == "pl-PL")
+                    .Select(t => t.Name)
+                    .FirstOrDefault()
+                ?? item.Translations.Select(t => t.Name).FirstOrDefault()
+                ?? item.Name;
+        }
     }
 }
