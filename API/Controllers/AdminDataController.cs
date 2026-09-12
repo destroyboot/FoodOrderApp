@@ -4,11 +4,10 @@ using Core.Utilities;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System.Data;
 using System.Globalization;
+using System.Reflection;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -16,7 +15,7 @@ namespace API.Controllers
 {
     [ApiController]
     [Route("api/admin/data")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,RestaurantAdmin,Waiter,Chef,DeliveryDriver")]
     public class AdminDataController : ControllerBase
     {
         private readonly AppDbContext _db;
@@ -37,24 +36,12 @@ namespace API.Controllers
         public async Task<ActionResult<IReadOnlyList<Dictionary<string, object?>>>> GetRows(
             string tableName,
             [FromQuery] string? search,
+            [FromQuery] string? sortColumn,
+            [FromQuery] string? sortDirection,
             CancellationToken ct)
         {
             var table = await RequireTableAsync(tableName, "read", ct);
-            using var cmd = await BuildSelectCommandAsync(table, search, ct);
-            using var reader = await cmd.ExecuteReaderAsync(ct);
-
-            var rows = new List<Dictionary<string, object?>>();
-            while (await reader.ReadAsync(ct))
-            {
-                var row = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
-                foreach (var column in table.Columns)
-                {
-                    var value = reader[column.ColumnName];
-                    row[column.Property.Name] = value == DBNull.Value ? null : value;
-                }
-                rows.Add(row);
-            }
-
+            var rows = await QueryRowsAsync(table, search, sortColumn, sortDirection, ct);
             return Ok(rows);
         }
 
@@ -126,10 +113,97 @@ namespace API.Controllers
             return Ok(new { deleted = affected });
         }
 
-        private Task<List<TableAccessDefinition>> GetAccessibleTablesAsync(CancellationToken ct)
+        [HttpGet("permission-groups")]
+        [Authorize(Roles = "Admin")]
+        public async Task<ActionResult<IReadOnlyList<AdminDataRolePermissionsDto>>> GetPermissionGroups(CancellationToken ct)
         {
             var tables = GetTableDefinitions()
-                .Select(x => x with
+                .Select(x => x.TableName)
+                .OrderBy(x => x)
+                .ToList();
+            var roleNames = await GetManageableRoleNamesAsync(ct);
+            var permissions = await _db.AdminTablePermissions
+                .AsNoTracking()
+                .Where(x => roleNames.Contains(x.RoleName))
+                .ToListAsync(ct);
+
+            var result = roleNames.Select(roleName => new AdminDataRolePermissionsDto
+            {
+                RoleName = roleName,
+                Grants = tables.Select(tableName =>
+                {
+                    var permission = permissions.FirstOrDefault(x =>
+                        string.Equals(x.RoleName, roleName, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(x.TableName, tableName, StringComparison.OrdinalIgnoreCase));
+
+                    return new AdminDataTableGrantDto
+                    {
+                        TableName = tableName,
+                        CanRead = permission?.CanRead ?? false,
+                        CanCreate = permission?.CanCreate ?? false,
+                        CanUpdate = permission?.CanUpdate ?? false,
+                        CanDelete = permission?.CanDelete ?? false
+                    };
+                }).ToList()
+            }).ToList();
+
+            return Ok(result);
+        }
+
+        [HttpPut("permission-groups/{roleName}")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> UpdatePermissionGroup(string roleName, [FromBody] AdminDataRolePermissionsDto dto, CancellationToken ct)
+        {
+            var normalizedRole = await RequireManageableRoleNameAsync(roleName, ct);
+            var validTables = GetTableDefinitions()
+                .Select(x => x.TableName)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var requested = dto.Grants
+                .Where(x => validTables.Contains(x.TableName))
+                .GroupBy(x => x.TableName, StringComparer.OrdinalIgnoreCase)
+                .Select(x => x.Last())
+                .ToList();
+
+            var existing = await _db.AdminTablePermissions
+                .Where(x => x.RoleName == normalizedRole)
+                .ToListAsync(ct);
+
+            foreach (var grant in requested)
+            {
+                var permission = existing.FirstOrDefault(x =>
+                    string.Equals(x.TableName, grant.TableName, StringComparison.OrdinalIgnoreCase));
+                if (permission is null)
+                {
+                    permission = new AdminTablePermission
+                    {
+                        RoleName = normalizedRole,
+                        TableName = grant.TableName
+                    };
+                    _db.AdminTablePermissions.Add(permission);
+                    existing.Add(permission);
+                }
+
+                permission.CanRead = grant.CanRead;
+                permission.CanCreate = grant.CanCreate;
+                permission.CanUpdate = grant.CanUpdate;
+                permission.CanDelete = grant.CanDelete;
+            }
+
+            foreach (var stale in existing.Where(x => !requested.Any(grant => string.Equals(grant.TableName, x.TableName, StringComparison.OrdinalIgnoreCase))).ToList())
+            {
+                _db.AdminTablePermissions.Remove(stale);
+            }
+
+            await _db.SaveChangesAsync(ct);
+            return NoContent();
+        }
+
+        private async Task<List<TableAccessDefinition>> GetAccessibleTablesAsync(CancellationToken ct)
+        {
+            var tables = GetTableDefinitions();
+            if (User.IsInRole("Admin"))
+            {
+                return tables.Select(x => x with
                 {
                     Permissions = new AdminDataTablePermissionsDto
                     {
@@ -140,7 +214,41 @@ namespace API.Controllers
                     }
                 })
                 .ToList();
-            return Task.FromResult(tables);
+            }
+
+            var roleNames = User.FindAll(ClaimTypes.Role)
+                .Select(x => x.Value)
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            if (roleNames.Count == 0)
+                return new List<TableAccessDefinition>();
+
+            var grants = await _db.AdminTablePermissions
+                .AsNoTracking()
+                .Where(x => roleNames.Contains(x.RoleName))
+                .ToListAsync(ct);
+
+            return tables
+                .Select(table =>
+                {
+                    var tableGrants = grants
+                        .Where(x => string.Equals(x.TableName, table.TableName, StringComparison.OrdinalIgnoreCase))
+                        .ToList();
+
+                    return table with
+                    {
+                        Permissions = new AdminDataTablePermissionsDto
+                        {
+                            CanRead = tableGrants.Any(x => x.CanRead),
+                            CanCreate = tableGrants.Any(x => x.CanCreate),
+                            CanUpdate = tableGrants.Any(x => x.CanUpdate),
+                            CanDelete = tableGrants.Any(x => x.CanDelete)
+                        }
+                    };
+                })
+                .Where(x => x.Permissions.CanRead || x.Permissions.CanCreate || x.Permissions.CanUpdate || x.Permissions.CanDelete)
+                .ToList();
         }
 
         private async Task<TableAccessDefinition> RequireTableAsync(string tableName, string operation, CancellationToken ct)
@@ -171,169 +279,494 @@ namespace API.Controllers
                 .FirstOrDefault(x => string.Equals(x.TableName, tableName, StringComparison.OrdinalIgnoreCase));
         }
 
-        private async Task<SqlCommand> BuildSelectCommandAsync(TableAccessDefinition table, string? search, CancellationToken ct)
+        private async Task<List<Dictionary<string, object?>>> QueryRowsAsync(
+            TableAccessDefinition table,
+            string? search,
+            string? sortColumn,
+            string? sortDirection,
+            CancellationToken ct)
         {
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
+            var allowedRestaurantIds = await GetAllowedRestaurantIdsAsync(ct);
+            var query = ApplySearchQuery(
+                ApplyScopeQuery(CreateEntityQuery(table), table, allowedRestaurantIds),
+                table,
+                search);
+            var sorted = ApplySort(query, table, sortColumn, sortDirection);
+            var rows = await ToListAsync(sorted.Cast<object>().Take(100), ct);
 
-            var columns = string.Join(", ", table.Columns.Select(x => $"[{x.ColumnName}]"));
-            var sql = $"SELECT TOP 100 {columns} FROM [{table.TableName}]";
+            var filtered = rows
+                .Select(entity => ToRowDictionary(entity, table))
+                .ToList();
 
-            var command = new SqlCommand();
-            command.Connection = connection;
-            var hasWhere = false;
-            hasWhere = ApplyScopeFilter(command, table, ref sql, hasWhere);
-            hasWhere = ApplySearchFilter(command, table, ref sql, search, hasWhere);
-
-            sql += $" ORDER BY [{table.PrimaryKey.ColumnName}] DESC";
-            command.CommandText = sql;
-            return command;
+            return filtered;
         }
 
         private async Task ExecuteInsertAsync(TableAccessDefinition table, AdminDataRowUpsertDto dto, CancellationToken ct)
         {
             var editableColumns = table.Columns.Where(x => x.IsEditable && !x.IsPrimaryKey).ToList();
             ValidateScopeForWrite(table, dto.Values);
-
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
-
-            var command = new SqlCommand { Connection = connection };
-            var columnNames = new List<string>();
-            var valueNames = new List<string>();
-            var index = 0;
+            var entity = Activator.CreateInstance(table.EntityType.ClrType)
+                ?? throw new InvalidOperationException("Could not create entity instance.");
 
             foreach (var column in editableColumns)
             {
-                columnNames.Add($"[{column.ColumnName}]");
-                var parameterName = $"@p{index++}";
-                valueNames.Add(parameterName);
-                command.Parameters.AddWithValue(parameterName, ConvertIncomingValue(dto.Values, column.Property) ?? DBNull.Value);
+                SetEntityValue(entity, column.Property, ConvertIncomingValue(dto.Values, column.Property));
             }
 
-            command.CommandText = $"INSERT INTO [{table.TableName}] ({string.Join(", ", columnNames)}) VALUES ({string.Join(", ", valueNames)})";
-            await command.ExecuteNonQueryAsync(ct);
+            _db.Add(entity);
+            await _db.SaveChangesAsync(ct);
+            await EnsureDefaultTranslationsAsync(entity, ct);
         }
 
         private async Task<int> ExecuteUpdateAsync(TableAccessDefinition table, string key, AdminDataRowUpsertDto dto, CancellationToken ct)
         {
             var editableColumns = table.Columns.Where(x => x.IsEditable && !x.IsPrimaryKey).ToList();
             ValidateScopeForWrite(table, dto.Values);
+            var entity = await FindEntityAsync(table, key, ct);
+            if (entity is null)
+                return 0;
 
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
-
-            var command = new SqlCommand { Connection = connection };
-            var sets = new List<string>();
-            var index = 0;
+            await EnsureEntityScopeAsync(table, entity, ct);
 
             foreach (var column in editableColumns)
             {
-                var parameterName = $"@p{index++}";
-                sets.Add($"[{column.ColumnName}] = {parameterName}");
-                command.Parameters.AddWithValue(parameterName, ConvertIncomingValue(dto.Values, column.Property) ?? DBNull.Value);
+                SetEntityValue(entity, column.Property, ConvertIncomingValue(dto.Values, column.Property));
             }
 
-            var keyParameter = "@key";
-            command.Parameters.AddWithValue(keyParameter, ConvertKeyValue(key, table.PrimaryKey.Property));
-
-            var sql = $"UPDATE [{table.TableName}] SET {string.Join(", ", sets)} WHERE [{table.PrimaryKey.ColumnName}] = {keyParameter}";
-            ApplyScopeFilter(command, table, ref sql, true);
-            command.CommandText = sql;
-            return await command.ExecuteNonQueryAsync(ct);
+            await EnsureEntityScopeAsync(table, entity, ct);
+            await _db.SaveChangesAsync(ct);
+            return 1;
         }
 
         private async Task<int> ExecuteDeleteAsync(TableAccessDefinition table, string key, CancellationToken ct)
         {
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
+            var entity = await FindEntityAsync(table, key, ct);
+            if (entity is null)
+                return 0;
 
-            var command = new SqlCommand { Connection = connection };
-            command.Parameters.AddWithValue("@key", ConvertKeyValue(key, table.PrimaryKey.Property));
+            await EnsureEntityScopeAsync(table, entity, ct);
+            await EnsureCanDeleteEntityAsync(table, entity, ct);
+            _db.Remove(entity);
+            await _db.SaveChangesAsync(ct);
 
-            var sql = $"DELETE FROM [{table.TableName}] WHERE [{table.PrimaryKey.ColumnName}] = @key";
-            ApplyScopeFilter(command, table, ref sql, true);
-            command.CommandText = sql;
-            return await command.ExecuteNonQueryAsync(ct);
+            return 1;
         }
 
         private async Task<int> ExecuteBulkDeleteAsync(TableAccessDefinition table, IReadOnlyList<string> keys, CancellationToken ct)
         {
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
-
-            var command = new SqlCommand { Connection = connection };
-            var keyNames = new List<string>();
-            for (var i = 0; i < keys.Count; i++)
+            var deleted = 0;
+            foreach (var key in keys)
             {
-                var parameterName = $"@key{i}";
-                keyNames.Add(parameterName);
-                command.Parameters.AddWithValue(parameterName, ConvertKeyValue(keys[i], table.PrimaryKey.Property));
+                var entity = await FindEntityAsync(table, key, ct);
+                if (entity is null)
+                    continue;
+
+                await EnsureEntityScopeAsync(table, entity, ct);
+                await EnsureCanDeleteEntityAsync(table, entity, ct);
+                _db.Remove(entity);
+                deleted++;
             }
 
-            var sql = $"DELETE FROM [{table.TableName}] WHERE [{table.PrimaryKey.ColumnName}] IN ({string.Join(", ", keyNames)})";
-            ApplyScopeFilter(command, table, ref sql, true);
-            command.CommandText = sql;
-            return await command.ExecuteNonQueryAsync(ct);
+            if (deleted > 0)
+            {
+                await _db.SaveChangesAsync(ct);
+            }
+
+            return deleted;
         }
 
-        private bool ApplyScopeFilter(SqlCommand command, TableAccessDefinition table, ref string sql, bool hasWhere)
+        private IQueryable CreateEntityQuery(TableAccessDefinition table)
+            => CreateEntityQuery(table.EntityType.ClrType);
+
+        private IQueryable CreateEntityQuery(Type entityType)
+        {
+            var setMethod = typeof(DbContext)
+                .GetMethods()
+                .Single(method => method.Name == nameof(DbContext.Set) && method.IsGenericMethodDefinition && method.GetParameters().Length == 0);
+
+            var set = setMethod.MakeGenericMethod(entityType).Invoke(_db, null)
+                ?? throw new InvalidOperationException("Could not create query.");
+            return (IQueryable)set;
+        }
+
+        private IQueryable ApplyScopeQuery(IQueryable query, TableAccessDefinition table, IReadOnlyCollection<int> allowedRestaurantIds)
         {
             if (User.IsInRole("Admin") || !table.IsRestaurantScoped || table.RestaurantIdColumn is null)
-                return hasWhere;
+                return query;
 
-            var allowedRestaurantIds = GetAllowedRestaurantIdsAsync(CancellationToken.None).GetAwaiter().GetResult();
             if (allowedRestaurantIds.Count == 0)
             {
-                sql += hasWhere ? " AND 1 = 0" : " WHERE 1 = 0";
-                return true;
+                return ApplyConstantFilter(query, false);
             }
 
-            var parameterNames = new List<string>();
-            for (var i = 0; i < allowedRestaurantIds.Count; i++)
+            var parameter = System.Linq.Expressions.Expression.Parameter(query.ElementType, "entity");
+            var property = System.Linq.Expressions.Expression.Property(parameter, table.RestaurantIdColumn.Property.Name);
+            System.Linq.Expressions.Expression predicate;
+
+            if (Nullable.GetUnderlyingType(property.Type) is not null)
             {
-                var name = $"@restaurantId{i}";
-                parameterNames.Add(name);
-                command.Parameters.AddWithValue(name, allowedRestaurantIds[i]);
+                var hasValue = System.Linq.Expressions.Expression.Property(property, nameof(Nullable<int>.HasValue));
+                var value = System.Linq.Expressions.Expression.Property(property, nameof(Nullable<int>.Value));
+                predicate = System.Linq.Expressions.Expression.AndAlso(hasValue, BuildContainsExpression(allowedRestaurantIds, value));
+            }
+            else
+            {
+                predicate = BuildContainsExpression(allowedRestaurantIds, property);
             }
 
-            sql += hasWhere
-                ? $" AND [{table.RestaurantIdColumn.ColumnName}] IN ({string.Join(", ", parameterNames)})"
-                : $" WHERE [{table.RestaurantIdColumn.ColumnName}] IN ({string.Join(", ", parameterNames)})";
-            return true;
+            return ApplyWhere(query, parameter, predicate);
         }
 
-        private bool ApplySearchFilter(SqlCommand command, TableAccessDefinition table, ref string sql, string? search, bool hasWhere)
+        private static IQueryable ApplySort(IQueryable query, TableAccessDefinition table, string? sortColumn, string? sortDirection)
+        {
+            var column = table.Columns.FirstOrDefault(x => string.Equals(x.Property.Name, sortColumn, StringComparison.OrdinalIgnoreCase))
+                ?? table.PrimaryKey;
+            var descending = string.Equals(sortDirection, "desc", StringComparison.OrdinalIgnoreCase);
+            var methodName = descending ? nameof(Queryable.OrderByDescending) : nameof(Queryable.OrderBy);
+
+            var parameter = System.Linq.Expressions.Expression.Parameter(query.ElementType, "entity");
+            var body = System.Linq.Expressions.Expression.Property(parameter, column.Property.Name);
+            var lambda = System.Linq.Expressions.Expression.Lambda(body, parameter);
+
+            return (IQueryable)typeof(Queryable)
+                .GetMethods()
+                .Where(method => method.Name == methodName && method.GetParameters().Length == 2)
+                .Single()
+                .MakeGenericMethod(query.ElementType, column.Property.ClrType)
+                .Invoke(null, new object[] { query, lambda })!;
+        }
+
+        private static IQueryable ApplySearchQuery(IQueryable query, TableAccessDefinition table, string? search)
         {
             var terms = TokenizedSearch.SplitTerms(search);
             if (terms.Count == 0)
-                return hasWhere;
+                return query;
 
             var searchableColumns = table.Columns
-                .Where(x => x.Property.ClrType != typeof(byte[]))
+                .Where(x => x.Property.ClrType == typeof(string))
                 .ToList();
-
             if (searchableColumns.Count == 0)
-                return hasWhere;
+                return query;
 
-            var tokenClauses = new List<string>();
-            for (var i = 0; i < terms.Count; i++)
+            var parameter = System.Linq.Expressions.Expression.Parameter(query.ElementType, "entity");
+            foreach (var term in terms)
             {
-                var parameterName = $"@search{i}";
-                command.Parameters.AddWithValue(parameterName, $"%{terms[i].ToLowerInvariant()}%");
-                var columnClause = string.Join(" OR ", searchableColumns.Select(column =>
-                    $"LOWER(COALESCE(CONVERT(nvarchar(max), [{column.ColumnName}]), '')) LIKE {parameterName}"));
-                tokenClauses.Add($"({columnClause})");
+                System.Linq.Expressions.Expression? termPredicate = null;
+                foreach (var column in searchableColumns)
+                {
+                    var property = System.Linq.Expressions.Expression.Property(parameter, column.Property.Name);
+                    var notNull = System.Linq.Expressions.Expression.NotEqual(
+                        property,
+                        System.Linq.Expressions.Expression.Constant(null, typeof(string)));
+                    var contains = System.Linq.Expressions.Expression.Call(
+                        property,
+                        nameof(string.Contains),
+                        Type.EmptyTypes,
+                        System.Linq.Expressions.Expression.Constant(term));
+                    var columnPredicate = System.Linq.Expressions.Expression.AndAlso(notNull, contains);
+                    termPredicate = termPredicate is null
+                        ? columnPredicate
+                        : System.Linq.Expressions.Expression.OrElse(termPredicate, columnPredicate);
+                }
+
+                if (termPredicate is not null)
+                    query = ApplyWhere(query, parameter, termPredicate);
             }
 
-            var combinedClause = string.Join(" AND ", tokenClauses);
-            sql += hasWhere ? $" AND {combinedClause}" : $" WHERE {combinedClause}";
-            return true;
+            return query;
+        }
+
+        private static IQueryable ApplyConstantFilter(IQueryable query, bool value)
+        {
+            var parameter = System.Linq.Expressions.Expression.Parameter(query.ElementType, "entity");
+            var body = System.Linq.Expressions.Expression.Constant(value);
+            return ApplyWhere(query, parameter, body);
+        }
+
+        private static IQueryable ApplyWhere(
+            IQueryable query,
+            System.Linq.Expressions.ParameterExpression parameter,
+            System.Linq.Expressions.Expression predicate)
+        {
+            var lambda = System.Linq.Expressions.Expression.Lambda(predicate, parameter);
+            return (IQueryable)typeof(Queryable)
+                .GetMethods()
+                .Where(method => method.Name == nameof(Queryable.Where) && method.GetParameters().Length == 2)
+                .Single()
+                .MakeGenericMethod(query.ElementType)
+                .Invoke(null, new object[] { query, lambda })!;
+        }
+
+        private static System.Linq.Expressions.Expression BuildContainsExpression(
+            IReadOnlyCollection<int> values,
+            System.Linq.Expressions.Expression property)
+        {
+            return System.Linq.Expressions.Expression.Call(
+                typeof(Enumerable),
+                nameof(Enumerable.Contains),
+                new[] { typeof(int) },
+                System.Linq.Expressions.Expression.Constant(values.ToList()),
+                property);
+        }
+
+        private static Dictionary<string, object?> ToRowDictionary(object entity, TableAccessDefinition table)
+        {
+            var row = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);
+            foreach (var column in table.Columns)
+            {
+                row[column.Property.Name] = GetEntityValue(entity, column.Property);
+            }
+
+            return row;
+        }
+
+        private static async Task<List<object>> ToListAsync(IQueryable query, CancellationToken ct)
+        {
+            var method = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods()
+                .Where(x => x.Name == nameof(EntityFrameworkQueryableExtensions.ToListAsync))
+                .Single(x => x.GetParameters().Length == 2)
+                .MakeGenericMethod(query.ElementType);
+
+            var task = (Task)method.Invoke(null, new object[] { query, ct })!;
+            await task.ConfigureAwait(false);
+            var result = task.GetType().GetProperty(nameof(Task<object>.Result))!.GetValue(task)!;
+            return ((System.Collections.IEnumerable)result).Cast<object>().ToList();
+        }
+
+        private async Task<object?> FindEntityAsync(TableAccessDefinition table, string key, CancellationToken ct)
+        {
+            var keyValue = ConvertKeyValue(key, table.PrimaryKey.Property);
+            return await _db.FindAsync(table.EntityType.ClrType, [keyValue], ct);
+        }
+
+        private async Task EnsureDefaultTranslationsAsync(object entity, CancellationToken ct)
+        {
+            var cultures = await GetActiveCultureCodesAsync(ct);
+
+            if (entity is Cuisine cuisine)
+            {
+                var existingCultures = await _db.CuisineTranslations
+                    .AsNoTracking()
+                    .Where(x => x.CuisineId == cuisine.Id)
+                    .Select(x => x.Culture)
+                    .ToListAsync(ct);
+                var fallbackName = string.IsNullOrWhiteSpace(cuisine.Name) ? $"Cuisine #{cuisine.Id}" : cuisine.Name;
+
+                foreach (var culture in cultures.Where(culture => !existingCultures.Contains(culture, StringComparer.OrdinalIgnoreCase)))
+                {
+                    _db.CuisineTranslations.Add(new CuisineTranslation
+                    {
+                        CuisineId = cuisine.Id,
+                        Culture = culture,
+                        Name = fallbackName
+                    });
+                }
+
+                await _db.SaveChangesAsync(ct);
+                return;
+            }
+
+            if (entity is Allergen allergen)
+            {
+                var existingCultures = await _db.AllergenTranslations
+                    .AsNoTracking()
+                    .Where(x => x.AllergenId == allergen.Id)
+                    .Select(x => x.Culture)
+                    .ToListAsync(ct);
+                var fallbackName = !string.IsNullOrWhiteSpace(allergen.Name)
+                    ? allergen.Name
+                    : !string.IsNullOrWhiteSpace(allergen.Code)
+                        ? allergen.Code
+                        : $"Allergen #{allergen.Id}";
+
+                foreach (var culture in cultures.Where(culture => !existingCultures.Contains(culture, StringComparer.OrdinalIgnoreCase)))
+                {
+                    _db.AllergenTranslations.Add(new AllergenTranslation
+                    {
+                        AllergenId = allergen.Id,
+                        Culture = culture,
+                        Name = fallbackName
+                    });
+                }
+
+                await _db.SaveChangesAsync(ct);
+            }
+        }
+
+        private async Task EnsureCanDeleteEntityAsync(TableAccessDefinition table, object entity, CancellationToken ct)
+        {
+            await EnsureNoCustomUsageAsync(entity, ct);
+
+            foreach (var foreignKey in table.EntityType.GetReferencingForeignKeys())
+            {
+                if (foreignKey.DeleteBehavior == DeleteBehavior.Cascade)
+                    continue;
+
+                if (foreignKey.PrincipalKey.Properties.Any(property => GetEntityValue(entity, property) is null))
+                    continue;
+
+                if (await HasDependentRowsAsync(foreignKey, entity, ct))
+                {
+                    var dependentName = foreignKey.DeclaringEntityType.GetTableName() ?? foreignKey.DeclaringEntityType.ClrType.Name;
+                    throw new InvalidOperationException($"Cannot delete {table.TableName} because it is used by {dependentName}.");
+                }
+            }
+        }
+
+        private async Task EnsureNoCustomUsageAsync(object entity, CancellationToken ct)
+        {
+            if (entity is Cuisine cuisine)
+            {
+                var assignedCuisineValues = await _db.Restaurants
+                    .AsNoTracking()
+                    .Where(x => x.CuisineType != null)
+                    .Select(x => x.CuisineType!)
+                    .ToListAsync(ct);
+                var used = assignedCuisineValues.Any(value =>
+                    SplitCuisineTypes(value).Contains(cuisine.Name, StringComparer.OrdinalIgnoreCase));
+                if (used)
+                    throw new InvalidOperationException("Cannot delete cuisine because it is used by at least one restaurant.");
+            }
+
+            if (entity is Allergen allergen)
+            {
+                var used = await _db.Ingredients
+                    .AsNoTracking()
+                    .AnyAsync(x => x.AllergenCode != null && x.AllergenCode == allergen.Code, ct);
+                if (used)
+                    throw new InvalidOperationException("Cannot delete allergen because it is used by at least one ingredient.");
+            }
+        }
+
+        private async Task<bool> HasDependentRowsAsync(IForeignKey foreignKey, object principalEntity, CancellationToken ct)
+        {
+            var query = CreateEntityQuery(foreignKey.DeclaringEntityType.ClrType);
+            var parameter = System.Linq.Expressions.Expression.Parameter(query.ElementType, "entity");
+            System.Linq.Expressions.Expression? predicate = null;
+
+            for (var i = 0; i < foreignKey.Properties.Count; i++)
+            {
+                var dependentProperty = foreignKey.Properties[i];
+                var principalProperty = foreignKey.PrincipalKey.Properties[i];
+                var principalValue = GetEntityValue(principalEntity, principalProperty);
+                var dependentValue = ConvertReferenceValue(principalValue, dependentProperty.ClrType);
+                var dependentAccess = BuildEfPropertyExpression(parameter, dependentProperty);
+                var equals = System.Linq.Expressions.Expression.Equal(
+                    dependentAccess,
+                    System.Linq.Expressions.Expression.Constant(dependentValue, dependentProperty.ClrType));
+
+                predicate = predicate is null
+                    ? equals
+                    : System.Linq.Expressions.Expression.AndAlso(predicate, equals);
+            }
+
+            if (predicate is null)
+                return false;
+
+            var lambda = System.Linq.Expressions.Expression.Lambda(predicate, parameter);
+            var method = typeof(EntityFrameworkQueryableExtensions)
+                .GetMethods()
+                .Where(x => x.Name == nameof(EntityFrameworkQueryableExtensions.AnyAsync))
+                .Single(x => x.GetParameters().Length == 3)
+                .MakeGenericMethod(query.ElementType);
+
+            var task = (Task)method.Invoke(null, new object[] { query, lambda, ct })!;
+            await task.ConfigureAwait(false);
+            return (bool)task.GetType().GetProperty(nameof(Task<bool>.Result))!.GetValue(task)!;
+        }
+
+        private static System.Linq.Expressions.Expression BuildEfPropertyExpression(
+            System.Linq.Expressions.Expression parameter,
+            IProperty property)
+        {
+            return System.Linq.Expressions.Expression.Call(
+                typeof(EF),
+                nameof(EF.Property),
+                new[] { property.ClrType },
+                parameter,
+                System.Linq.Expressions.Expression.Constant(property.Name));
+        }
+
+        private static object? ConvertReferenceValue(object? value, Type targetType)
+        {
+            if (value is null)
+                return null;
+
+            var effectiveType = Nullable.GetUnderlyingType(targetType) ?? targetType;
+            var converted = value.GetType() == effectiveType
+                ? value
+                : Convert.ChangeType(value, effectiveType, CultureInfo.InvariantCulture);
+
+            return Nullable.GetUnderlyingType(targetType) is null
+                ? converted
+                : Activator.CreateInstance(targetType, converted);
+        }
+
+        private async Task<List<string>> GetActiveCultureCodesAsync(CancellationToken ct)
+        {
+            var cultures = await _db.AppLanguages
+                .AsNoTracking()
+                .Where(x => x.IsActive)
+                .OrderBy(x => x.SortOrder)
+                .Select(x => x.Culture)
+                .ToListAsync(ct);
+
+            return cultures.Count > 0 ? cultures : new List<string> { "pl-PL" };
+        }
+
+        private async Task EnsureEntityScopeAsync(TableAccessDefinition table, object entity, CancellationToken ct)
+        {
+            if (User.IsInRole("Admin") || !table.IsRestaurantScoped || table.RestaurantIdColumn is null)
+                return;
+
+            var value = GetEntityValue(entity, table.RestaurantIdColumn.Property);
+            if (value is null)
+                throw new InvalidOperationException("RestaurantId is required for this table.");
+
+            var restaurantId = Convert.ToInt32(value, CultureInfo.InvariantCulture);
+            var allowed = await GetAllowedRestaurantIdsAsync(ct);
+            if (!allowed.Contains(restaurantId))
+                throw new InvalidOperationException("You are not allowed to modify rows for this restaurant.");
+        }
+
+        private async Task<List<string>> GetManageableRoleNamesAsync(CancellationToken ct)
+        {
+            return await _db.Roles
+                .AsNoTracking()
+                .Select(x => x.Name!)
+                .Where(x => x != null && x != "Admin")
+                .OrderBy(x => x)
+                .ToListAsync(ct);
+        }
+
+        private async Task<string> RequireManageableRoleNameAsync(string roleName, CancellationToken ct)
+        {
+            var normalized = roleName.Trim();
+            var role = await _db.Roles
+                .AsNoTracking()
+                .Where(x => x.Name != null && x.Name != "Admin")
+                .Select(x => x.Name!)
+                .FirstOrDefaultAsync(x => x == normalized, ct);
+
+            if (string.IsNullOrWhiteSpace(role))
+                throw new InvalidOperationException("Role not found or cannot be managed here.");
+
+            return role;
+        }
+
+        private static object? GetEntityValue(object entity, IProperty property)
+        {
+            var propertyInfo = property.PropertyInfo
+                ?? throw new InvalidOperationException($"Property {property.Name} is not mapped to a CLR property.");
+            return propertyInfo.GetValue(entity);
+        }
+
+        private static void SetEntityValue(object entity, IProperty property, object? value)
+        {
+            var propertyInfo = property.PropertyInfo
+                ?? throw new InvalidOperationException($"Property {property.Name} is not mapped to a CLR property.");
+            propertyInfo.SetValue(entity, value);
         }
 
         private void ValidateScopeForWrite(TableAccessDefinition table, IReadOnlyDictionary<string, JsonElement?> values)
@@ -358,7 +791,7 @@ namespace API.Controllers
             var userId = GetCurrentUserId();
             return await _db.RestaurantUserRoles
                 .AsNoTracking()
-                .Where(x => x.UserId == userId && x.Role == "RestaurantAdmin")
+                .Where(x => x.UserId == userId)
                 .Select(x => x.RestaurantId)
                 .Distinct()
                 .ToListAsync(ct);
@@ -452,6 +885,14 @@ namespace API.Controllers
 
             return Convert.ChangeType(value, targetType, CultureInfo.InvariantCulture);
         }
+
+        private static List<string> SplitCuisineTypes(string? value)
+            => string.IsNullOrWhiteSpace(value)
+                ? new List<string>()
+                : value.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                    .Distinct(StringComparer.OrdinalIgnoreCase)
+                    .ToList();
 
         private string GetCurrentUserId() =>
             User.FindFirstValue(ClaimTypes.NameIdentifier)
@@ -560,61 +1001,45 @@ namespace API.Controllers
             if (specialLabels is not null)
                 return specialLabels;
 
-            var principalTableName = principalType.GetTableName()
-                ?? throw new InvalidOperationException("Referenced table not found.");
-
             var principalPrimaryKey = foreignKey.PrincipalKey.Properties.Single();
-            var tableIdentifier = StoreObjectIdentifier.Table(principalTableName, principalType.GetSchema());
-            var primaryKeyColumnName = principalPrimaryKey.GetColumnName(tableIdentifier) ?? principalPrimaryKey.Name;
             var labelProperty = GetPreferredLabelProperty(principalType);
-            var labelColumnName = labelProperty?.GetColumnName(tableIdentifier) ?? primaryKeyColumnName;
             var restaurantIdProperty = principalType.GetProperties()
                 .FirstOrDefault(x => string.Equals(x.Name, "RestaurantId", StringComparison.OrdinalIgnoreCase) && (x.ClrType == typeof(int) || x.ClrType == typeof(int?)));
-            var restaurantIdColumnName = restaurantIdProperty?.GetColumnName(tableIdentifier);
 
-            var connection = (SqlConnection)_db.Database.GetDbConnection();
-            if (connection.State != ConnectionState.Open)
-                await connection.OpenAsync(ct);
+            var query = CreateEntityQuery(principalType.ClrType);
+            var rows = await ToListAsync(query, ct);
 
-            var command = new SqlCommand { Connection = connection };
-            var sql = $"SELECT TOP 100 [{primaryKeyColumnName}], [{labelColumnName}] FROM [{principalTableName}]";
-
-            if (!User.IsInRole("Admin") && restaurantIdColumnName is not null)
+            if (!User.IsInRole("Admin") && restaurantIdProperty is not null)
             {
                 var allowedRestaurantIds = await GetAllowedRestaurantIdsAsync(ct);
                 if (allowedRestaurantIds.Count == 0)
                     return new List<AdminDataOptionDto>();
 
-                var parameterNames = new List<string>();
-                for (var i = 0; i < allowedRestaurantIds.Count; i++)
-                {
-                    var name = $"@restaurantId{i}";
-                    parameterNames.Add(name);
-                    command.Parameters.AddWithValue(name, allowedRestaurantIds[i]);
-                }
-
-                sql += $" WHERE [{restaurantIdColumnName}] IN ({string.Join(", ", parameterNames)})";
+                rows = rows
+                    .Where(row =>
+                    {
+                        var value = GetEntityValue(row, restaurantIdProperty);
+                        return value is not null && allowedRestaurantIds.Contains(Convert.ToInt32(value, CultureInfo.InvariantCulture));
+                    })
+                    .ToList();
             }
 
-            sql += $" ORDER BY [{labelColumnName}]";
-            command.CommandText = sql;
-
-            var options = new List<AdminDataOptionDto>();
-            using var reader = await command.ExecuteReaderAsync(ct);
-            while (await reader.ReadAsync(ct))
-            {
-                var value = reader[primaryKeyColumnName];
-                var label = reader[labelColumnName];
-                options.Add(new AdminDataOptionDto
+            return rows
+                .OrderBy(row => Convert.ToString(labelProperty is null ? GetEntityValue(row, principalPrimaryKey) : GetEntityValue(row, labelProperty), CultureInfo.InvariantCulture))
+                .Take(100)
+                .Select(row =>
                 {
-                    Value = Convert.ToString(value, CultureInfo.InvariantCulture) ?? "",
-                    Label = label == DBNull.Value || string.IsNullOrWhiteSpace(Convert.ToString(label, CultureInfo.InvariantCulture))
-                        ? Convert.ToString(value, CultureInfo.InvariantCulture) ?? ""
-                        : Convert.ToString(label, CultureInfo.InvariantCulture) ?? ""
-                });
-            }
-
-            return options;
+                    var value = GetEntityValue(row, principalPrimaryKey);
+                    var label = labelProperty is null ? value : GetEntityValue(row, labelProperty);
+                    return new AdminDataOptionDto
+                    {
+                        Value = Convert.ToString(value, CultureInfo.InvariantCulture) ?? "",
+                        Label = string.IsNullOrWhiteSpace(Convert.ToString(label, CultureInfo.InvariantCulture))
+                            ? Convert.ToString(value, CultureInfo.InvariantCulture) ?? ""
+                            : Convert.ToString(label, CultureInfo.InvariantCulture) ?? ""
+                    };
+                })
+                .ToList();
         }
 
         private async Task<List<AdminDataOptionDto>?> TryBuildSpecialForeignKeyOptionsAsync(IEntityType principalType, CancellationToken ct)

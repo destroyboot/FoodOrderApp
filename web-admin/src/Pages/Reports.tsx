@@ -141,7 +141,7 @@ export default function Reports() {
     }
   }
 
-  async function exportReport(format: "csv" | "xlsx") {
+  async function exportReport(format: "csv" | "xlsx" | "pdf") {
     try {
       const params = new URLSearchParams();
       params.set("format", format);
@@ -164,7 +164,7 @@ export default function Reports() {
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
       anchor.href = url;
-      anchor.download = `${reportKey}.${format === "xlsx" ? "xlsx" : "csv"}`;
+      anchor.download = `${reportKey}.${format}`;
       document.body.appendChild(anchor);
       anchor.click();
       anchor.remove();
@@ -203,7 +203,7 @@ export default function Reports() {
         <div>
           <h2 style={{ marginBottom: 6 }}>{t("page.reports", "Reports")}</h2>
           <div style={{ color: "#667085" }}>
-            {t("reports.pageHint", "Generate business reports for restaurant operations and export them to CSV or Excel.")}
+            {t("reports.pageHint", "Generate business reports for restaurant operations and export them to CSV, Excel, or PDF.")}
           </div>
         </div>
         <div style={{ display: "flex", gap: 8, flexWrap: "wrap" }}>
@@ -212,6 +212,9 @@ export default function Reports() {
           </button>
           <button onClick={() => void exportReport("xlsx")} disabled={!report}>
             {t("reports.exportExcel", "Export Excel")}
+          </button>
+          <button onClick={() => void exportReport("pdf")} disabled={!report}>
+            {t("reports.exportPdf", "Export PDF")}
           </button>
         </div>
       </div>

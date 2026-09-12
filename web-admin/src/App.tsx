@@ -24,6 +24,7 @@ import Ingredients from "./Pages/Ingredients";
 import Reservations from "./Pages/Reservations";
 import MyReservations from "./Pages/MyReservations";
 import DataAdmin from "./Pages/DataAdmin";
+import PermissionGroups from "./Pages/PermissionGroups";
 import Tables from "./Pages/Tables";
 import PlatformOptions from "./Pages/PlatformOptions";
 import Reports from "./Pages/Reports";
@@ -121,6 +122,9 @@ export default function App() {
       : null,
     hasAssignedRole && canManageDataTables
       ? { to: "/data-tables", label: t("nav.dataTables", "Data Tables"), tone: "settings" }
+      : null,
+    hasAssignedRole && canManageDataTables
+      ? { to: "/permission-groups", label: t("dataAdmin.permissionGroups", "Permission Groups"), tone: "settings" }
       : null,
     hasAssignedRole && isMainAdmin
       ? { to: "/platform", label: t("nav.platformSettings", "Platform Settings"), tone: "settings" }
@@ -419,6 +423,15 @@ export default function App() {
         element={
           <RequireAuth allowedRoles={["Admin"]}>
             <DataAdmin />
+          </RequireAuth>
+        }
+      />
+
+      <Route
+        path="/permission-groups"
+        element={
+          <RequireAuth allowedRoles={["Admin"]}>
+            <PermissionGroups />
           </RequireAuth>
         }
       />

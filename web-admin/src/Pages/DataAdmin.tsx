@@ -45,6 +45,7 @@ type AdminDataColumnOptionsDto = {
 
 type RowData = Record<string, unknown>;
 type ColumnFilterValue = string | boolean;
+type SortDirection = "asc" | "desc";
 
 function valueToInput(value: unknown, dataType: string) {
   if (value === null || value === undefined) return "";
@@ -114,6 +115,8 @@ export default function DataAdmin() {
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const [bulkBusy, setBulkBusy] = useState(false);
   const [showRowModal, setShowRowModal] = useState(false);
+  const [sortColumn, setSortColumn] = useState("");
+  const [sortDirection, setSortDirection] = useState<SortDirection>("desc");
 
   const selectedTable = useMemo(
     () => tables.find((table) => table.tableName === selectedTableName) ?? null,
@@ -141,13 +144,25 @@ export default function DataAdmin() {
     return { nextTables, targetTableName: preferredTableName };
   }
 
-  async function loadRows(tableName = selectedTableName, nextSearch = debouncedSearchText) {
+  async function loadRows(
+    tableName = selectedTableName,
+    nextSearch = debouncedSearchText,
+    nextSortColumn = sortColumn,
+    nextSortDirection = sortDirection
+  ) {
     if (!tableName) {
       setRows([]);
       return;
     }
 
-    const suffix = nextSearch ? `?search=${encodeURIComponent(nextSearch)}` : "";
+    const params = new URLSearchParams();
+    if (nextSearch) params.set("search", nextSearch);
+    if (nextSortColumn) {
+      params.set("sortColumn", nextSortColumn);
+      params.set("sortDirection", nextSortDirection);
+    }
+
+    const suffix = params.toString() ? `?${params.toString()}` : "";
     const result = await api<RowData[]>(`/api/admin/data/tables/${encodeURIComponent(tableName)}/rows${suffix}`);
     setRows(result ?? []);
   }
@@ -196,10 +211,10 @@ export default function DataAdmin() {
   useEffect(() => {
     if (!selectedTableName || !selectedTable?.permissions.canRead) return;
 
-    loadRows(selectedTableName, debouncedSearchText).catch((e: any) => {
+    loadRows(selectedTableName, debouncedSearchText, sortColumn, sortDirection).catch((e: any) => {
       setErr(e.message || t("dataAdmin.searchFailed", "Failed to search table rows."));
     });
-  }, [debouncedSearchText, selectedTableName]);
+  }, [debouncedSearchText, selectedTableName, sortColumn, sortDirection]);
 
   useEffect(() => {
     setSelectedKeys([]);
@@ -242,11 +257,13 @@ export default function DataAdmin() {
     setErr(null);
     setColumnFilters({});
     setSelectedKeys([]);
+    setSortColumn("");
+    setSortDirection("desc");
 
     try {
       await Promise.all([
         loadEditorOptions(tableName),
-        loadRows(tableName, debouncedSearchText),
+        loadRows(tableName, debouncedSearchText, "", "desc"),
       ]);
     } catch (e: any) {
       setErr(e.message || t("dataAdmin.rowsLoadFailed", "Failed to load table rows."));
@@ -277,7 +294,7 @@ export default function DataAdmin() {
 
       startCreate();
       setShowRowModal(false);
-      await loadRows(selectedTable.tableName, debouncedSearchText);
+      await loadRows(selectedTable.tableName, debouncedSearchText, sortColumn, sortDirection);
     } catch (e: any) {
       setErr(e.message || t("dataAdmin.rowSaveFailed", "Failed to save row."));
     }
@@ -293,7 +310,7 @@ export default function DataAdmin() {
       await api(`/api/admin/data/tables/${encodeURIComponent(selectedTable.tableName)}/rows/${encodeURIComponent(key)}`, {
         method: "DELETE",
       });
-      await loadRows(selectedTable.tableName, debouncedSearchText);
+      await loadRows(selectedTable.tableName, debouncedSearchText, sortColumn, sortDirection);
     } catch (e: any) {
       setErr(e.message || t("dataAdmin.rowDeleteFailed", "Failed to delete row."));
     }
@@ -312,7 +329,7 @@ export default function DataAdmin() {
       });
 
       setSelectedKeys([]);
-      await loadRows(selectedTable.tableName, debouncedSearchText);
+      await loadRows(selectedTable.tableName, debouncedSearchText, sortColumn, sortDirection);
     } catch (e: any) {
       setErr(e.message || t("dataAdmin.bulkDeleteFailed", "Failed to delete selected rows."));
     } finally {
@@ -388,6 +405,16 @@ export default function DataAdmin() {
     setSelectedKeys([]);
   }
 
+  function changeSort(columnName: string) {
+    if (sortColumn === columnName) {
+      setSortDirection((current) => current === "asc" ? "desc" : "asc");
+      return;
+    }
+
+    setSortColumn(columnName);
+    setSortDirection("asc");
+  }
+
   const filteredTables = useMemo(
     () => tables.filter((table) => matchesTokenizedSearch(`${table.tableName} ${table.displayName}`, tableSearchText)),
     [tables, tableSearchText]
@@ -432,46 +459,43 @@ export default function DataAdmin() {
             <div>{t("dataAdmin.noneAccessible", "No accessible tables.")}</div>
           ) : (
             <>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 12, flexWrap: "wrap" }}>
+              <div style={{ marginBottom: 12 }}>
                 <h3 style={{ margin: 0 }}>{selectedTable.tableName}</h3>
-                <button onClick={startCreate} disabled={!selectedTable.permissions.canCreate}>
-                  {t("dataAdmin.newRow", "New row")}
-                </button>
-                <button onClick={() => loadRows(selectedTable.tableName, debouncedSearchText)} disabled={!selectedTable.permissions.canRead}>
-                  {t("common.reload", "Reload")}
-                </button>
-                {selectedTable.permissions.canDelete && (
-                  <>
-                    <button onClick={selectAllVisible} disabled={allVisibleKeys.length === 0}>
-                      {t("dataAdmin.selectAll", "Select all")}
-                    </button>
-                    <button onClick={clearSelection} disabled={selectedKeys.length === 0}>
-                      {t("dataAdmin.deselectAll", "Deselect all")}
-                    </button>
-                    <button onClick={bulkDeleteSelected} disabled={selectedKeys.length === 0 || bulkBusy}>
-                      {bulkBusy ? t("dataAdmin.deleting", "Deleting...") : `${t("dataAdmin.deleteSelected", "Delete selected")} (${selectedKeys.length})`}
-                    </button>
-                  </>
-                )}
-                <input
-                  placeholder={t("dataAdmin.searchColumns", "Search all listed columns")}
-                  value={searchText}
-                  onChange={(e) => setSearchText(e.target.value)}
-                  style={{ marginLeft: "auto", minWidth: 280 }}
-                />
-                <button
-                  onClick={() => {
-                    setSearchText("");
-                    setColumnFilters({});
-                  }}
-                >
-                  {t("common.resetFilters", "Reset Filters")}
-                </button>
-              </div>
-
-              <div style={{ marginBottom: 16 }}>
-                <strong>{t("dataAdmin.columns", "Columns")}:</strong>{" "}
-                {selectedTable.columns.map((column) => `${column.name}${column.isPrimaryKey ? " (PK)" : ""}`).join(", ")}
+                <div style={{ display: "flex", alignItems: "center", gap: 8, marginTop: 10, flexWrap: "wrap" }}>
+                  <button onClick={startCreate} disabled={!selectedTable.permissions.canCreate}>
+                    {t("dataAdmin.newRow", "New row")}
+                  </button>
+                  <button onClick={() => loadRows(selectedTable.tableName, debouncedSearchText, sortColumn, sortDirection)} disabled={!selectedTable.permissions.canRead}>
+                    {t("common.reload", "Reload")}
+                  </button>
+                  {selectedTable.permissions.canDelete && (
+                    <>
+                      <button onClick={selectAllVisible} disabled={allVisibleKeys.length === 0}>
+                        {t("dataAdmin.selectAll", "Select all")}
+                      </button>
+                      <button onClick={clearSelection} disabled={selectedKeys.length === 0}>
+                        {t("dataAdmin.deselectAll", "Deselect all")}
+                      </button>
+                      <button onClick={bulkDeleteSelected} disabled={selectedKeys.length === 0 || bulkBusy}>
+                        {bulkBusy ? t("dataAdmin.deleting", "Deleting...") : `${t("dataAdmin.deleteSelected", "Delete selected")} (${selectedKeys.length})`}
+                      </button>
+                    </>
+                  )}
+                  <input
+                    placeholder={t("dataAdmin.searchColumns", "Search all listed columns")}
+                    value={searchText}
+                    onChange={(e) => setSearchText(e.target.value)}
+                    style={{ marginLeft: "auto", minWidth: 280 }}
+                  />
+                  <button
+                    onClick={() => {
+                      setSearchText("");
+                      setColumnFilters({});
+                    }}
+                  >
+                    {t("common.resetFilters", "Reset Filters")}
+                  </button>
+                </div>
               </div>
 
               {!selectedTable.permissions.canRead && (
@@ -482,23 +506,32 @@ export default function DataAdmin() {
 
               {selectedTable.permissions.canRead && (
                 <div style={{ overflowX: "auto" }}>
-                  <table width="100%" cellPadding={8}>
+                  <table width="100%" cellPadding={8} style={{ minWidth: selectedTable.columns.length * 130 }}>
                     <thead>
                       <tr>
                         {selectedTable.permissions.canDelete && <th align="left">{t("users.select", "Select")}</th>}
                         {selectedTable.columns.map((column) => (
-                          <th key={column.name} align="left">{column.name}</th>
+                          <th key={column.name} align="left" style={{ minWidth: 130 }}>
+                            <button
+                              type="button"
+                              onClick={() => changeSort(column.name)}
+                              style={{ background: "transparent", color: "#101828", padding: 0, border: 0, fontWeight: 700, whiteSpace: "nowrap" }}
+                            >
+                              {column.name}{sortColumn === column.name ? ` (${sortDirection})` : ""}
+                            </button>
+                          </th>
                         ))}
                         {(selectedTable.permissions.canUpdate || selectedTable.permissions.canDelete) && <th></th>}
                       </tr>
                       <tr>
                         {selectedTable.permissions.canDelete && <th></th>}
                         {selectedTable.columns.map((column) => (
-                          <th key={`${column.name}-filter`} align="left">
+                          <th key={`${column.name}-filter`} align="left" style={{ minWidth: 130 }}>
                             {column.dataType === "boolean" ? (
                               <select
                                 value={String(columnFilters[column.name] ?? "__any__")}
                                 onChange={(e) => setColumnFilters((prev) => ({ ...prev, [column.name]: e.target.value }))}
+                                style={{ minWidth: 110 }}
                               >
                                 <option value="__any__">{t("dataAdmin.any", "Any")}</option>
                                 <option value="true">{t("common.yes", "Yes")}</option>
@@ -508,6 +541,7 @@ export default function DataAdmin() {
                               <select
                                 value={String(columnFilters[column.name] ?? "")}
                                 onChange={(e) => setColumnFilters((prev) => ({ ...prev, [column.name]: e.target.value }))}
+                                style={{ minWidth: 110 }}
                               >
                                 <option value="">{t("common.all", "All")}</option>
                                 {column.enumValues.map((enumValue) => (
@@ -520,6 +554,7 @@ export default function DataAdmin() {
                               <select
                                 value={String(columnFilters[column.name] ?? "")}
                                 onChange={(e) => setColumnFilters((prev) => ({ ...prev, [column.name]: e.target.value }))}
+                                style={{ minWidth: 180 }}
                               >
                                 <option value="">{t("common.all", "All")}</option>
                                 {(columnOptions[column.name] ?? []).map((option) => (

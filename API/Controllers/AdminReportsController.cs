@@ -79,6 +79,14 @@ public class AdminReportsController : ControllerBase
                 ReportExportBuilder.BuildExcel(payload.Table, payload.SheetName),
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 $"{baseFileName}.xlsx"),
+            "pdf" => File(
+                ReportExportBuilder.BuildPdf(
+                    payload.Table,
+                    payload.Title,
+                    payload.Summary.Select(metric => (metric.Label, metric.Value)).ToList(),
+                    payload.ColumnLabels),
+                "application/pdf",
+                $"{baseFileName}.pdf"),
             _ => File(
                 ReportExportBuilder.BuildCsv(payload.Table),
                 "text/csv; charset=utf-8",

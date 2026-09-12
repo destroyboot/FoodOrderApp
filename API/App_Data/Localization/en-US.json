@@ -1680,6 +1680,24 @@
       "groupName": "dataAdmin",
       "isActive": true
     },
+    "dataAdmin.permissionGroups": {
+      "value": "Permission groups",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.permissionGroupsHint": {
+      "value": "Configure which role can read, create, update, or delete rows in each data table.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.permissionsSaveFailed": {
+      "value": "Failed to save permissions.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
     "dataAdmin.noneAccessible": {
       "value": "No accessible tables.",
       "description": null,
@@ -1724,6 +1742,12 @@
     },
     "dataAdmin.rowSaveFailed": {
       "value": "Failed to save row.",
+      "description": null,
+      "groupName": "dataAdmin",
+      "isActive": true
+    },
+    "dataAdmin.savePermissions": {
+      "value": "Save permissions",
       "description": null,
       "groupName": "dataAdmin",
       "isActive": true
@@ -4470,6 +4494,12 @@
       "groupName": "reports",
       "isActive": true
     },
+    "reports.exportPdf": {
+      "value": "Export PDF",
+      "description": null,
+      "groupName": "reports",
+      "isActive": true
+    },
     "reports.exportFailed": {
       "value": "Failed to export report.",
       "description": null,
@@ -4525,7 +4555,7 @@
       "isActive": true
     },
     "reports.pageHint": {
-      "value": "Generate business reports for restaurant operations and export them to CSV or Excel.",
+      "value": "Generate business reports for restaurant operations and export them to CSV, Excel, or PDF.",
       "description": null,
       "groupName": "reports",
       "isActive": true
