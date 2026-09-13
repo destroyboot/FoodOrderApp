@@ -1,4 +1,5 @@
 using Core.Interfaces;
+using API.Support;
 using Infrastructure.Auth;
 using Infrastructure.Persistence;
 using Microsoft.AspNetCore.Authorization;
@@ -19,12 +20,14 @@ namespace API.Controllers
         private readonly UserManager<ApplicationUser> _users;
         private readonly IEmailSender _email;
         private readonly AppDbContext _db;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
-        public AccountSettingsController(UserManager<ApplicationUser> users, IEmailSender email, AppDbContext db)
+        public AccountSettingsController(UserManager<ApplicationUser> users, IEmailSender email, AppDbContext db, IPrintTemplateRenderer printTemplates)
         {
             _users = users;
             _email = email;
             _db = db;
+            _printTemplates = printTemplates;
         }
 
         public record RequestEmailChangeDto(string NewEmail);
@@ -63,10 +66,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: newEmail,
                 subject: "Food Order App - Confirm email change",
-                htmlBody: $@"
-                <p>Use this code to confirm your email change:</p>
-                <h2 style='letter-spacing:2px;'>{code}</h2>
-                <p>This code is valid for 20 minutes.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountEmailChangeCodeEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Code(newEmail, code, user.EmailChangeCodeExpiresAt),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Confirmation code sent to new email." });
@@ -110,7 +115,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: newEmail,
                 subject: "Food Order App - Email changed",
-                htmlBody: "<p>Your email address has been updated successfully.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountEmailChangedEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Simple(newEmail),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Email changed." });
@@ -142,7 +152,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: user.PendingEmail,
                 subject: "Food Order App - Email change code (resend)",
-                htmlBody: $@"<p>Your new code is:</p><h2>{code}</h2>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountEmailChangeCodeEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Code(user.PendingEmail, code, user.EmailChangeCodeExpiresAt),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Code resent." });
@@ -179,7 +194,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: user.Email ?? "",
                 subject: "Food Order App - Password changed",
-                htmlBody: "<p>Your password was changed successfully.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountPasswordChangedEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Simple(user.Email ?? ""),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Password changed successfully." });
@@ -224,10 +244,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: user.Email,
                 subject: "Food Order App - Confirm account removal",
-                htmlBody: $@"
-                <p>Use this code to confirm account removal:</p>
-                <h2 style='letter-spacing:2px;'>{code}</h2>
-                <p>This code is valid for 20 minutes.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountDeletionCodeEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Code(user.Email, code, user.AccountDeletionCodeExpiresAt),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Confirmation email sent." });

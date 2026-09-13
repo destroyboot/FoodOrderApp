@@ -7,6 +7,7 @@ import { AccountMenu } from "./account/AccountMenu";
 import { DeliveryProfileForm } from "./account/DeliveryProfileForm";
 import { GuestAccountForms } from "./account/GuestAccountForms";
 import { InvoiceProfileForm } from "./account/InvoiceProfileForm";
+import { NotificationPreferenceForm } from "./account/NotificationPreferenceForm";
 import { AccountRemovalForm, PasswordChangeForm } from "./account/SecurityForms";
 import type { GuestMode, SignedInMode } from "./account/types";
 
@@ -20,11 +21,13 @@ export function AccountScreen({
   const {
     token,
     billingProfile,
+    wantsOrderStatusEmails,
     signIn,
     signOut,
     register,
     confirmRegistration,
     saveBillingProfile,
+    saveStatusEmailPreference,
     changePassword,
     requestAccountDeletion,
     confirmAccountDeletion,
@@ -58,6 +61,7 @@ export function AccountScreen({
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmDeleteCode, setConfirmDeleteCode] = useState("");
+  const [statusEmailsEnabled, setStatusEmailsEnabled] = useState(wantsOrderStatusEmails);
 
   useEffect(() => {
     setProfileCustomerType((billingProfile?.customerType ?? 0) === 1 ? "company" : "person");
@@ -78,6 +82,10 @@ export function AccountScreen({
     setProfileDeliveryPostalCode(billingProfile?.deliveryPostalCode ?? "");
     setProfileDeliveryCountry(billingProfile?.deliveryCountry ?? "");
   }, [billingProfile]);
+
+  useEffect(() => {
+    setStatusEmailsEnabled(wantsOrderStatusEmails);
+  }, [wantsOrderStatusEmails]);
 
   async function run(action: () => Promise<void>, successMessage: string) {
     try {
@@ -241,6 +249,15 @@ export function AccountScreen({
           onPostalCodeChange={setProfileDeliveryPostalCode}
           onCountryChange={setProfileDeliveryCountry}
           onSave={(profile) => void run(() => saveBillingProfile(profile), t("account.deliveryDetailsSaved", "Delivery details saved."))}
+          t={t}
+        />
+      ) : null}
+
+      {signedInMode === "notifications" ? (
+        <NotificationPreferenceForm
+          enabled={statusEmailsEnabled}
+          onEnabledChange={setStatusEmailsEnabled}
+          onSave={() => void run(() => saveStatusEmailPreference(statusEmailsEnabled), t("account.notificationSettingsSaved", "Notification settings saved."))}
           t={t}
         />
       ) : null}

@@ -49,6 +49,7 @@ namespace Infrastructure.Persistence
         public DbSet<OrderComment> OrderComments => Set<OrderComment>();
         public DbSet<Notification> Notifications => Set<Notification>();
         public DbSet<PushDeviceRegistration> PushDeviceRegistrations => Set<PushDeviceRegistration>();
+        public DbSet<PrintTemplate> PrintTemplates => Set<PrintTemplate>();
 
 
         protected override void OnModelCreating(ModelBuilder b)
@@ -493,9 +494,23 @@ namespace Infrastructure.Persistence
                 e.HasIndex(x => new { x.OwnerKey, x.IsActive, x.LastSeenAt });
             });
 
+            b.Entity<PrintTemplate>(e =>
+            {
+                e.Property(x => x.Code).HasMaxLength(120).IsRequired();
+                e.Property(x => x.Culture).HasMaxLength(20).IsRequired();
+                e.Property(x => x.Name).HasMaxLength(200).IsRequired();
+                e.Property(x => x.Description).HasMaxLength(1000);
+                e.Property(x => x.DocumentKind).HasMaxLength(80).IsRequired();
+                e.Property(x => x.HtmlTemplate).IsRequired();
+                e.Property(x => x.UpdatedByUserId).HasMaxLength(450);
+                e.HasIndex(x => new { x.Code, x.Culture }).IsUnique();
+                e.HasIndex(x => new { x.DocumentKind, x.Culture });
+            });
+
             b.Entity<ApplicationUser>(e =>
             {
                 e.Property(x => x.RegistrationCodeHash).HasMaxLength(128);
+                e.Property(x => x.WantsOrderStatusEmails).HasDefaultValue(true);
                 e.Property(x => x.DefaultBillingReceiptEmail).HasMaxLength(256);
                 e.Property(x => x.DefaultBillingPersonName).HasMaxLength(200);
                 e.Property(x => x.DefaultBillingCompanyName).HasMaxLength(250);

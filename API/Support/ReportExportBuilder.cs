@@ -1,6 +1,8 @@
 using System.Data;
 using System.Globalization;
+using System.Net;
 using System.Text;
+using System.Text.RegularExpressions;
 using ClosedXML.Excel;
 
 namespace API.Support;
@@ -111,6 +113,20 @@ internal static class ReportExportBuilder
         return BuildSimplePdf(Paginate(lines, PdfLinesPerPage));
     }
 
+    public static byte[] BuildPdfFromHtml(string html)
+    {
+        var lines = HtmlToLines(html)
+            .SelectMany(line => WrapLine(line, MaxPdfLineLength))
+            .ToList();
+
+        if (lines.Count == 0)
+        {
+            lines.Add("Document");
+        }
+
+        return BuildSimplePdf(Paginate(lines, PdfLinesPerPage));
+    }
+
     private static string EscapeCsv(string value)
     {
         if (value.Contains('"'))
@@ -139,6 +155,22 @@ internal static class ReportExportBuilder
             float flt => flt.ToString("0.##", CultureInfo.InvariantCulture),
             _ => Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty
         };
+    }
+
+    private static IReadOnlyList<string> HtmlToLines(string html)
+    {
+        var normalized = string.IsNullOrWhiteSpace(html) ? string.Empty : html;
+        normalized = Regex.Replace(normalized, @"<\s*br\s*/?\s*>", "\n", RegexOptions.IgnoreCase);
+        normalized = Regex.Replace(normalized, @"<\s*/\s*(p|div|h[1-6]|li|tr|table|ul|ol)\s*>", "\n", RegexOptions.IgnoreCase);
+        normalized = Regex.Replace(normalized, @"<\s*(td|th)\b[^>]*>", " | ", RegexOptions.IgnoreCase);
+        normalized = Regex.Replace(normalized, @"<[^>]+>", " ");
+        normalized = WebUtility.HtmlDecode(normalized);
+
+        return normalized
+            .Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None)
+            .Select(line => Regex.Replace(line, @"\s+", " ").Trim(' ', '|'))
+            .Where(line => !string.IsNullOrWhiteSpace(line))
+            .ToList();
     }
 
     private static List<List<string>> Paginate(IReadOnlyList<string> lines, int linesPerPage)

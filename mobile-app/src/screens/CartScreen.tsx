@@ -324,11 +324,12 @@ export function CartScreen({ onOrderPlaced }: { onOrderPlaced?: () => void }) {
       const response = await finalizeCart();
       if (response) {
         await loadActiveCarts();
+        const orderNumber = response.displayOrderNumber || String(response.orderId);
         const message = selectedPaymentMethod === PaymentMethod.AtCounter
           ? displayCart?.orderType === OrderType.Delivery
-            ? `${t("cart.orderPlacedMessage", "Your order")} #${response.orderId} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.payOnDeliveryHint", "Please be ready to pay on delivery.")} ${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`
-            : `${t("cart.orderPlacedMessage", "Your order")} #${response.orderId} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.payAtCounterHint", "Please go to the counter and refer to this order number when paying.")} ${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`
-          : `${t("cart.orderPlacedMessage", "Your order")} #${response.orderId} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`;
+            ? `${t("cart.orderPlacedMessage", "Your order")} #${orderNumber} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.payOnDeliveryHint", "Please be ready to pay on delivery.")} ${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`
+            : `${t("cart.orderPlacedMessage", "Your order")} #${orderNumber} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.payAtCounterHint", "Please go to the counter and refer to this order number when paying.")} ${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`
+          : `${t("cart.orderPlacedMessage", "Your order")} #${orderNumber} ${t("cart.orderPlacedSuffix", "has been placed.")}\n\n${t("cart.trackOrderHint", "You can track the status on the My Orders page.")}`;
         showMessage(t("cart.orderPlaced", "Order placed"), message);
         onOrderPlaced?.();
         return true;

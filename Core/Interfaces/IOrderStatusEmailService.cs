@@ -10,8 +10,10 @@ namespace Core.Interfaces
     public interface IOrderStatusEmailService
     {
         Task TrySendStatusChangedEmailAsync(
-            string ownerKey,
+            string? ownerKey,
+            string? fallbackEmail,
             int orderId,
+            string displayOrderNumber,
             OrderStatus oldStatus,
             OrderStatus newStatus,
             CancellationToken ct = default);

@@ -96,6 +96,30 @@
       "groupName": "account",
       "isActive": true
     },
+    "account.notificationSettings": {
+      "value": "Notification Settings",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.notificationSettingsSaved": {
+      "value": "Notification settings saved.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.orderStatusEmails": {
+      "value": "Order status emails",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.orderStatusEmailsHint": {
+      "value": "Receive an email when restaurant staff changes the status of your order.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
     "account.invoiceForCompany": {
       "value": "Invoice for company",
       "description": null,
@@ -134,6 +158,12 @@
     },
     "account.passwordRequirementsError": {
       "value": "The new password does not meet the password requirements.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.signInToSaveNotifications": {
+      "value": "Sign in to save notification settings.",
       "description": null,
       "groupName": "account",
       "isActive": true
@@ -1184,6 +1214,12 @@
     },
     "common.cancel": {
       "value": "Cancel",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.save": {
+      "value": "Save",
       "description": null,
       "groupName": "common",
       "isActive": true
@@ -2994,6 +3030,12 @@
       "groupName": "nav",
       "isActive": true
     },
+    "nav.printTemplates": {
+      "value": "Print Templates",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
     "nav.ingredients": {
       "value": "Ingredients",
       "description": null,
@@ -4630,6 +4672,114 @@
       "value": "To",
       "description": null,
       "groupName": "reports",
+      "isActive": true
+    },
+    "printTemplates.checklist": {
+      "value": "Configured document types",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.custom": {
+      "value": "Custom",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.customized": {
+      "value": "Customized",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.default": {
+      "value": "Default",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.loadFailed": {
+      "value": "Failed to load print templates.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.none": {
+      "value": "No template selected.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.pending": {
+      "value": "Pending",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.preview": {
+      "value": "Preview",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.previewFailed": {
+      "value": "Failed to render preview.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.ready": {
+      "value": "Ready",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetConfirm": {
+      "value": "Restore the default template?",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetDone": {
+      "value": "Default template restored.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetFailed": {
+      "value": "Failed to restore template.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.restoreDefault": {
+      "value": "Restore default",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.saveFailed": {
+      "value": "Failed to save template.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.saved": {
+      "value": "Template saved.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.search": {
+      "value": "Search templates",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.tokens": {
+      "value": "Available parameters",
+      "description": null,
+      "groupName": "printTemplates",
       "isActive": true
     },
     "reports.topDish": {

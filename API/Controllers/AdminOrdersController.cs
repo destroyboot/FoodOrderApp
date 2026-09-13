@@ -30,6 +30,7 @@ namespace API.Controllers
         private readonly IEmailSender _email;
         private readonly AppDbContext _db;
         private readonly IOrderSummaryEmailComposer _orderEmails;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
         public AdminOrdersController(
             IOrderRepository orders,
@@ -40,7 +41,8 @@ namespace API.Controllers
             IOrderStatusEmailService statusEmails,
             IEmailSender email,
             AppDbContext db,
-            IOrderSummaryEmailComposer orderEmails)
+            IOrderSummaryEmailComposer orderEmails,
+            IPrintTemplateRenderer printTemplates)
         {
             _orders = orders;
             _q = q;
@@ -51,6 +53,7 @@ namespace API.Controllers
             _email = email;
             _db = db;
             _orderEmails = orderEmails;
+            _printTemplates = printTemplates;
         }
 
         [HttpGet("active")]
@@ -482,6 +485,7 @@ namespace API.Controllers
                 {
                     type = "order-status-changed",
                     orderId = order.Id,
+                    displayOrderNumber = FormatDisplayOrderNumber(order),
                     oldStatus = oldStatus.ToString(),
                     newStatus = order.Status.ToString(),
                     url = "/orders"
@@ -489,8 +493,10 @@ namespace API.Controllers
                 ct: ct);
 
             await _statusEmails.TrySendStatusChangedEmailAsync(
-                ownerKey: order.CustomerId!,
+                ownerKey: order.CustomerId,
+                fallbackEmail: order.ReceiptEmail ?? order.BillingDetails?.ReceiptEmail,
                 orderId: order.Id,
+                displayOrderNumber: FormatDisplayOrderNumber(order),
                 oldStatus: oldStatus,
                 newStatus: OrderStatus.Completed,
                 ct: ct);
@@ -544,6 +550,7 @@ namespace API.Controllers
                 .Include(x => x.BillingDetails)
                 .Include(x => x.InvoiceDocument)
                 .Include(x => x.Items)
+                .Include(x => x.Restaurant)
                 .FirstOrDefaultAsync(x => x.Id == id, ct);
             if (order is null) return NotFound();
 
@@ -575,7 +582,12 @@ namespace API.Controllers
                 await _email.SendAsync(
                     toEmail,
                     emailModel.Subject,
-                    OrderSummaryEmailBuilder.Build(emailModel),
+                    await _printTemplates.RenderHtmlAsync(
+                        PrintTemplateDefaults.OrderSummaryEmail,
+                        emailModel.Culture,
+                        emailModel.DefaultCulture,
+                        OrderSummaryEmailTemplateModelBuilder.Build(emailModel),
+                        ct),
                     new[]
                     {
                         new EmailAttachment
@@ -631,7 +643,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail,
                 emailModel.Subject,
-                OrderSummaryEmailBuilder.Build(emailModel),
+                await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.OrderSummaryEmail,
+                    emailModel.Culture,
+                    emailModel.DefaultCulture,
+                    OrderSummaryEmailTemplateModelBuilder.Build(emailModel),
+                    ct),
                 attachments,
                 ct);
 
@@ -651,6 +668,7 @@ namespace API.Controllers
                 .Include(o => o.BillingDetails)
                 .Include(o => o.InvoiceDocument)
                 .Include(o => o.Items)
+                .Include(o => o.Restaurant)
                 .FirstOrDefaultAsync(o => o.Id == id, ct);
 
             if (order is null) return NotFound();
@@ -674,33 +692,10 @@ namespace API.Controllers
                 return NotFound();
 
             var fileName = $"order-summary-{FormatDisplayOrderNumber(order)}.pdf";
-            var content = OrderSummaryPdfBuilder.Build(new
-            {
-                DisplayOrderNumber = FormatDisplayOrderNumber(order),
-                RestaurantName = order.Restaurant?.Name ?? "-",
-                CreatedAt = order.CreatedAt,
-                Status = order.Status.ToString(),
-                OrderType = order.OrderType.ToString(),
-                PaymentMethod = order.PaymentMethod.ToString(),
-                PaymentStatus = order.PaymentStatus.ToString(),
-                order.Subtotal,
-                order.DeliveryFee,
-                order.Total,
-                Items = order.Items.Select(i => new
-                {
-                    Name = _db.MenuItems
-                        .Where(m => m.Id == i.MenuItemId)
-                        .Select(m => m.Translations
-                            .OrderBy(t => t.Culture == "pl-PL" ? 0 : 1)
-                            .Select(t => t.Name)
-                            .FirstOrDefault())
-                        .FirstOrDefault() ?? $"#{i.MenuItemId}",
-                    i.Quantity,
-                    i.UnitPrice,
-                    i.Note,
-                    LineTotal = i.UnitPrice * i.Quantity
-                }).ToList()
-            });
+            var itemNames = await LoadMenuItemNamesAsync(order, ct);
+            var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, FormatDisplayOrderNumber(order), null, itemNames);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.OrderSummaryPdf, model, ct);
+            var content = ReportExportBuilder.BuildPdfFromHtml(html);
 
             return File(content, "application/pdf", fileName);
         }
@@ -786,7 +781,7 @@ namespace API.Controllers
                 FileName = $"{invoiceNumber}.pdf",
                 ContentType = "application/pdf",
                 GeneratedAt = generatedAt,
-                PdfBytes = InvoicePdfBuilder.Build(CreateInvoicePdfModel(order, invoiceNumber, itemNames))
+                PdfBytes = await BuildInvoicePdfAsync(order, invoiceNumber, itemNames, ct)
             };
 
             _db.OrderInvoiceDocuments.Add(document);
@@ -795,41 +790,11 @@ namespace API.Controllers
             return document;
         }
 
-        private static object CreateInvoicePdfModel(Order order, string invoiceNumber, IReadOnlyDictionary<int, string> itemNames)
+        private async Task<byte[]> BuildInvoicePdfAsync(Order order, string invoiceNumber, IReadOnlyDictionary<int, string> itemNames, CancellationToken ct)
         {
-            var customerName = order.BillingDetails?.CustomerType == BillingCustomerType.Company
-                ? order.BillingDetails?.CompanyName
-                : order.BillingDetails?.PersonName;
-            var address = string.Join(", ", new[]
-            {
-                order.BillingDetails?.BillingAddressLine1,
-                order.BillingDetails?.BillingAddressLine2,
-                order.BillingDetails?.BillingCity,
-                order.BillingDetails?.BillingPostalCode,
-                order.BillingDetails?.BillingCountry
-            }.Where(x => !string.IsNullOrWhiteSpace(x)));
-
-            return new
-            {
-                InvoiceNumber = invoiceNumber,
-                OrderId = order.Id,
-                CreatedAt = order.CreatedAt,
-                CustomerName = string.IsNullOrWhiteSpace(customerName) ? "Customer" : customerName,
-                Address = string.IsNullOrWhiteSpace(address) ? "-" : address,
-                TaxId = order.BillingDetails?.TaxId ?? "-",
-                Subtotal = order.Subtotal,
-                DeliveryFee = order.DeliveryFee,
-                Total = order.Total,
-                Items = order.Items.Select(i => new
-                {
-                    i.MenuItemId,
-                    Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
-                    i.Quantity,
-                    i.UnitPrice,
-                    i.Note,
-                    LineTotal = i.UnitPrice * i.Quantity
-                }).ToList()
-            };
+            var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, FormatDisplayOrderNumber(order), invoiceNumber, itemNames);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, model, ct);
+            return ReportExportBuilder.BuildPdfFromHtml(html);
         }
 
         private async Task RefreshLegacyInvoicePdfAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
@@ -838,7 +803,7 @@ namespace API.Controllers
                 return;
 
             var itemNames = await LoadMenuItemNamesAsync(order, ct);
-            document.PdfBytes = InvoicePdfBuilder.Build(CreateInvoicePdfModel(order, document.InvoiceNumber, itemNames));
+            document.PdfBytes = await BuildInvoicePdfAsync(order, document.InvoiceNumber, itemNames, ct);
             document.ContentType = "application/pdf";
             document.GeneratedAt = DateTime.UtcNow;
             await _db.SaveChangesAsync(ct);

@@ -12,6 +12,7 @@ import { useI18n } from "../i18n";
 
 type OrderRow = {
   id: number;
+  displayOrderNumber?: string | null;
   status: number;
   orderType: number;
   customerUserId: string | null;
@@ -78,6 +79,7 @@ export default function ActiveOrders() {
 
             const row: OrderRow = {
               id,
+              displayOrderNumber: (p as any).displayOrderNumber ?? String(id),
               status: normalizeOrderStatus((p as any).status),
               orderType: Number((p as any).orderType),
               customerUserId: null,
@@ -140,6 +142,7 @@ export default function ActiveOrders() {
     matchesTokenizedSearch(
       [
         order.id,
+        order.displayOrderNumber ?? "",
         orderStatusDisplayLabel(order.status, order.orderType, t),
         orderTypeLabel(order.orderType, t),
         order.isAnonymousCustomer ? t("orders.customer.anonymous", "anonymous") : t("orders.customer.user", "user"),
@@ -162,7 +165,7 @@ export default function ActiveOrders() {
 
   const summaryOrders = orders.filter((order) =>
     matchesTokenizedSearch(
-      [order.id, order.customerEmail ?? "", order.tableNumber ?? "", order.pickupContactName ?? "", order.deliveryContactName ?? "", order.deliveryCity ?? ""].join(" "),
+      [order.id, order.displayOrderNumber ?? "", order.customerEmail ?? "", order.tableNumber ?? "", order.pickupContactName ?? "", order.deliveryContactName ?? "", order.deliveryCity ?? ""].join(" "),
       searchText
     )
   );
@@ -387,7 +390,7 @@ export default function ActiveOrders() {
                         onClick={() => nav(`/orders/${order.id}`)}
                       >
                         <td>
-                          <Link to={`/orders/${order.id}`} onClick={(e) => e.stopPropagation()}>{order.id}</Link>
+                          <Link to={`/orders/${order.id}`} onClick={(e) => e.stopPropagation()}>{order.displayOrderNumber ?? order.id}</Link>
                         </td>
                         <td>
                           {order.isAnonymousCustomer || !order.customerUserId ? (

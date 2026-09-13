@@ -7,6 +7,7 @@ using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System.Data;
 using System.Globalization;
+using System.Net;
 using System.Security.Claims;
 
 namespace API.Controllers;
@@ -17,10 +18,12 @@ namespace API.Controllers;
 public class AdminReportsController : ControllerBase
 {
     private readonly AppDbContext _db;
+    private readonly IPrintTemplateRenderer _printTemplates;
 
-    public AdminReportsController(AppDbContext db)
+    public AdminReportsController(AppDbContext db, IPrintTemplateRenderer printTemplates)
     {
         _db = db;
+        _printTemplates = printTemplates;
     }
 
     [HttpGet("meta")]
@@ -80,11 +83,7 @@ public class AdminReportsController : ControllerBase
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 $"{baseFileName}.xlsx"),
             "pdf" => File(
-                ReportExportBuilder.BuildPdf(
-                    payload.Table,
-                    payload.Title,
-                    payload.Summary.Select(metric => (metric.Label, metric.Value)).ToList(),
-                    payload.ColumnLabels),
+                ReportExportBuilder.BuildPdfFromHtml(await BuildReportPrintHtmlAsync(payload, from, to, ct)),
                 "application/pdf",
                 $"{baseFileName}.pdf"),
             _ => File(
@@ -93,6 +92,84 @@ public class AdminReportsController : ControllerBase
                 $"{baseFileName}.csv")
         };
     }
+
+    private async Task<string> BuildReportPrintHtmlAsync(ReportPayload payload, DateTime? from, DateTime? to, CancellationToken ct)
+    {
+        var (fromUtc, toUtc) = NormalizeDateRange(from, to);
+        var model = new
+        {
+            report = new
+            {
+                title = payload.Title,
+                generatedAt = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture) + " UTC",
+                dateFrom = fromUtc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                dateTo = toUtc.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                summaryHtml = BuildSummaryHtml(payload.Summary),
+                tableHtml = BuildTableHtml(payload.Table, payload.ColumnLabels)
+            }
+        };
+
+        return await _printTemplates.RenderHtmlAsync($"report.{payload.FileName}", model, ct);
+    }
+
+    private static string BuildSummaryHtml(IReadOnlyList<ReportSummaryMetric> summary)
+    {
+        if (summary.Count == 0)
+        {
+            return "<p>No summary data.</p>";
+        }
+
+        var items = summary
+            .Select(metric => $"<li><strong>{Html(metric.Label)}:</strong> {Html(metric.Value)}</li>");
+        return $"<ul>{string.Concat(items)}</ul>";
+    }
+
+    private static string BuildTableHtml(DataTable table, IReadOnlyDictionary<string, string> columnLabels)
+    {
+        var headers = table.Columns
+            .Cast<DataColumn>()
+            .Select(column =>
+            {
+                var label = columnLabels.TryGetValue(column.ColumnName, out var resolvedLabel)
+                    ? resolvedLabel
+                    : column.ColumnName;
+                return $"<th>{Html(label)}</th>";
+            });
+
+        var rows = table.Rows
+            .Cast<DataRow>()
+            .Select(row =>
+            {
+                var cells = table.Columns
+                    .Cast<DataColumn>()
+                    .Select(column => $"<td>{Html(FormatReportCell(row[column]))}</td>");
+                return $"<tr>{string.Concat(cells)}</tr>";
+            });
+
+        var body = table.Rows.Count == 0
+            ? $"<tr><td colspan=\"{Math.Max(table.Columns.Count, 1)}\">No data</td></tr>"
+            : string.Concat(rows);
+
+        return $"<table><thead><tr>{string.Concat(headers)}</tr></thead><tbody>{body}</tbody></table>";
+    }
+
+    private static string FormatReportCell(object? value)
+    {
+        return value switch
+        {
+            null => string.Empty,
+            DBNull => string.Empty,
+            DateTime dt => dt.ToString("yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
+            DateOnly date => date.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+            decimal dec => dec.ToString("0.00", CultureInfo.InvariantCulture),
+            double dbl => dbl.ToString("0.##", CultureInfo.InvariantCulture),
+            float flt => flt.ToString("0.##", CultureInfo.InvariantCulture),
+            _ => Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty
+        };
+    }
+
+    private static string Html(string value)
+        => WebUtility.HtmlEncode(value);
 
     private async Task<ReportPayload> BuildReportAsync(
         string reportKey,

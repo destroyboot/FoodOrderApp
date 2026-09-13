@@ -931,6 +931,66 @@ namespace Infrastructure.Migrations
                     b.ToTable("PaymentMethodOptionTranslations");
                 });
 
+            modelBuilder.Entity("Core.Data.Entities.PrintTemplate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasMaxLength(120)
+                        .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("Culture")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<DateTime>("CreatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
+
+                    b.Property<string>("DocumentKind")
+                        .IsRequired()
+                        .HasMaxLength(80)
+                        .HasColumnType("nvarchar(80)");
+
+                    b.Property<string>("HtmlTemplate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.Property<DateTime>("UpdatedAtUtc")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UpdatedByUserId")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Code", "Culture")
+                        .IsUnique();
+
+                    b.HasIndex("DocumentKind", "Culture");
+
+                    b.ToTable("PrintTemplates");
+                });
+
             modelBuilder.Entity("Core.Data.Entities.PushDeviceRegistration", b =>
                 {
                     b.Property<int>("Id")
@@ -1572,6 +1632,7 @@ namespace Infrastructure.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.Property<bool>("WantsOrderStatusEmails")
+                        .HasDefaultValue(true)
                         .HasColumnType("bit");
 
                     b.HasKey("Id");

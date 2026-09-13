@@ -60,16 +60,18 @@ namespace Core.Services
 
             var oldStatusText = FormatStatusForCustomer(order.OrderType, oldStatus);
             var newStatusText = FormatStatusForCustomer(order.OrderType, order.Status);
+            var displayOrderNumber = FormatDisplayOrderNumber(order);
 
             await _notifications.CreateAsync(
                 ownerKey: order.CustomerId!,
                 type: NotificationType.OrderStatusChanged,
                 title: "Order status updated",
-                body: $"Order #{order.Id}: {oldStatusText} -> {newStatusText}",
+                body: $"Order #{displayOrderNumber}: {oldStatusText} -> {newStatusText}",
                 payloadJson: JsonSerializer.Serialize(new
                 {
                     type = "order-status-changed",
                     orderId = order.Id,
+                    displayOrderNumber = displayOrderNumber,
                     oldStatus = oldStatus.ToString(),
                     newStatus = order.Status.ToString(),
                     url = "/orders"
@@ -77,8 +79,10 @@ namespace Core.Services
                 ct: ct);
 
             await _statusEmails.TrySendStatusChangedEmailAsync(
-                ownerKey: order.CustomerId!,
+                ownerKey: order.CustomerId,
+                fallbackEmail: order.ReceiptEmail,
                 orderId: order.Id,
+                displayOrderNumber: displayOrderNumber,
                 oldStatus: oldStatus,
                 newStatus: newStatus,
                 ct: ct);
@@ -140,5 +144,10 @@ namespace Core.Services
 
             return status.ToString();
         }
+
+        private static string FormatDisplayOrderNumber(Core.Data.Entities.Order order)
+            => order.DailyRestaurantOrderNumber.HasValue
+                ? order.DailyRestaurantOrderNumber.Value.ToString("0000")
+                : order.Id.ToString();
     }
 }

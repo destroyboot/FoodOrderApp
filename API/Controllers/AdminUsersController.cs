@@ -1,5 +1,6 @@
 using Core.Contracts.Users;
 using Core.Data.Entities;
+using API.Support;
 using Infrastructure.Auth;
 using Infrastructure.Persistence;
 using Core.Interfaces;
@@ -23,19 +24,22 @@ namespace API.Controllers
         private readonly AppDbContext _db;
         private readonly IConfiguration _cfg;
         private readonly IEmailSender _email;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
         public AdminUsersController(
             UserManager<ApplicationUser> users,
             RoleManager<IdentityRole> roles,
             AppDbContext db,
             IConfiguration cfg,
-            IEmailSender email)
+            IEmailSender email,
+            IPrintTemplateRenderer printTemplates)
         {
             _users = users;
             _roles = roles;
             _db = db;
             _cfg = cfg;
             _email = email;
+            _printTemplates = printTemplates;
         }
 
         private string CurrentUserId =>
@@ -144,12 +148,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App - Password reset",
-                htmlBody: $"""
-                    <p>Hello,</p>
-                    <p>An administrator requested a password reset for your account.</p>
-                    <p><a href="{resetLink}">Reset your password</a></p>
-                    <p>If you did not expect this email, you can ignore it.</p>
-                    """,
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountPasswordResetEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Link(email, resetLink),
+                    ct),
                 ct: ct);
 
             return NoContent();

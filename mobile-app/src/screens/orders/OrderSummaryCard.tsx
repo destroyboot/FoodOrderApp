@@ -103,7 +103,7 @@ export function OrderSummaryCard({ order, details, expanded, token, currentCultu
       <View style={sharedStyles.stackMd}>
         <View style={sharedStyles.rowBetween}>
           <View style={[sharedStyles.flexOne, sharedStyles.stackSm]}>
-            <Text style={sharedStyles.sectionTitle}>{t("orders.orderNumber", "Order")} #{order.id}</Text>
+            <Text style={sharedStyles.sectionTitle}>{t("orders.orderNumber", "Order")} #{order.displayOrderNumber ?? order.id}</Text>
             <Text style={sharedStyles.mutedText}>
               {formatOrderType(order.orderType, t)}
               {order.tableNumber ? ` - ${order.tableNumber}` : ""}

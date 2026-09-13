@@ -96,6 +96,30 @@
       "groupName": "account",
       "isActive": true
     },
+    "account.notificationSettings": {
+      "value": "Ustawienia powiadomie\u0144",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.notificationSettingsSaved": {
+      "value": "Ustawienia powiadomie\u0144 zosta\u0142y zapisane.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.orderStatusEmails": {
+      "value": "E-maile o zmianie statusu zam\u00F3wienia",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.orderStatusEmailsHint": {
+      "value": "Otrzymuj e-mail, gdy obs\u0142uga restauracji zmieni status Twojego zam\u00F3wienia.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
     "account.invoiceForCompany": {
       "value": "Faktura dla firmy",
       "description": null,
@@ -134,6 +158,12 @@
     },
     "account.passwordRequirementsError": {
       "value": "Nowe has\u0142o nie spe\u0142nia wymaga\u0144 bezpiecze\u0144stwa.",
+      "description": null,
+      "groupName": "account",
+      "isActive": true
+    },
+    "account.signInToSaveNotifications": {
+      "value": "Zaloguj si\u0119, aby zapisa\u0107 ustawienia powiadomie\u0144.",
       "description": null,
       "groupName": "account",
       "isActive": true
@@ -1184,6 +1214,12 @@
     },
     "common.cancel": {
       "value": "Anuluj",
+      "description": null,
+      "groupName": "common",
+      "isActive": true
+    },
+    "common.save": {
+      "value": "Zapisz",
       "description": null,
       "groupName": "common",
       "isActive": true
@@ -2994,6 +3030,12 @@
       "groupName": "nav",
       "isActive": true
     },
+    "nav.printTemplates": {
+      "value": "Szablony wydruk\u00F3w",
+      "description": null,
+      "groupName": "nav",
+      "isActive": true
+    },
     "nav.ingredients": {
       "value": "Sk\u0142adniki",
       "description": null,
@@ -4630,6 +4672,114 @@
       "value": "Do",
       "description": null,
       "groupName": "reports",
+      "isActive": true
+    },
+    "printTemplates.checklist": {
+      "value": "Skonfigurowane typy dokument\u00F3w",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.custom": {
+      "value": "W\u0142asny",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.customized": {
+      "value": "Dostosowane",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.default": {
+      "value": "Domy\u015Blny",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.loadFailed": {
+      "value": "Nie uda\u0142o si\u0119 za\u0142adowa\u0107 szablon\u00F3w wydruk\u00F3w.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.none": {
+      "value": "Nie wybrano szablonu.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.pending": {
+      "value": "Oczekuje",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.preview": {
+      "value": "Podgl\u0105d",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.previewFailed": {
+      "value": "Nie uda\u0142o si\u0119 wyrenderowa\u0107 podgl\u0105du.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.ready": {
+      "value": "Gotowy",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetConfirm": {
+      "value": "Przywr\u00F3ci\u0107 domy\u015Blny szablon?",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetDone": {
+      "value": "Przywr\u00F3cono domy\u015Blny szablon.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.resetFailed": {
+      "value": "Nie uda\u0142o si\u0119 przywr\u00F3ci\u0107 szablonu.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.restoreDefault": {
+      "value": "Przywr\u00F3\u0107 domy\u015Blny",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.saveFailed": {
+      "value": "Nie uda\u0142o si\u0119 zapisa\u0107 szablonu.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.saved": {
+      "value": "Zapisano szablon.",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.search": {
+      "value": "Szukaj szablon\u00F3w",
+      "description": null,
+      "groupName": "printTemplates",
+      "isActive": true
+    },
+    "printTemplates.tokens": {
+      "value": "Dost\u0119pne parametry",
+      "description": null,
+      "groupName": "printTemplates",
       "isActive": true
     },
     "reports.topDish": {

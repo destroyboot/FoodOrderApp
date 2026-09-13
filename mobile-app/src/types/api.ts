@@ -239,6 +239,7 @@ export type CartPreview = {
 
 export type FinalizeResponse = {
   orderId: number;
+  displayOrderNumber?: string | null;
   status: OrderStatus;
   total: number;
   createdAt: string;

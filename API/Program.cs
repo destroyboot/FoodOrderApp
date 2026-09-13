@@ -60,6 +60,9 @@ builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
 builder.Services.AddScoped<IOrderStatusEmailService, OrderStatusEmailService>();
 builder.Services.AddScoped<IAppLocalizationFileStore, AppLocalizationFileStore>();
 builder.Services.AddScoped<IOrderSummaryEmailComposer, OrderSummaryEmailComposer>();
+builder.Services.AddScoped<PrintTemplateRenderer>();
+builder.Services.AddScoped<IPrintTemplateRenderer>(sp => sp.GetRequiredService<PrintTemplateRenderer>());
+builder.Services.AddScoped<IEmailTemplateRenderer>(sp => sp.GetRequiredService<PrintTemplateRenderer>());
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
 {

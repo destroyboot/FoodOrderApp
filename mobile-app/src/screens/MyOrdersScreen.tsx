@@ -20,7 +20,7 @@ function parseNotificationPayload(payloadJson?: string | null) {
   }
 
   try {
-    return JSON.parse(payloadJson) as { orderId?: number; newStatus?: string };
+    return JSON.parse(payloadJson) as { orderId?: number; displayOrderNumber?: string; newStatus?: string };
   } catch {
     return null;
   }
@@ -100,7 +100,8 @@ export function MyOrdersScreen() {
       return notification.body;
     }
 
-    const orderLabel = payload.orderId ? `${t("orders.order", "Order")} #${payload.orderId}` : t("orders.order", "Order");
+    const orderNumber = payload.displayOrderNumber || (payload.orderId ? String(payload.orderId) : null);
+    const orderLabel = orderNumber ? `${t("orders.order", "Order")} #${orderNumber}` : t("orders.order", "Order");
     return `${orderLabel}: ${formatOrderStatusName(payload.newStatus, t)}`;
   }
 

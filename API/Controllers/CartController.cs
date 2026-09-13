@@ -21,13 +21,15 @@ namespace API.Controllers
         private readonly AppDbContext _db;
         private readonly IEmailSender _email;
         private readonly IOrderSummaryEmailComposer _orderEmails;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
-        public CartController(IShoppingCartService cart, AppDbContext db, IEmailSender email, IOrderSummaryEmailComposer orderEmails)
+        public CartController(IShoppingCartService cart, AppDbContext db, IEmailSender email, IOrderSummaryEmailComposer orderEmails, IPrintTemplateRenderer printTemplates)
         {
             _cart = cart;
             _db = db;
             _email = email;
             _orderEmails = orderEmails;
+            _printTemplates = printTemplates;
         }
 
         private string? CustomerId => User?.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -167,7 +169,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail,
                 emailModel.Subject,
-                OrderSummaryEmailBuilder.Build(emailModel),
+                await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.OrderSummaryEmail,
+                    emailModel.Culture,
+                    emailModel.DefaultCulture,
+                    OrderSummaryEmailTemplateModelBuilder.Build(emailModel),
+                    ct),
                 attachments,
                 ct);
 
@@ -218,36 +225,7 @@ namespace API.Controllers
                 FileName = $"{invoiceNumber}.pdf",
                 ContentType = "application/pdf",
                 GeneratedAt = generatedAt,
-                PdfBytes = InvoicePdfBuilder.Build(new
-                {
-                    InvoiceNumber = invoiceNumber,
-                    OrderId = order.Id,
-                    CreatedAt = order.CreatedAt,
-                    CustomerName = order.BillingDetails?.CustomerType == BillingCustomerType.Company
-                        ? order.BillingDetails?.CompanyName ?? "Customer"
-                        : order.BillingDetails?.PersonName ?? "Customer",
-                    Address = string.Join(", ", new[]
-                    {
-                        order.BillingDetails?.BillingAddressLine1,
-                        order.BillingDetails?.BillingAddressLine2,
-                        order.BillingDetails?.BillingCity,
-                        order.BillingDetails?.BillingPostalCode,
-                        order.BillingDetails?.BillingCountry
-                    }.Where(x => !string.IsNullOrWhiteSpace(x))),
-                    TaxId = order.BillingDetails?.TaxId ?? "-",
-                    Subtotal = order.Subtotal,
-                    DeliveryFee = order.DeliveryFee,
-                    Total = order.Total,
-                    Items = order.Items.Select(i => new
-                    {
-                        i.MenuItemId,
-                        Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
-                        i.Quantity,
-                        i.UnitPrice,
-                        i.Note,
-                        LineTotal = i.UnitPrice * i.Quantity
-                    }).ToList()
-                })
+                PdfBytes = await BuildInvoicePdfAsync(order, invoiceNumber, itemNames, ct)
             };
 
             _db.OrderInvoiceDocuments.Add(document);
@@ -262,39 +240,18 @@ namespace API.Controllers
                 return;
 
             var itemNames = await LoadMenuItemNamesAsync(order, ct);
-            document.PdfBytes = InvoicePdfBuilder.Build(new
-            {
-                InvoiceNumber = document.InvoiceNumber,
-                OrderId = order.Id,
-                CreatedAt = order.CreatedAt,
-                CustomerName = order.BillingDetails?.CustomerType == BillingCustomerType.Company
-                    ? order.BillingDetails?.CompanyName ?? "Customer"
-                    : order.BillingDetails?.PersonName ?? "Customer",
-                Address = string.Join(", ", new[]
-                {
-                    order.BillingDetails?.BillingAddressLine1,
-                    order.BillingDetails?.BillingAddressLine2,
-                    order.BillingDetails?.BillingCity,
-                    order.BillingDetails?.BillingPostalCode,
-                    order.BillingDetails?.BillingCountry
-                }.Where(x => !string.IsNullOrWhiteSpace(x))),
-                TaxId = order.BillingDetails?.TaxId ?? "-",
-                Subtotal = order.Subtotal,
-                DeliveryFee = order.DeliveryFee,
-                Total = order.Total,
-                Items = order.Items.Select(i => new
-                {
-                    i.MenuItemId,
-                    Name = itemNames.GetValueOrDefault(i.MenuItemId, $"Menu item #{i.MenuItemId}"),
-                    i.Quantity,
-                    i.UnitPrice,
-                    i.Note,
-                    LineTotal = i.UnitPrice * i.Quantity
-                }).ToList()
-            });
+            document.PdfBytes = await BuildInvoicePdfAsync(order, document.InvoiceNumber, itemNames, ct);
             document.ContentType = "application/pdf";
             document.GeneratedAt = DateTime.UtcNow;
             await _db.SaveChangesAsync(ct);
+        }
+
+        private async Task<byte[]> BuildInvoicePdfAsync(Order order, string invoiceNumber, IReadOnlyDictionary<int, string> itemNames, CancellationToken ct)
+        {
+            var displayNumber = order.DailyRestaurantOrderNumber?.ToString("0000") ?? order.Id.ToString();
+            var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, displayNumber, invoiceNumber, itemNames);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, model, ct);
+            return ReportExportBuilder.BuildPdfFromHtml(html);
         }
 
         private static bool ContainsLegacyMenuItemPlaceholder(OrderInvoiceDocument document)

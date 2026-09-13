@@ -587,6 +587,7 @@ namespace Core.Services
                 {
                     type = "order-created",
                     orderId = cart.Id,
+                    displayOrderNumber = FormatDisplayOrderNumber(cart),
                     status = cart.Status.ToString(),
                     url = "/orders"
                 }),
@@ -604,6 +605,7 @@ namespace Core.Services
             return new FinalizeResponseDto
             {
                 OrderId = cart.Id,
+                DisplayOrderNumber = FormatDisplayOrderNumber(cart),
                 Status = cart.Status,
                 Total = cart.Total,
                 CreatedAt = cart.CreatedAt

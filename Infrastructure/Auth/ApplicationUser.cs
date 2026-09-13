@@ -16,7 +16,7 @@ namespace Infrastructure.Auth
         public DateTime? RegistrationCodeExpiresAt { get; set; }
         public DateTime? RegistrationResendAvailableAt { get; set; }
         public int RegistrationResendCount { get; set; } = 0;
-        public bool WantsOrderStatusEmails { get; set; } = false;
+        public bool WantsOrderStatusEmails { get; set; } = true;
         public int DefaultBillingCustomerType { get; set; } = 0;
         public string? DefaultBillingReceiptEmail { get; set; }
         public string? DefaultBillingPersonName { get; set; }

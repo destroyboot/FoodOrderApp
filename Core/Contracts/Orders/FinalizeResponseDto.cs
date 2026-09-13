@@ -10,6 +10,7 @@ namespace Core.Contracts.Orders
     public class FinalizeResponseDto
     {
         public int OrderId { get; set; }
+        public string? DisplayOrderNumber { get; set; }
         public OrderStatus Status { get; set; }
         public decimal Total { get; set; }
         public DateTime CreatedAt { get; set; }

@@ -31,7 +31,9 @@ public sealed record OrderSummaryEmailModel(
     decimal DeliveryFee,
     decimal Total,
     string? InvoiceNumber,
-    IReadOnlyList<OrderSummaryEmailLine> Items);
+    IReadOnlyList<OrderSummaryEmailLine> Items,
+    string Culture,
+    string DefaultCulture);
 
 internal static class OrderSummaryEmailBuilder
 {

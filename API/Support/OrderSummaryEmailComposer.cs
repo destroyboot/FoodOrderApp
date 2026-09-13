@@ -64,7 +64,9 @@ public sealed class OrderSummaryEmailComposer : IOrderSummaryEmailComposer
             Text("email.orderSummary.invoice", "Invoice"), Text("email.orderSummary.thankYou", "Thank you for your order!"),
             restaurant?.Name ?? order.Restaurant?.Name ?? "-", StatusText(order.Status, Text), OrderTypeText(order.OrderType, Text),
             order.TableNumber, order.CreatedAt, order.Subtotal, order.DeliveryFee, order.Total, invoiceDocument?.InvoiceNumber,
-            order.Items.Select(x => new OrderSummaryEmailLine(names.GetValueOrDefault(x.MenuItemId) ?? $"Menu item #{x.MenuItemId}", x.Quantity, x.UnitPrice, x.Note)).ToList());
+            order.Items.Select(x => new OrderSummaryEmailLine(names.GetValueOrDefault(x.MenuItemId) ?? $"Menu item #{x.MenuItemId}", x.Quantity, x.UnitPrice, x.Note)).ToList(),
+            culture,
+            defaultCulture);
     }
 
     private static string DisplayNumber(Order order) => order.DailyRestaurantOrderNumber?.ToString("0000") ?? order.Id.ToString();

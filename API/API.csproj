@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <PackageReference Include="ClosedXML" Version="0.105.0" />
+    <PackageReference Include="Handlebars.Net" Version="2.4.3" />
+    <PackageReference Include="HtmlSanitizer" Version="9.2.1039" />
     <PackageReference Include="MailKit" Version="4.17.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.22" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">

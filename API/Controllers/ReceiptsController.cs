@@ -19,14 +19,16 @@ namespace API.Controllers
         private readonly IEmailSender _email;
         private readonly Infrastructure.Persistence.AppDbContext _db;
         private readonly IOrderSummaryEmailComposer _orderEmails;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
-        public ReceiptsController(IOrderRepository orders, IAsyncQueryExecutor q, IEmailSender email, Infrastructure.Persistence.AppDbContext db, IOrderSummaryEmailComposer orderEmails)
+        public ReceiptsController(IOrderRepository orders, IAsyncQueryExecutor q, IEmailSender email, Infrastructure.Persistence.AppDbContext db, IOrderSummaryEmailComposer orderEmails, IPrintTemplateRenderer printTemplates)
         {
             _orders = orders;
             _q = q;
             _email = email;
             _db = db;
             _orderEmails = orderEmails;
+            _printTemplates = printTemplates;
         }
 
         private string? CustomerId => User?.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -82,7 +84,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: toEmail,
                 subject: emailModel.Subject,
-                htmlBody: OrderSummaryEmailBuilder.Build(emailModel),
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.OrderSummaryEmail,
+                    emailModel.Culture,
+                    emailModel.DefaultCulture,
+                    OrderSummaryEmailTemplateModelBuilder.Build(emailModel),
+                    ct),
                 attachments: attachments,
                 ct: ct);
 

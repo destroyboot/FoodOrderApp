@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Auth;
 using Microsoft.AspNetCore.Authorization;
+using API.Support;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -22,14 +23,16 @@ namespace API.Controllers
         private readonly IConfiguration _cfg;
         private readonly IEmailSender _email;
         private readonly AppDbContext _db;
+        private readonly IPrintTemplateRenderer _printTemplates;
 
-        public AuthController(UserManager<ApplicationUser> users, SignInManager<ApplicationUser> signIn, IConfiguration cfg, IEmailSender email, AppDbContext db)
+        public AuthController(UserManager<ApplicationUser> users, SignInManager<ApplicationUser> signIn, IConfiguration cfg, IEmailSender email, AppDbContext db, IPrintTemplateRenderer printTemplates)
         {
             _users = users;
             _signIn = signIn;
             _cfg = cfg;
             _email = email;
             _db = db;
+            _printTemplates = printTemplates;
         }
 
         public record RegisterRequest(string Email, string Password);
@@ -74,7 +77,8 @@ namespace API.Controllers
                 UserName = email,
                 Email = email,
                 EmailConfirmed = false,
-                RegisteredAtUtc = DateTime.UtcNow
+                RegisteredAtUtc = DateTime.UtcNow,
+                WantsOrderStatusEmails = true
             };
 
             var create = await _users.CreateAsync(user, req.Password);
@@ -100,11 +104,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App – Confirm your account",
-                htmlBody: $@"
-                <p>Your confirmation code is:</p>
-                <h2 style='letter-spacing:2px;'>{code}</h2>
-                <p>This code is valid for 20 minutes.</p>
-            ",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountRegistrationCodeEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Code(email, code, user.RegistrationCodeExpiresAt),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Confirmation code sent." });
@@ -147,7 +152,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App – Account activated",
-                htmlBody: "<p>Your account is now active. You can log in and start ordering.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountActivatedEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Simple(email),
+                    ct),
                 ct: ct);
 
             await LinkRestaurantInvitesAsync(user, ct);
@@ -192,11 +202,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App – Your confirmation code (resend)",
-                htmlBody: $@"
-                <p>Your new confirmation code is:</p>
-                <h2 style='letter-spacing:2px;'>{code}</h2>
-                <p>This code is valid until: {user.RegistrationCodeExpiresAt:yyyy-MM-dd HH:mm} UTC</p>
-            ",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountRegistrationCodeEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Code(email, code, user.RegistrationCodeExpiresAt),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "If the email exists, a code was sent." });
@@ -224,12 +235,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App – Password reset",
-                htmlBody: $@"
-                    <p>Click the link below to reset your password:</p>
-                    <p><a href=""{resetLink}"">Reset password</a></p>
-                    <p>This link is valid for a limited time.</p>
-                    <p>If you didn’t request this, ignore this message.</p>
-                ",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountPasswordResetEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Link(email, resetLink),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "If the email exists, reset instructions were sent." });
@@ -253,7 +264,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: email,
                 subject: "Food Order App – Password changed",
-                htmlBody: "<p>Your password was changed successfully.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountPasswordChangedEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Simple(email),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Password reset processed if token was valid." });
@@ -288,7 +304,12 @@ namespace API.Controllers
             await _email.SendAsync(
                 toEmail: user.Email ?? "",
                 subject: "Food Order App – Password changed",
-                htmlBody: "<p>Your password was changed successfully.</p>",
+                htmlBody: await _printTemplates.RenderHtmlAsync(
+                    PrintTemplateDefaults.AccountPasswordChangedEmail,
+                    user.PreferredCulture,
+                    "pl-PL",
+                    AccountEmailTemplateModel.Simple(user.Email ?? ""),
+                    ct),
                 ct: ct);
 
             return Ok(new { message = "Password changed successfully." });

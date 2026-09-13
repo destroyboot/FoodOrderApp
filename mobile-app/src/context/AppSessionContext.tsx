@@ -40,6 +40,7 @@ type SessionContextValue = {
   reservationAvailability: ReservationAvailability | null;
   reservations: Reservation[];
   billingProfile: BillingProfile | null;
+  wantsOrderStatusEmails: boolean;
   appLanguages: AppLanguage[];
   currentCulture: string;
   t: (key: string, fallback: string) => string;
@@ -90,6 +91,7 @@ type SessionContextValue = {
   loadMyReservations: () => Promise<void>;
   loadBillingProfile: () => Promise<void>;
   saveBillingProfile: (profile: BillingProfile) => Promise<void>;
+  saveStatusEmailPreference: (enabled: boolean) => Promise<void>;
   changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   setPreferredCulture: (culture: string) => Promise<void>;
   requestAccountDeletion: () => Promise<void>;
@@ -122,6 +124,7 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
   const [reservationAvailability, setReservationAvailability] = useState<ReservationAvailability | null>(null);
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [billingProfile, setBillingProfile] = useState<BillingProfile | null>(null);
+  const [wantsOrderStatusEmails, setWantsOrderStatusEmails] = useState(true);
   const [appLanguages, setAppLanguages] = useState<AppLanguage[]>([]);
   const [currentCulture, setCurrentCulture] = useState("pl-PL");
   const lastSeenNotificationIdRef = useRef<number>(0);
@@ -359,7 +362,10 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
         loadNotificationsInternal(false, storedToken, nextGuestToken),
       ]);
       if (storedToken) {
-        await loadBillingProfileInternal(storedToken);
+        await Promise.all([
+          loadBillingProfileInternal(storedToken),
+          loadStatusEmailPreferenceInternal(storedToken),
+        ]);
       }
     } catch (error: any) {
       setBootError(error?.message || "App startup failed.");
@@ -594,9 +600,10 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
     }
 
     try {
-      const payload = JSON.parse(item.payloadJson) as { orderId?: number; newStatus?: string };
+      const payload = JSON.parse(item.payloadJson) as { orderId?: number; displayOrderNumber?: string; newStatus?: string };
       if (item.type === NotificationType.OrderStatusChanged && payload.newStatus) {
-        const orderLabel = payload.orderId ? `${t("orders.order", "Order")} #${payload.orderId}` : t("orders.order", "Order");
+        const orderNumber = payload.displayOrderNumber || (payload.orderId ? String(payload.orderId) : null);
+        const orderLabel = orderNumber ? `${t("orders.order", "Order")} #${orderNumber}` : t("orders.order", "Order");
         return {
           title: t("orders.statusUpdated", "Order status updated"),
           body: `${orderLabel}: ${translateStatusName(payload.newStatus)}`,
@@ -859,6 +866,7 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
 
     await setAuthToken(response.token);
     setTokenState(response.token);
+    await claimGuestOrders(response.token);
     const signInCulture = await loadLocalization(response.token);
 
     if (cartId) {
@@ -887,7 +895,10 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
         loadMyOrderHistory(),
         loadNotifications(false),
       ]);
-      await loadBillingProfileInternal(response.token);
+      await Promise.all([
+        loadBillingProfileInternal(response.token),
+        loadStatusEmailPreferenceInternal(response.token),
+      ]);
     }
 
   async function signOut() {
@@ -912,6 +923,7 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
     setPushStatus("Checking push notification support...");
     setReservations([]);
     setBillingProfile(null);
+    setWantsOrderStatusEmails(true);
     setAppLanguages([]);
     setCurrentCulture("pl-PL");
     appI18n.addResourceBundle("pl-PL", "translation", {}, true, true);
@@ -993,6 +1005,39 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
       body: profile,
     });
     setBillingProfile(profile);
+  }
+
+  async function loadStatusEmailPreferenceInternal(currentToken: string) {
+    try {
+      const response = await apiRequest<{ enabled: boolean }>("/api/account/preferences/status-emails", {
+        token: currentToken,
+      });
+      setWantsOrderStatusEmails(response.enabled);
+    } catch (error: any) {
+      const message = String(error?.message ?? "");
+      if (message.includes("401")) {
+        await setAuthToken(null);
+        setTokenState(null);
+        setBillingProfile(null);
+        setWantsOrderStatusEmails(true);
+        return;
+      }
+
+      throw error;
+    }
+  }
+
+  async function saveStatusEmailPreference(enabled: boolean) {
+    if (!token) {
+      throw new Error(appI18n.t("account.signInToSaveNotifications", "Sign in to save notification settings."));
+    }
+
+    await apiRequest<void>("/api/account/preferences/status-emails", {
+      method: "PUT",
+      token,
+      body: { enabled },
+    });
+    setWantsOrderStatusEmails(enabled);
   }
 
   async function loadLocalization(currentToken?: string | null) {
@@ -1150,6 +1195,7 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
       reservationAvailability,
       reservations,
       billingProfile,
+      wantsOrderStatusEmails,
       appLanguages,
       currentCulture,
       t,
@@ -1182,12 +1228,13 @@ export function AppSessionProvider({ children }: { children: React.ReactNode }) 
       loadMyReservations,
       loadBillingProfile,
       saveBillingProfile,
+      saveStatusEmailPreference,
       changePassword,
       setPreferredCulture,
       requestAccountDeletion,
       confirmAccountDeletion,
     }),
-    [booting, bootError, token, guestToken, cartId, cart, activeCarts, preview, restaurants, selectedRestaurantId, selectedRestaurant, restaurantSettings, tables, categories, items, activeOrders, orderHistory, orderDetailsById, notifications, transientNotification, pushStatus, reservationAvailability, reservations, billingProfile, appLanguages, currentCulture]
+    [booting, bootError, token, guestToken, cartId, cart, activeCarts, preview, restaurants, selectedRestaurantId, selectedRestaurant, restaurantSettings, tables, categories, items, activeOrders, orderHistory, orderDetailsById, notifications, transientNotification, pushStatus, reservationAvailability, reservations, billingProfile, wantsOrderStatusEmails, appLanguages, currentCulture]
   );
 
   return <AppSessionContext.Provider value={value}>{children}</AppSessionContext.Provider>;

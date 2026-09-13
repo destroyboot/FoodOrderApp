@@ -16,6 +16,7 @@ export function AccountMenu({ onModeChange, onSignOut, t }: Props) {
       <View style={sharedStyles.stackLg}>
         <PrimaryButton label={t("account.invoiceDetails", "Invoice Details")} onPress={() => onModeChange("invoice")} />
         <PrimaryButton label={t("account.deliveryDetails", "Delivery Details")} onPress={() => onModeChange("delivery")} />
+        <PrimaryButton label={t("account.notificationSettings", "Notification Settings")} onPress={() => onModeChange("notifications")} />
         <PrimaryButton label={t("account.passwordChange", "Password Change")} onPress={() => onModeChange("password")} />
         <PrimaryButton label={t("account.accountRemoval", "Account Removal")} onPress={() => onModeChange("remove")} />
         <PrimaryButton label={t("auth.signOut", "Sign out")} onPress={onSignOut} />
