@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Menu;
 using Core.Interfaces;
 using Infrastructure.Persistence;
@@ -10,6 +11,7 @@ using System.Text.RegularExpressions;
 namespace API.Controllers
 {
     [Authorize(Roles = "Admin,RestaurantAdmin")]
+    [AppFeatureAuthorize(AppFeatures.MenuView)]
     [ApiController]
     [Route("api/admin/menu")]
     public class AdminMenuController : ControllerBase
@@ -53,6 +55,7 @@ namespace API.Controllers
         }
 
         [HttpPost("categories")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> CreateCategory(MenuCategoryCreateDto dto, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(dto.RestaurantId, ct);
@@ -61,6 +64,7 @@ namespace API.Controllers
         }
 
         [HttpPut("categories/{id:int}")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> UpdateCategory(int id, MenuCategoryUpdateDto dto, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetCategoryRestaurantIdAsync(id, ct), ct);
@@ -70,6 +74,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("categories/{id:int}")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> DeleteCategory(int id, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetCategoryRestaurantIdAsync(id, ct), ct);
@@ -88,6 +93,7 @@ namespace API.Controllers
         }
 
         [HttpPut("categories/{id:int}/translations")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> UpsertCategoryTranslation(
             int id,
             MenuCategoryTranslationUpsertDto dto,
@@ -99,6 +105,7 @@ namespace API.Controllers
         }
 
         [HttpPost("items")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> CreateItem(MenuItemCreateDto dto, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetCategoryRestaurantIdAsync(dto.MenuCategoryId, ct), ct);
@@ -107,6 +114,7 @@ namespace API.Controllers
         }
 
         [HttpPost("items/photo")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         [Consumes("multipart/form-data")]
         [RequestSizeLimit(10 * 1024 * 1024)]
         public async Task<IActionResult> UploadItemPhoto([FromForm] UploadItemPhotoRequest request, CancellationToken ct)
@@ -176,6 +184,7 @@ namespace API.Controllers
         }
 
         [HttpPut("items/{id:int}")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> UpdateItem(int id, MenuItemUpdateDto dto, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetItemRestaurantIdAsync(id, ct), ct);
@@ -185,6 +194,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("items/{id:int}")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> DeleteItem(int id, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetItemRestaurantIdAsync(id, ct), ct);
@@ -193,6 +203,7 @@ namespace API.Controllers
         }
 
         [HttpPatch("items/{id:int}/availability")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> SetAvailability(int id, [FromQuery] bool isAvailable, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetItemRestaurantIdAsync(id, ct), ct);
@@ -201,6 +212,7 @@ namespace API.Controllers
         }
 
         [HttpPatch("items/{id:int}/price")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> ChangePrice(int id, [FromQuery] decimal newPrice, CancellationToken ct)
         {
             await EnsureCanManageRestaurantAsync(await GetItemRestaurantIdAsync(id, ct), ct);
@@ -209,6 +221,7 @@ namespace API.Controllers
         }
 
         [HttpPut("items/{id:int}/translations")]
+        [AppFeatureAuthorize(AppFeatures.MenuManage)]
         public async Task<IActionResult> UpsertItemTranslation(
             int id,
             MenuItemTranslationUpsertDto dto,

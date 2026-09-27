@@ -68,14 +68,56 @@ public sealed class PrintTemplateRenderer : IPrintTemplateRenderer, IEmailTempla
         var sanitizer = new HtmlSanitizer();
         sanitizer.AllowedSchemes.Add("data");
         sanitizer.AllowedAttributes.Add("style");
-        sanitizer.AllowedCssProperties.Add("font-size");
-        sanitizer.AllowedCssProperties.Add("font-family");
-        sanitizer.AllowedCssProperties.Add("font-weight");
-        sanitizer.AllowedCssProperties.Add("font-style");
-        sanitizer.AllowedCssProperties.Add("text-align");
-        sanitizer.AllowedCssProperties.Add("text-decoration");
-        sanitizer.AllowedCssProperties.Add("color");
-        sanitizer.AllowedCssProperties.Add("background-color");
+        sanitizer.AllowedAttributes.Add("align");
+        sanitizer.AllowedAttributes.Add("valign");
+        sanitizer.AllowedAttributes.Add("colspan");
+        sanitizer.AllowedAttributes.Add("rowspan");
+        sanitizer.AllowedAttributes.Add("width");
+        sanitizer.AllowedAttributes.Add("height");
+
+        foreach (var property in new[]
+        {
+            "background-color",
+            "border",
+            "border-bottom",
+            "border-collapse",
+            "border-color",
+            "border-left",
+            "border-right",
+            "border-style",
+            "border-top",
+            "border-width",
+            "color",
+            "font",
+            "font-family",
+            "font-size",
+            "font-style",
+            "font-weight",
+            "height",
+            "line-height",
+            "margin",
+            "margin-bottom",
+            "margin-left",
+            "margin-right",
+            "margin-top",
+            "max-width",
+            "min-width",
+            "padding",
+            "padding-bottom",
+            "padding-left",
+            "padding-right",
+            "padding-top",
+            "text-align",
+            "text-decoration",
+            "text-transform",
+            "vertical-align",
+            "white-space",
+            "width"
+        })
+        {
+            sanitizer.AllowedCssProperties.Add(property);
+        }
+
         return sanitizer;
     }
 }

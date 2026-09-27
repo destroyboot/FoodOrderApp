@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Restaurants;
 using Core.Contracts.Users;
 using Core.Data.Entities;
@@ -17,6 +18,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/restaurants")]
     [Authorize(Roles = "Admin,RestaurantAdmin")]
+    [AppFeatureAuthorize(AppFeatures.RestaurantsManage)]
     public class AdminRestaurantsController : ControllerBase
     {
         private static readonly string[] RestaurantRoles = ["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"];

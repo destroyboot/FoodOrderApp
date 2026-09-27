@@ -6018,6 +6018,12 @@
       "groupName": "ui",
       "isActive": true
     },
+    "ui.title": {
+      "value": "Tytu\u0142",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
     "ui.gram": {
       "value": "Gram",
       "description": null,

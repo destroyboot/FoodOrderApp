@@ -46,6 +46,20 @@ type ToastNotification = {
   targetUrl?: string | null;
 };
 
+const AppFeatures = {
+  ordersView: "orders.view",
+  menuView: "menu.view",
+  menuManage: "menu.manage",
+  restaurantsManage: "restaurants.manage",
+  reservationsManage: "reservations.manage",
+  reportsView: "reports.view",
+  printTemplatesManage: "printTemplates.manage",
+  usersManage: "users.manage",
+  platformManage: "platform.manage",
+  dataCrud: "dataCrud.manage",
+  permissionGroupsManage: "permissionGroups.manage",
+} as const;
+
 export default function App() {
   const nav = useNavigate();
   const location = useLocation();
@@ -56,6 +70,8 @@ export default function App() {
   const defaultRoute = getDefaultAuthorizedRoute();
   const [toast, setToast] = useState<ToastNotification | null>(null);
   const [workspaceRealtime, setWorkspaceRealtime] = useState("connecting");
+  const [appFeatures, setAppFeatures] = useState<string[]>([]);
+  const [featuresLoaded, setFeaturesLoaded] = useState(false);
   const toastQueueRef = useRef<ToastNotification[]>([]);
   const toastTimerRef = useRef<number | null>(null);
   const notificationsReadyRef = useRef(false);
@@ -70,15 +86,19 @@ export default function App() {
   const hasAssignedRole = roles.length > 0;
   const isCustomerOnly = hasToken && !isStaff;
 
-  const canSeeOrders = isRestaurantAdmin || isWaiter || isChef || isDeliveryDriver;
-  const canManageMenu = isRestaurantAdmin;
-  const canManageRestaurantSettings = isMainAdmin || isRestaurantAdmin;
-  const canManageIngredients = isRestaurantAdmin;
-  const canSeeReservations = isRestaurantAdmin || isWaiter;
-  const canManageTables = isRestaurantAdmin || isWaiter;
-  const canManageDataTables = isMainAdmin;
-  const canManageUsers = isMainAdmin;
-  const canSeeReports = isMainAdmin || isRestaurantAdmin;
+  const hasFeature = (feature: string) => appFeatures.includes(feature);
+  const canSeeOrders = hasFeature(AppFeatures.ordersView);
+  const canManageMenu = hasFeature(AppFeatures.menuManage);
+  const canManageRestaurantSettings = hasFeature(AppFeatures.restaurantsManage);
+  const canManageIngredients = hasFeature(AppFeatures.menuManage);
+  const canSeeReservations = hasFeature(AppFeatures.reservationsManage);
+  const canManageTables = hasFeature(AppFeatures.restaurantsManage);
+  const canManageDataTables = hasFeature(AppFeatures.dataCrud);
+  const canManageUsers = hasFeature(AppFeatures.usersManage);
+  const canSeeReports = hasFeature(AppFeatures.reportsView);
+  const canManagePermissionGroups = hasFeature(AppFeatures.permissionGroupsManage);
+  const canManagePrintTemplates = hasFeature(AppFeatures.printTemplatesManage);
+  const canManagePlatform = hasFeature(AppFeatures.platformManage);
 
   const navItems = [
     hasAssignedRole && canSeeOrders
@@ -124,13 +144,13 @@ export default function App() {
     hasAssignedRole && canManageDataTables
       ? { to: "/data-tables", label: t("nav.dataTables", "Data Tables"), tone: "settings" }
       : null,
-    hasAssignedRole && canManageDataTables
+    hasAssignedRole && canManagePermissionGroups
       ? { to: "/permission-groups", label: t("dataAdmin.permissionGroups", "Permission Groups"), tone: "settings" }
       : null,
-    hasAssignedRole && canManageDataTables
+    hasAssignedRole && canManagePrintTemplates
       ? { to: "/print-templates", label: t("nav.printTemplates", "Print Templates"), tone: "settings" }
       : null,
-    hasAssignedRole && isMainAdmin
+    hasAssignedRole && canManagePlatform
       ? { to: "/platform", label: t("nav.platformSettings", "Platform Settings"), tone: "settings" }
       : null,
     hasAssignedRole && isCustomerOnly
@@ -158,6 +178,35 @@ export default function App() {
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (!hasToken || !isStaff) {
+      setAppFeatures([]);
+      setFeaturesLoaded(true);
+      return;
+    }
+
+    let cancelled = false;
+    setFeaturesLoaded(false);
+
+    api<string[]>("/api/admin/data/features/me")
+      .then((features) => {
+        if (!cancelled) {
+          setAppFeatures(features ?? []);
+          setFeaturesLoaded(true);
+        }
+      })
+      .catch(() => {
+        if (!cancelled) {
+          setAppFeatures([]);
+          setFeaturesLoaded(true);
+        }
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [hasToken, isStaff, roles.join("|")]);
 
   useEffect(() => {
     if (!hasToken || !isStaff) {
@@ -308,7 +357,12 @@ export default function App() {
       <Route
         path="/orders"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}
+            allowedFeatures={[AppFeatures.ordersView]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <ActiveOrders />
           </RequireAuth>
         }
@@ -317,7 +371,12 @@ export default function App() {
       <Route
         path="/orders/:id"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}
+            allowedFeatures={[AppFeatures.ordersView]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <OrderDetails />
           </RequireAuth>
         }
@@ -326,7 +385,12 @@ export default function App() {
       <Route
         path="/orders/history"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"]}
+            allowedFeatures={[AppFeatures.ordersView]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <OrderHistory />
           </RequireAuth>
         }
@@ -335,7 +399,12 @@ export default function App() {
       <Route
         path="/menu/categories"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin"]}
+            allowedFeatures={[AppFeatures.menuManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <MenuCategories />
           </RequireAuth>
         }
@@ -344,7 +413,12 @@ export default function App() {
       <Route
         path="/menu/items"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin"]}
+            allowedFeatures={[AppFeatures.menuManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <MenuItems />
           </RequireAuth>
         }
@@ -389,7 +463,12 @@ export default function App() {
       <Route
         path="/restaurants"
         element={
-          <RequireAuth allowedRoles={["Admin", "RestaurantAdmin"]}>
+          <RequireAuth
+            allowedRoles={["Admin", "RestaurantAdmin"]}
+            allowedFeatures={[AppFeatures.restaurantsManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Restaurants />
           </RequireAuth>
         }
@@ -398,7 +477,12 @@ export default function App() {
       <Route
         path="/tables"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin", "Waiter"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin", "Waiter"]}
+            allowedFeatures={[AppFeatures.restaurantsManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Tables />
           </RequireAuth>
         }
@@ -407,7 +491,12 @@ export default function App() {
       <Route
         path="/ingredients"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin"]}
+            allowedFeatures={[AppFeatures.menuManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Ingredients />
           </RequireAuth>
         }
@@ -416,7 +505,12 @@ export default function App() {
       <Route
         path="/reservations"
         element={
-          <RequireAuth allowedRoles={["RestaurantAdmin", "Waiter"]}>
+          <RequireAuth
+            allowedRoles={["RestaurantAdmin", "Waiter"]}
+            allowedFeatures={[AppFeatures.reservationsManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Reservations />
           </RequireAuth>
         }
@@ -425,7 +519,12 @@ export default function App() {
       <Route
         path="/data-tables"
         element={
-          <RequireAuth allowedRoles={["Admin"]}>
+          <RequireAuth
+            allowedRoles={["Admin"]}
+            allowedFeatures={[AppFeatures.dataCrud]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <DataAdmin />
           </RequireAuth>
         }
@@ -434,7 +533,12 @@ export default function App() {
       <Route
         path="/permission-groups"
         element={
-          <RequireAuth allowedRoles={["Admin"]}>
+          <RequireAuth
+            allowedRoles={["Admin"]}
+            allowedFeatures={[AppFeatures.permissionGroupsManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <PermissionGroups />
           </RequireAuth>
         }
@@ -443,7 +547,12 @@ export default function App() {
       <Route
         path="/print-templates"
         element={
-          <RequireAuth allowedRoles={["Admin"]}>
+          <RequireAuth
+            allowedRoles={["Admin"]}
+            allowedFeatures={[AppFeatures.printTemplatesManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <PrintTemplates />
           </RequireAuth>
         }
@@ -452,7 +561,12 @@ export default function App() {
       <Route
         path="/platform"
         element={
-          <RequireAuth allowedRoles={["Admin"]}>
+          <RequireAuth
+            allowedRoles={["Admin"]}
+            allowedFeatures={[AppFeatures.platformManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <PlatformOptions />
           </RequireAuth>
         }
@@ -461,7 +575,12 @@ export default function App() {
       <Route
         path="/reports"
         element={
-          <RequireAuth allowedRoles={["Admin", "RestaurantAdmin"]}>
+          <RequireAuth
+            allowedRoles={["Admin", "RestaurantAdmin"]}
+            allowedFeatures={[AppFeatures.reportsView]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Reports />
           </RequireAuth>
         }
@@ -479,7 +598,12 @@ export default function App() {
       <Route
         path="/users"
         element={
-          <RequireAuth allowedRoles={["Admin"]}>
+          <RequireAuth
+            allowedRoles={["Admin"]}
+            allowedFeatures={[AppFeatures.usersManage]}
+            userFeatures={appFeatures}
+            featuresLoaded={featuresLoaded}
+          >
             <Users />
           </RequireAuth>
         }

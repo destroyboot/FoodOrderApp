@@ -12,6 +12,7 @@ export function resolveApiUrl(path?: string | null) {
 
 export async function api<T>(url: string, options: RequestInit = {}): Promise<T> {
   const token = getToken();
+  const culture = localStorage.getItem("foodapp_culture");
 
   const headers = new Headers(options.headers || {});
   const isFormData = typeof FormData !== "undefined" && options.body instanceof FormData;
@@ -19,6 +20,7 @@ export async function api<T>(url: string, options: RequestInit = {}): Promise<T>
     headers.set("Content-Type", "application/json");
   }
   if (token) headers.set("Authorization", `Bearer ${token}`);
+  if (culture && !headers.has("Accept-Language")) headers.set("Accept-Language", culture);
 
   const res = await fetch(url, { ...options, headers });
 

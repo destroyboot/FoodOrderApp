@@ -1,3 +1,4 @@
+using API.Authorization;
 using API.Localization;
 using Core.Contracts.Platform;
 using Core.Data.Entities;
@@ -9,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 namespace API.Controllers
 {
     [Authorize(Roles = "Admin")]
+    [AppFeatureAuthorize(AppFeatures.PlatformManage)]
     [ApiController]
     [Route("api/admin/platform")]
     public class AdminPlatformController : ControllerBase

@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Reservations;
 using Core.Contracts.Restaurants;
 using Infrastructure.Persistence;
@@ -11,6 +12,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/tables")]
     [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+    [AppFeatureAuthorize(AppFeatures.RestaurantsManage)]
     public class AdminTablesController : ControllerBase
     {
         private readonly AppDbContext _db;

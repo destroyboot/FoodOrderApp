@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.AdminOptions;
 using Core.Data.Entities;
 using Infrastructure.Persistence;
@@ -10,6 +11,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/options")]
     [Authorize(Roles = "Admin")]
+    [AppFeatureAuthorize(AppFeatures.PlatformManage)]
     public class AdminOptionsController : ControllerBase
     {
         private readonly AppDbContext _db;

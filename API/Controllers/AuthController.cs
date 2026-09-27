@@ -1,4 +1,4 @@
-﻿using Infrastructure.Auth;
+using Infrastructure.Auth;
 using Microsoft.AspNetCore.Authorization;
 using API.Support;
 using Microsoft.AspNetCore.Identity;
@@ -106,7 +106,7 @@ namespace API.Controllers
                 subject: "Food Order App – Confirm your account",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountRegistrationCodeEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Code(email, code, user.RegistrationCodeExpiresAt),
                     ct),
@@ -154,7 +154,7 @@ namespace API.Controllers
                 subject: "Food Order App – Account activated",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountActivatedEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Simple(email),
                     ct),
@@ -204,7 +204,7 @@ namespace API.Controllers
                 subject: "Food Order App – Your confirmation code (resend)",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountRegistrationCodeEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Code(email, code, user.RegistrationCodeExpiresAt),
                     ct),
@@ -237,7 +237,7 @@ namespace API.Controllers
                 subject: "Food Order App – Password reset",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountPasswordResetEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Link(email, resetLink),
                     ct),
@@ -266,7 +266,7 @@ namespace API.Controllers
                 subject: "Food Order App – Password changed",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountPasswordChangedEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Simple(email),
                     ct),
@@ -306,7 +306,7 @@ namespace API.Controllers
                 subject: "Food Order App – Password changed",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountPasswordChangedEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Simple(user.Email ?? ""),
                     ct),
@@ -387,6 +387,16 @@ namespace API.Controllers
             for (int i = 0; i < a.Length; i++) diff |= a[i] ^ b[i];
             return diff == 0;
         }
+
+        private string ResolveTemplateCulture(ApplicationUser user)
+            => string.IsNullOrWhiteSpace(user.PreferredCulture)
+                ? ResolveRequestCulture()
+                : user.PreferredCulture.Trim();
+
+        private string ResolveRequestCulture()
+            => Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0].Trim() is { Length: > 0 } culture
+                ? culture
+                : "pl-PL";
 
         private async Task LinkRestaurantInvitesAsync(ApplicationUser user, CancellationToken ct)
         {

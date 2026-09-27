@@ -366,15 +366,21 @@ export default function PrintTemplates() {
             <div style={{ display: "grid", gap: 14 }}>
               <div style={{ display: "grid", gridTemplateColumns: "1fr auto", gap: 12, alignItems: "start" }}>
                 <div style={{ display: "grid", gap: 8 }}>
-                  <input
-                    value={draft.name}
-                    onChange={(event) => setDraft({ ...draft, name: event.target.value })}
-                  />
-                  <textarea
-                    value={draft.description}
-                    onChange={(event) => setDraft({ ...draft, description: event.target.value })}
-                    style={{ minHeight: 70 }}
-                  />
+                  <label style={{ display: "grid", gap: 6 }}>
+                    <span>{t("ui.title", "Title")}</span>
+                    <input
+                      value={draft.name}
+                      onChange={(event) => setDraft({ ...draft, name: event.target.value })}
+                    />
+                  </label>
+                  <label style={{ display: "grid", gap: 6 }}>
+                    <span>{t("ui.description", "Description")}</span>
+                    <textarea
+                      value={draft.description}
+                      onChange={(event) => setDraft({ ...draft, description: event.target.value })}
+                      style={{ minHeight: 70 }}
+                    />
+                  </label>
                   <label style={{ display: "flex", alignItems: "center", gap: 8 }}>
                     <input
                       type="checkbox"

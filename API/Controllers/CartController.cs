@@ -211,7 +211,7 @@ namespace API.Controllers
             if (existing is not null)
             {
                 order.InvoiceDocument = existing;
-                await RefreshLegacyInvoicePdfAsync(order, existing, ct);
+                await RefreshInvoicePdfIfNeededAsync(order, existing, ct);
                 return existing;
             }
 
@@ -234,9 +234,9 @@ namespace API.Controllers
             return document;
         }
 
-        private async Task RefreshLegacyInvoicePdfAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        private async Task RefreshInvoicePdfIfNeededAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
         {
-            if (!ContainsLegacyMenuItemPlaceholder(document))
+            if (!ContainsLegacyMenuItemPlaceholder(document) && !await IsInvoiceTemplateNewerAsync(order, document, ct))
                 return;
 
             var itemNames = await LoadMenuItemNamesAsync(order, ct);
@@ -250,9 +250,59 @@ namespace API.Controllers
         {
             var displayNumber = order.DailyRestaurantOrderNumber?.ToString("0000") ?? order.Id.ToString();
             var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, displayNumber, invoiceNumber, itemNames);
-            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, model, ct);
+            var (culture, defaultCulture) = await ResolveOrderTemplateCulturesAsync(order, ct);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, culture, defaultCulture, model, ct);
             return ReportExportBuilder.BuildPdfFromHtml(html);
         }
+
+        private async Task<bool> IsInvoiceTemplateNewerAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        {
+            var (culture, defaultCulture) = await ResolveOrderTemplateCulturesAsync(order, ct);
+            var cultures = new[] { culture, defaultCulture }
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var updatedAt = await _db.PrintTemplates
+                .AsNoTracking()
+                .Where(x => x.Code == PrintTemplateDefaults.InvoicePdf && x.IsActive && cultures.Contains(x.Culture))
+                .MaxAsync(x => (DateTime?)x.UpdatedAtUtc, ct);
+
+            return updatedAt.HasValue && updatedAt.Value > document.GeneratedAt;
+        }
+
+        private async Task<(string Culture, string DefaultCulture)> ResolveOrderTemplateCulturesAsync(Order order, CancellationToken ct)
+        {
+            var settings = order.RestaurantId.HasValue
+                ? await _db.RestaurantSettings
+                    .AsNoTracking()
+                    .Where(x => x.RestaurantId == order.RestaurantId.Value)
+                    .Select(x => new { x.DefaultCulture, x.SupportedCultures })
+                    .FirstOrDefaultAsync(ct)
+                : null;
+
+            var defaultCulture = string.IsNullOrWhiteSpace(settings?.DefaultCulture) ? "pl-PL" : settings.DefaultCulture.Trim();
+            var supportedCultures = (settings?.SupportedCultures ?? defaultCulture)
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Append(defaultCulture)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var preferredCulture = string.IsNullOrWhiteSpace(order.CustomerId)
+                ? ResolveRequestCulture()
+                : await _db.Users
+                    .Where(x => x.Id == order.CustomerId)
+                    .Select(x => x.PreferredCulture)
+                    .FirstOrDefaultAsync(ct);
+            var culture = !string.IsNullOrWhiteSpace(preferredCulture) && supportedCultures.Contains(preferredCulture)
+                ? preferredCulture.Trim()
+                : defaultCulture;
+
+            return (culture, defaultCulture);
+        }
+
+        private string? ResolveRequestCulture()
+            => Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0].Trim() is { Length: > 0 } culture
+                ? culture
+                : null;
 
         private static bool ContainsLegacyMenuItemPlaceholder(OrderInvoiceDocument document)
             => Encoding.ASCII.GetString(document.PdfBytes).Contains("MenuItem #", StringComparison.Ordinal);

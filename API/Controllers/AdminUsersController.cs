@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Users;
 using Core.Data.Entities;
 using API.Support;
@@ -15,6 +16,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/users")]
     [Authorize(Roles = "Admin")]
+    [AppFeatureAuthorize(AppFeatures.UsersManage)]
     public class AdminUsersController : ControllerBase
     {
         private static readonly string[] RestaurantScopedRoles = ["RestaurantAdmin", "Waiter", "Chef", "DeliveryDriver"];
@@ -150,7 +152,7 @@ namespace API.Controllers
                 subject: "Food Order App - Password reset",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountPasswordResetEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Link(email, resetLink),
                     ct),
@@ -476,6 +478,16 @@ namespace API.Controllers
 
             return normalized;
         }
+
+        private string ResolveTemplateCulture(ApplicationUser user)
+            => string.IsNullOrWhiteSpace(user.PreferredCulture)
+                ? ResolveRequestCulture()
+                : user.PreferredCulture.Trim();
+
+        private string ResolveRequestCulture()
+            => Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0].Trim() is { Length: > 0 } culture
+                ? culture
+                : "pl-PL";
 
         private static void ThrowIfFailed(IdentityResult result)
         {

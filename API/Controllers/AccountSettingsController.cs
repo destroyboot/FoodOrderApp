@@ -68,7 +68,7 @@ namespace API.Controllers
                 subject: "Food Order App - Confirm email change",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountEmailChangeCodeEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Code(newEmail, code, user.EmailChangeCodeExpiresAt),
                     ct),
@@ -117,7 +117,7 @@ namespace API.Controllers
                 subject: "Food Order App - Email changed",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountEmailChangedEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Simple(newEmail),
                     ct),
@@ -154,7 +154,7 @@ namespace API.Controllers
                 subject: "Food Order App - Email change code (resend)",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountEmailChangeCodeEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Code(user.PendingEmail, code, user.EmailChangeCodeExpiresAt),
                     ct),
@@ -196,7 +196,7 @@ namespace API.Controllers
                 subject: "Food Order App - Password changed",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountPasswordChangedEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Simple(user.Email ?? ""),
                     ct),
@@ -246,7 +246,7 @@ namespace API.Controllers
                 subject: "Food Order App - Confirm account removal",
                 htmlBody: await _printTemplates.RenderHtmlAsync(
                     PrintTemplateDefaults.AccountDeletionCodeEmail,
-                    user.PreferredCulture,
+                    ResolveTemplateCulture(user),
                     "pl-PL",
                     AccountEmailTemplateModel.Code(user.Email, code, user.AccountDeletionCodeExpiresAt),
                     ct),
@@ -308,5 +308,15 @@ namespace API.Controllers
             for (var i = 0; i < a.Length; i++) diff |= a[i] ^ b[i];
             return diff == 0;
         }
+
+        private string ResolveTemplateCulture(ApplicationUser user)
+            => string.IsNullOrWhiteSpace(user.PreferredCulture)
+                ? ResolveRequestCulture()
+                : user.PreferredCulture.Trim();
+
+        private string ResolveRequestCulture()
+            => Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0].Trim() is { Length: > 0 } culture
+                ? culture
+                : "pl-PL";
     }
 }

@@ -1,4 +1,5 @@
 using System.Data;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net;
 using System.Text;
@@ -115,6 +116,73 @@ internal static class ReportExportBuilder
 
     public static byte[] BuildPdfFromHtml(string html)
     {
+        try
+        {
+            return BuildBrowserPdf(WrapHtmlDocument(html));
+        }
+        catch
+        {
+            return BuildSimplePdfFromHtml(html);
+        }
+    }
+
+    private static byte[] BuildBrowserPdf(string html)
+    {
+        var browserPath = FindBrowserPath()
+            ?? throw new InvalidOperationException("Chrome or Edge executable was not found.");
+
+        var tempRoot = Path.Combine(Path.GetTempPath(), "FoodOrderAppPdf", Guid.NewGuid().ToString("N"));
+        Directory.CreateDirectory(tempRoot);
+
+        try
+        {
+            var htmlPath = Path.Combine(tempRoot, "document.html");
+            var pdfPath = Path.Combine(tempRoot, "document.pdf");
+            var userDataPath = Path.Combine(tempRoot, "profile");
+            File.WriteAllText(htmlPath, html, new UTF8Encoding(false));
+
+            var startInfo = new ProcessStartInfo
+            {
+                FileName = browserPath,
+                UseShellExecute = false,
+                CreateNoWindow = true
+            };
+
+            startInfo.ArgumentList.Add("--headless=new");
+            startInfo.ArgumentList.Add("--disable-gpu");
+            startInfo.ArgumentList.Add("--disable-extensions");
+            startInfo.ArgumentList.Add("--disable-background-networking");
+            startInfo.ArgumentList.Add("--no-first-run");
+            startInfo.ArgumentList.Add("--no-default-browser-check");
+            startInfo.ArgumentList.Add($"--user-data-dir={userDataPath}");
+            startInfo.ArgumentList.Add("--print-to-pdf-no-header");
+            startInfo.ArgumentList.Add($"--print-to-pdf={pdfPath}");
+            startInfo.ArgumentList.Add(new Uri(htmlPath).AbsoluteUri);
+
+            using var process = Process.Start(startInfo)
+                ?? throw new InvalidOperationException("Could not start browser PDF renderer.");
+
+            if (!process.WaitForExit(30000))
+            {
+                try { process.Kill(entireProcessTree: true); } catch { }
+                throw new TimeoutException("Browser PDF renderer timed out.");
+            }
+
+            if (process.ExitCode != 0 || !File.Exists(pdfPath))
+            {
+                throw new InvalidOperationException("Browser PDF renderer failed.");
+            }
+
+            return File.ReadAllBytes(pdfPath);
+        }
+        finally
+        {
+            try { Directory.Delete(tempRoot, recursive: true); } catch { }
+        }
+    }
+
+    private static byte[] BuildSimplePdfFromHtml(string html)
+    {
         var lines = HtmlToLines(html)
             .SelectMany(line => WrapLine(line, MaxPdfLineLength))
             .ToList();
@@ -125,6 +193,77 @@ internal static class ReportExportBuilder
         }
 
         return BuildSimplePdf(Paginate(lines, PdfLinesPerPage));
+    }
+
+    private static string WrapHtmlDocument(string html)
+    {
+        html ??= string.Empty;
+
+        if (Regex.IsMatch(html, @"<\s*html[\s>]", RegexOptions.IgnoreCase))
+        {
+            return html;
+        }
+
+        return $$"""
+        <!doctype html>
+        <html>
+        <head>
+          <meta charset="utf-8">
+          <style>
+            @page { size: A4; margin: 14mm; }
+            * { box-sizing: border-box; }
+            body {
+              margin: 0;
+              color: #172033;
+              font-family: Arial, Helvetica, sans-serif;
+              font-size: 12px;
+              line-height: 1.45;
+            }
+            h1, h2, h3 { margin: 0 0 10px; line-height: 1.2; color: #111827; }
+            h1 { font-size: 24px; }
+            h2 { font-size: 18px; margin-top: 18px; }
+            h3 { font-size: 15px; margin-top: 14px; }
+            p { margin: 0 0 10px; }
+            ul, ol { margin: 0 0 12px 22px; padding: 0; }
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 12px 0;
+              page-break-inside: auto;
+            }
+            thead { display: table-header-group; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            th, td {
+              border: 1px solid #d0d5dd;
+              padding: 6px 8px;
+              text-align: left;
+              vertical-align: top;
+            }
+            th { background: #f2f4f7; font-weight: 700; }
+            hr { border: 0; border-top: 1px solid #d0d5dd; margin: 14px 0; }
+            .text-center { text-align: center; }
+            .text-right { text-align: right; }
+          </style>
+        </head>
+        <body>
+        {{html}}
+        </body>
+        </html>
+        """;
+    }
+
+    private static string? FindBrowserPath()
+    {
+        var candidates = new[]
+        {
+            Environment.GetEnvironmentVariable("FOODORDER_PDF_BROWSER_PATH"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Google", "Chrome", "Application", "chrome.exe"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Google", "Chrome", "Application", "chrome.exe"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Microsoft", "Edge", "Application", "msedge.exe"),
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Microsoft", "Edge", "Application", "msedge.exe")
+        };
+
+        return candidates.FirstOrDefault(path => !string.IsNullOrWhiteSpace(path) && File.Exists(path));
     }
 
     private static string EscapeCsv(string value)

@@ -35,6 +35,7 @@ type I18nContextValue = {
 };
 
 const i18n = i18next.createInstance();
+const CULTURE_STORAGE_KEY = "foodapp_culture";
 void i18n.use(initReactI18next).init({
   lng: "pl-PL",
   fallbackLng: "pl-PL",
@@ -85,6 +86,7 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
     i18n.addResourceBundle(resourceCulture, "translation", payload.texts || {}, true, true);
     await i18n.changeLanguage(resourceCulture);
+    localStorage.setItem(CULTURE_STORAGE_KEY, resourceCulture);
 
     setCultureState(resourceCulture);
     setRevision((current) => current + 1);

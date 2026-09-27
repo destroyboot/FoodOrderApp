@@ -1,3 +1,4 @@
+using API.Authorization;
 using API.Support;
 using Core.Data.Enums;
 using Infrastructure.Persistence;
@@ -13,6 +14,7 @@ using System.Security.Claims;
 namespace API.Controllers;
 
 [Authorize(Roles = "Admin,RestaurantAdmin")]
+[AppFeatureAuthorize(AppFeatures.ReportsView)]
 [ApiController]
 [Route("api/admin/reports")]
 public class AdminReportsController : ControllerBase
@@ -69,6 +71,7 @@ public class AdminReportsController : ControllerBase
         [FromQuery] DateTime? from,
         [FromQuery] DateTime? to,
         [FromQuery] int[]? restaurantIds,
+        [FromQuery] string? culture,
         CancellationToken ct)
     {
         var payload = await BuildReportAsync(reportKey, from, to, restaurantIds, ct);
@@ -83,7 +86,7 @@ public class AdminReportsController : ControllerBase
                 "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 $"{baseFileName}.xlsx"),
             "pdf" => File(
-                ReportExportBuilder.BuildPdfFromHtml(await BuildReportPrintHtmlAsync(payload, from, to, ct)),
+                ReportExportBuilder.BuildPdfFromHtml(await BuildReportPrintHtmlAsync(payload, from, to, culture, restaurantIds, ct)),
                 "application/pdf",
                 $"{baseFileName}.pdf"),
             _ => File(
@@ -93,7 +96,7 @@ public class AdminReportsController : ControllerBase
         };
     }
 
-    private async Task<string> BuildReportPrintHtmlAsync(ReportPayload payload, DateTime? from, DateTime? to, CancellationToken ct)
+    private async Task<string> BuildReportPrintHtmlAsync(ReportPayload payload, DateTime? from, DateTime? to, string? culture, int[]? restaurantIds, CancellationToken ct)
     {
         var (fromUtc, toUtc) = NormalizeDateRange(from, to);
         var model = new
@@ -109,8 +112,34 @@ public class AdminReportsController : ControllerBase
             }
         };
 
-        return await _printTemplates.RenderHtmlAsync($"report.{payload.FileName}", model, ct);
+        var (requestedCulture, defaultCulture) = await ResolveReportTemplateCulturesAsync(culture, restaurantIds, ct);
+        return await _printTemplates.RenderHtmlAsync($"report.{payload.FileName}", requestedCulture, defaultCulture, model, ct);
     }
+
+    private async Task<(string Culture, string DefaultCulture)> ResolveReportTemplateCulturesAsync(string? requestedCulture, int[]? restaurantIds, CancellationToken ct)
+    {
+        var normalizedRequest = NormalizeCulture(requestedCulture)
+            ?? NormalizeCulture(Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0])
+            ?? "pl-PL";
+        var defaultCulture = "pl-PL";
+
+        var effectiveRestaurantIds = await GetEffectiveRestaurantIdsAsync(restaurantIds, ct);
+        if (effectiveRestaurantIds is { Count: 1 })
+        {
+            var restaurantDefault = await _db.RestaurantSettings
+                .AsNoTracking()
+                .Where(x => x.RestaurantId == effectiveRestaurantIds[0])
+                .Select(x => x.DefaultCulture)
+                .FirstOrDefaultAsync(ct);
+
+            defaultCulture = NormalizeCulture(restaurantDefault) ?? defaultCulture;
+        }
+
+        return (normalizedRequest, defaultCulture);
+    }
+
+    private static string? NormalizeCulture(string? culture)
+        => string.IsNullOrWhiteSpace(culture) ? null : culture.Trim();
 
     private static string BuildSummaryHtml(IReadOnlyList<ReportSummaryMetric> summary)
     {

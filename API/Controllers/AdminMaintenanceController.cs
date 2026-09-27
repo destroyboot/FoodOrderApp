@@ -1,4 +1,5 @@
-﻿using Infrastructure.Auth;
+using API.Authorization;
+using Infrastructure.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +9,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/maintenance")]
     [Authorize(Roles = "Admin")]
+    [AppFeatureAuthorize(AppFeatures.MaintenanceManage)]
     public class AdminMaintenanceController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _users;

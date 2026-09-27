@@ -1,5 +1,6 @@
 using API.Events;
 using API.Hubs;
+using API.Authorization;
 using API.Localization;
 using API.Middleware;
 using API.Support;
@@ -63,6 +64,7 @@ builder.Services.AddScoped<IOrderSummaryEmailComposer, OrderSummaryEmailComposer
 builder.Services.AddScoped<PrintTemplateRenderer>();
 builder.Services.AddScoped<IPrintTemplateRenderer>(sp => sp.GetRequiredService<PrintTemplateRenderer>());
 builder.Services.AddScoped<IEmailTemplateRenderer>(sp => sp.GetRequiredService<PrintTemplateRenderer>());
+builder.Services.AddScoped<IAppFeaturePermissionService, AppFeaturePermissionService>();
 
 builder.Services.Configure<DataProtectionTokenProviderOptions>(opt =>
 {

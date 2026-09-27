@@ -6018,6 +6018,12 @@
       "groupName": "ui",
       "isActive": true
     },
+    "ui.title": {
+      "value": "Title",
+      "description": null,
+      "groupName": "ui",
+      "isActive": true
+    },
     "ui.gram": {
       "value": "Gram",
       "description": null,

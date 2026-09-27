@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Ingredients;
 using Core.Contracts.Menu;
 using Core.Data.Entities;
@@ -12,6 +13,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/ingredients")]
     [Authorize(Roles = "Admin,RestaurantAdmin")]
+    [AppFeatureAuthorize(AppFeatures.MenuManage)]
     public class AdminIngredientsController : ControllerBase
     {
         private readonly AppDbContext _db;

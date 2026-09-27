@@ -34,6 +34,7 @@ namespace Infrastructure.Persistence
         public DbSet<RestaurantUserRole> RestaurantUserRoles => Set<RestaurantUserRole>();
         public DbSet<RestaurantStaffInvite> RestaurantStaffInvites => Set<RestaurantStaffInvite>();
         public DbSet<AdminTablePermission> AdminTablePermissions => Set<AdminTablePermission>();
+        public DbSet<AdminFeaturePermission> AdminFeaturePermissions => Set<AdminFeaturePermission>();
         public DbSet<Reservation> Reservations => Set<Reservation>();
         public DbSet<ReservationSlot> ReservationSlots => Set<ReservationSlot>();
         public DbSet<ReservationSchedule> ReservationSchedules => Set<ReservationSchedule>();
@@ -166,6 +167,13 @@ namespace Infrastructure.Persistence
                 e.Property(x => x.RoleName).HasMaxLength(80).IsRequired();
                 e.Property(x => x.TableName).HasMaxLength(200).IsRequired();
                 e.HasIndex(x => new { x.RoleName, x.TableName }).IsUnique();
+            });
+
+            b.Entity<AdminFeaturePermission>(e =>
+            {
+                e.Property(x => x.RoleName).HasMaxLength(80).IsRequired();
+                e.Property(x => x.FeatureKey).HasMaxLength(160).IsRequired();
+                e.HasIndex(x => new { x.RoleName, x.FeatureKey }).IsUnique();
             });
 
             b.Entity<OrderTypeOption>(e =>

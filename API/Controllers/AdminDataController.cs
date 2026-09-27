@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.AdminData;
 using Core.Data.Entities;
 using Core.Utilities;
@@ -26,6 +27,7 @@ namespace API.Controllers
         }
 
         [HttpGet("tables")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<ActionResult<IReadOnlyList<AdminDataTableDto>>> GetTables(CancellationToken ct)
         {
             var tables = await GetAccessibleTablesAsync(ct);
@@ -33,6 +35,7 @@ namespace API.Controllers
         }
 
         [HttpGet("tables/{tableName}/rows")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<ActionResult<IReadOnlyList<Dictionary<string, object?>>>> GetRows(
             string tableName,
             [FromQuery] string? search,
@@ -46,6 +49,7 @@ namespace API.Controllers
         }
 
         [HttpGet("tables/{tableName}/editor-options")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<ActionResult<IReadOnlyList<AdminDataColumnOptionsDto>>> GetEditorOptions(string tableName, CancellationToken ct)
         {
             var table = await ResolveAccessibleTableAsync(tableName, ct);
@@ -67,6 +71,7 @@ namespace API.Controllers
         }
 
         [HttpPost("tables/{tableName}/rows")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<IActionResult> CreateRow(string tableName, [FromBody] AdminDataRowUpsertDto dto, CancellationToken ct)
         {
             var table = await RequireTableAsync(tableName, "create", ct);
@@ -75,6 +80,7 @@ namespace API.Controllers
         }
 
         [HttpPut("tables/{tableName}/rows/{key}")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<IActionResult> UpdateRow(string tableName, string key, [FromBody] AdminDataRowUpsertDto dto, CancellationToken ct)
         {
             var table = await RequireTableAsync(tableName, "update", ct);
@@ -86,6 +92,7 @@ namespace API.Controllers
         }
 
         [HttpDelete("tables/{tableName}/rows/{key}")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<IActionResult> DeleteRow(string tableName, string key, CancellationToken ct)
         {
             var table = await RequireTableAsync(tableName, "delete", ct);
@@ -97,6 +104,7 @@ namespace API.Controllers
         }
 
         [HttpPost("tables/{tableName}/rows/bulk-delete")]
+        [AppFeatureAuthorize(AppFeatures.DataCrud)]
         public async Task<IActionResult> BulkDeleteRows(string tableName, [FromBody] AdminDataBulkDeleteDto dto, CancellationToken ct)
         {
             var table = await RequireTableAsync(tableName, "delete", ct);
@@ -115,6 +123,7 @@ namespace API.Controllers
 
         [HttpGet("permission-groups")]
         [Authorize(Roles = "Admin")]
+        [AppFeatureAuthorize(AppFeatures.PermissionGroupsManage)]
         public async Task<ActionResult<IReadOnlyList<AdminDataRolePermissionsDto>>> GetPermissionGroups(CancellationToken ct)
         {
             var tables = GetTableDefinitions()
@@ -152,6 +161,7 @@ namespace API.Controllers
 
         [HttpPut("permission-groups/{roleName}")]
         [Authorize(Roles = "Admin")]
+        [AppFeatureAuthorize(AppFeatures.PermissionGroupsManage)]
         public async Task<IActionResult> UpdatePermissionGroup(string roleName, [FromBody] AdminDataRolePermissionsDto dto, CancellationToken ct)
         {
             var normalizedRole = await RequireManageableRoleNameAsync(roleName, ct);
@@ -196,6 +206,93 @@ namespace API.Controllers
 
             await _db.SaveChangesAsync(ct);
             return NoContent();
+        }
+
+        [HttpGet("feature-permission-groups")]
+        [Authorize(Roles = "Admin")]
+        [AppFeatureAuthorize(AppFeatures.PermissionGroupsManage)]
+        public async Task<ActionResult<IReadOnlyList<AdminFeatureRolePermissionsDto>>> GetFeaturePermissionGroups(CancellationToken ct)
+        {
+            var roleNames = await GetManageableRoleNamesAsync(ct);
+            var permissions = await _db.AdminFeaturePermissions
+                .AsNoTracking()
+                .Where(x => roleNames.Contains(x.RoleName))
+                .ToListAsync(ct);
+
+            var result = roleNames.Select(roleName => new AdminFeatureRolePermissionsDto
+            {
+                RoleName = roleName,
+                Grants = AppFeatures.All.Select(feature =>
+                {
+                    var permission = permissions.FirstOrDefault(x =>
+                        string.Equals(x.RoleName, roleName, StringComparison.OrdinalIgnoreCase) &&
+                        string.Equals(x.FeatureKey, feature.FeatureKey, StringComparison.OrdinalIgnoreCase));
+
+                    return new AdminFeatureGrantDto
+                    {
+                        FeatureKey = feature.FeatureKey,
+                        Name = feature.Name,
+                        Description = feature.Description,
+                        GroupName = feature.GroupName,
+                        IsAllowed = permission?.IsAllowed ?? feature.DefaultRoles.Contains(roleName, StringComparer.OrdinalIgnoreCase)
+                    };
+                }).ToList()
+            }).ToList();
+
+            return Ok(result);
+        }
+
+        [HttpPut("feature-permission-groups/{roleName}")]
+        [Authorize(Roles = "Admin")]
+        [AppFeatureAuthorize(AppFeatures.PermissionGroupsManage)]
+        public async Task<IActionResult> UpdateFeaturePermissionGroup(string roleName, [FromBody] AdminFeatureRolePermissionsDto dto, CancellationToken ct)
+        {
+            var normalizedRole = await RequireManageableRoleNameAsync(roleName, ct);
+            var validFeatures = AppFeatures.All
+                .Select(x => x.FeatureKey)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var requested = dto.Grants
+                .Where(x => validFeatures.Contains(x.FeatureKey))
+                .GroupBy(x => x.FeatureKey, StringComparer.OrdinalIgnoreCase)
+                .Select(x => x.Last())
+                .ToList();
+
+            var existing = await _db.AdminFeaturePermissions
+                .Where(x => x.RoleName == normalizedRole)
+                .ToListAsync(ct);
+
+            foreach (var grant in requested)
+            {
+                var permission = existing.FirstOrDefault(x =>
+                    string.Equals(x.FeatureKey, grant.FeatureKey, StringComparison.OrdinalIgnoreCase));
+                if (permission is null)
+                {
+                    permission = new AdminFeaturePermission
+                    {
+                        RoleName = normalizedRole,
+                        FeatureKey = grant.FeatureKey
+                    };
+                    _db.AdminFeaturePermissions.Add(permission);
+                    existing.Add(permission);
+                }
+
+                permission.IsAllowed = grant.IsAllowed;
+            }
+
+            foreach (var stale in existing.Where(x => !requested.Any(grant => string.Equals(grant.FeatureKey, x.FeatureKey, StringComparison.OrdinalIgnoreCase))).ToList())
+            {
+                _db.AdminFeaturePermissions.Remove(stale);
+            }
+
+            await _db.SaveChangesAsync(ct);
+            return NoContent();
+        }
+
+        [HttpGet("features/me")]
+        public async Task<ActionResult<IReadOnlyList<string>>> GetMyFeatures([FromServices] IAppFeaturePermissionService permissions, CancellationToken ct)
+        {
+            var allowed = await permissions.GetAllowedFeatureKeysAsync(User, ct);
+            return Ok(allowed.OrderBy(x => x).ToList());
         }
 
         private async Task<List<TableAccessDefinition>> GetAccessibleTablesAsync(CancellationToken ct)

@@ -1,3 +1,4 @@
+using API.Authorization;
 using API.Support;
 using Core.Contracts.AdminOrders;
 using Core.Contracts.Orders;
@@ -17,6 +18,7 @@ using System.Text.Json;
 namespace API.Controllers
 {
     [Authorize(Roles = "Admin,RestaurantAdmin,Waiter,Chef,DeliveryDriver")]
+    [AppFeatureAuthorize(AppFeatures.OrdersView)]
     [ApiController]
     [Route("api/admin/orders")]
     public class AdminOrdersController : ControllerBase
@@ -31,6 +33,7 @@ namespace API.Controllers
         private readonly AppDbContext _db;
         private readonly IOrderSummaryEmailComposer _orderEmails;
         private readonly IPrintTemplateRenderer _printTemplates;
+        private readonly IAppFeaturePermissionService _featurePermissions;
 
         public AdminOrdersController(
             IOrderRepository orders,
@@ -42,7 +45,8 @@ namespace API.Controllers
             IEmailSender email,
             AppDbContext db,
             IOrderSummaryEmailComposer orderEmails,
-            IPrintTemplateRenderer printTemplates)
+            IPrintTemplateRenderer printTemplates,
+            IAppFeaturePermissionService featurePermissions)
         {
             _orders = orders;
             _q = q;
@@ -54,6 +58,7 @@ namespace API.Controllers
             _db = db;
             _orderEmails = orderEmails;
             _printTemplates = printTemplates;
+            _featurePermissions = featurePermissions;
         }
 
         [HttpGet("active")]
@@ -328,12 +333,16 @@ namespace API.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "system";
 
             await EnsureCanAccessOrderAsync(id, ct);
+            if (!await _featurePermissions.IsAllowedAsync(User, GetStatusFeature(newStatus), ct))
+                return Forbid();
+
             await _admin.ChangeStatusAsync(id, newStatus, userId, roles, ct);
             return NoContent();
         }
 
         [HttpPatch("{id:int}/mark-paid")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter,DeliveryDriver")]
+        [AppFeatureAuthorize(AppFeatures.OrdersPayments)]
         public async Task<IActionResult> MarkPaid(int id, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -354,6 +363,7 @@ namespace API.Controllers
 
         [HttpGet("{id:int}/delivery-drivers")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDeliveryAssignments)]
         public async Task<ActionResult<List<DeliveryDriverOptionDto>>> GetDeliveryDrivers(int id, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -384,6 +394,7 @@ namespace API.Controllers
 
         [HttpPatch("{id:int}/assign-delivery-driver")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDeliveryAssignments)]
         public async Task<IActionResult> AssignDeliveryDriver(int id, [FromQuery] string? userId, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -448,6 +459,7 @@ namespace API.Controllers
 
         [HttpPatch("{id:int}/collect-payment-and-complete")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter,DeliveryDriver")]
+        [AppFeatureAuthorize(AppFeatures.OrdersPayments)]
         public async Task<IActionResult> CollectPaymentAndComplete(int id, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -542,6 +554,7 @@ namespace API.Controllers
 
         [HttpPatch("{id:int}/invoice-status")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDocuments)]
         public async Task<IActionResult> UpdateInvoiceStatus(int id, [FromQuery] InvoiceStatus status, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -606,6 +619,7 @@ namespace API.Controllers
 
         [HttpPost("{id:int}/send-receipt")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDocuments)]
         public async Task<IActionResult> SendReceipt(int id, [FromBody] SendReceiptRequestDto? req, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -660,6 +674,7 @@ namespace API.Controllers
 
         [HttpGet("{id:int}/invoice-pdf")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDocuments)]
         public async Task<IActionResult> DownloadInvoicePdf(int id, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -679,6 +694,7 @@ namespace API.Controllers
 
         [HttpGet("{id:int}/summary-pdf")]
         [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+        [AppFeatureAuthorize(AppFeatures.OrdersDocuments)]
         public async Task<IActionResult> DownloadSummaryPdf(int id, CancellationToken ct)
         {
             await EnsureCanAccessOrderAsync(id, ct);
@@ -694,7 +710,8 @@ namespace API.Controllers
             var fileName = $"order-summary-{FormatDisplayOrderNumber(order)}.pdf";
             var itemNames = await LoadMenuItemNamesAsync(order, ct);
             var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, FormatDisplayOrderNumber(order), null, itemNames);
-            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.OrderSummaryPdf, model, ct);
+            var (culture, defaultCulture) = await ResolveOrderTemplateCulturesAsync(order, ct);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.OrderSummaryPdf, culture, defaultCulture, model, ct);
             var content = ReportExportBuilder.BuildPdfFromHtml(html);
 
             return File(content, "application/pdf", fileName);
@@ -756,18 +773,29 @@ namespace API.Controllers
                 throw new InvalidOperationException("You are not allowed to access this order.");
         }
 
+        private static string GetStatusFeature(OrderStatus status)
+            => status switch
+            {
+                OrderStatus.Preparing or OrderStatus.ReadyForWaiter => AppFeatures.OrdersChefStatus,
+                OrderStatus.OutForDelivery or OrderStatus.Delivered => AppFeatures.OrdersDeliveryStatus,
+                _ => AppFeatures.OrdersWaiterStatus
+            };
+
         private async Task<OrderInvoiceDocument> EnsureInvoiceDocumentAsync(Order order, CancellationToken ct)
         {
             order.BillingDetails ??= new OrderBillingDetails { OrderId = order.Id };
 
             if (order.InvoiceDocument is not null)
+            {
+                await RefreshInvoicePdfIfNeededAsync(order, order.InvoiceDocument, ct);
                 return order.InvoiceDocument;
+            }
 
             var existing = await _db.OrderInvoiceDocuments.FirstOrDefaultAsync(x => x.OrderId == order.Id, ct);
             if (existing is not null)
             {
                 order.InvoiceDocument = existing;
-                await RefreshLegacyInvoicePdfAsync(order, existing, ct);
+                await RefreshInvoicePdfIfNeededAsync(order, existing, ct);
                 return existing;
             }
 
@@ -793,13 +821,14 @@ namespace API.Controllers
         private async Task<byte[]> BuildInvoicePdfAsync(Order order, string invoiceNumber, IReadOnlyDictionary<int, string> itemNames, CancellationToken ct)
         {
             var model = OrderPrintTemplateModelBuilder.BuildOrderModel(order, FormatDisplayOrderNumber(order), invoiceNumber, itemNames);
-            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, model, ct);
+            var (culture, defaultCulture) = await ResolveOrderTemplateCulturesAsync(order, ct);
+            var html = await _printTemplates.RenderHtmlAsync(PrintTemplateDefaults.InvoicePdf, culture, defaultCulture, model, ct);
             return ReportExportBuilder.BuildPdfFromHtml(html);
         }
 
-        private async Task RefreshLegacyInvoicePdfAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        private async Task RefreshInvoicePdfIfNeededAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
         {
-            if (!ContainsLegacyMenuItemPlaceholder(document))
+            if (!ContainsLegacyMenuItemPlaceholder(document) && !await IsInvoiceTemplateNewerAsync(order, document, ct))
                 return;
 
             var itemNames = await LoadMenuItemNamesAsync(order, ct);
@@ -811,6 +840,55 @@ namespace API.Controllers
 
         private static bool ContainsLegacyMenuItemPlaceholder(OrderInvoiceDocument document)
             => Encoding.ASCII.GetString(document.PdfBytes).Contains("MenuItem #", StringComparison.Ordinal);
+
+        private async Task<bool> IsInvoiceTemplateNewerAsync(Order order, OrderInvoiceDocument document, CancellationToken ct)
+        {
+            var (culture, defaultCulture) = await ResolveOrderTemplateCulturesAsync(order, ct);
+            var cultures = new[] { culture, defaultCulture }
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .ToList();
+
+            var updatedAt = await _db.PrintTemplates
+                .AsNoTracking()
+                .Where(x => x.Code == PrintTemplateDefaults.InvoicePdf && x.IsActive && cultures.Contains(x.Culture))
+                .MaxAsync(x => (DateTime?)x.UpdatedAtUtc, ct);
+
+            return updatedAt.HasValue && updatedAt.Value > document.GeneratedAt;
+        }
+
+        private async Task<(string Culture, string DefaultCulture)> ResolveOrderTemplateCulturesAsync(Order order, CancellationToken ct)
+        {
+            var settings = order.RestaurantId.HasValue
+                ? await _db.RestaurantSettings
+                    .AsNoTracking()
+                    .Where(x => x.RestaurantId == order.RestaurantId.Value)
+                    .Select(x => new { x.DefaultCulture, x.SupportedCultures })
+                    .FirstOrDefaultAsync(ct)
+                : null;
+
+            var defaultCulture = string.IsNullOrWhiteSpace(settings?.DefaultCulture) ? "pl-PL" : settings.DefaultCulture.Trim();
+            var supportedCultures = (settings?.SupportedCultures ?? defaultCulture)
+                .Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                .Append(defaultCulture)
+                .ToHashSet(StringComparer.OrdinalIgnoreCase);
+            var preferredCulture = string.IsNullOrWhiteSpace(order.CustomerId)
+                ? ResolveRequestCulture()
+                : await _db.Users
+                    .Where(x => x.Id == order.CustomerId)
+                    .Select(x => x.PreferredCulture)
+                    .FirstOrDefaultAsync(ct);
+            var culture = !string.IsNullOrWhiteSpace(preferredCulture) && supportedCultures.Contains(preferredCulture)
+                ? preferredCulture.Trim()
+                : defaultCulture;
+
+            return (culture, defaultCulture);
+        }
+
+        private string? ResolveRequestCulture()
+            => Request.Headers.AcceptLanguage.FirstOrDefault()?.Split(';')[0].Trim() is { Length: > 0 } culture
+                ? culture
+                : null;
 
         private async Task<object> CreateOrderEmailModelAsync(Order order, OrderInvoiceDocument? invoiceDocument, CancellationToken ct)
         {

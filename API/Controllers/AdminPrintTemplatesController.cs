@@ -1,3 +1,4 @@
+using API.Authorization;
 using API.Support;
 using Core.Contracts.PrintTemplates;
 using Core.Data.Entities;
@@ -11,7 +12,8 @@ using System.Security.Claims;
 
 namespace API.Controllers;
 
-[Authorize(Roles = "Admin")]
+[Authorize(Roles = "Admin,RestaurantAdmin,Waiter,Chef,DeliveryDriver")]
+[AppFeatureAuthorize(AppFeatures.PrintTemplatesManage)]
 [ApiController]
 [Route("api/admin/print-templates")]
 public class AdminPrintTemplatesController : ControllerBase

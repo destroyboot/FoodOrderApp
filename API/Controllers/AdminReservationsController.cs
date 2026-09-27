@@ -1,3 +1,4 @@
+using API.Authorization;
 using Core.Contracts.Reservations;
 using Core.Data.Entities;
 using Core.Data.Enums;
@@ -17,6 +18,7 @@ namespace API.Controllers
     [ApiController]
     [Route("api/admin/reservations")]
     [Authorize(Roles = "Admin,RestaurantAdmin,Waiter")]
+    [AppFeatureAuthorize(AppFeatures.ReservationsManage)]
     public class AdminReservationsController : ControllerBase
     {
         private const int SlotMinutes = 15;

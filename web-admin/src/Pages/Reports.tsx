@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { api } from "../api";
+import { api, getApiOrigin } from "../api";
 import { getToken } from "../auth";
 import { useI18n } from "../i18n";
 
@@ -75,7 +75,7 @@ function formatCell(value: unknown) {
 }
 
 export default function Reports() {
-  const { t } = useI18n();
+  const { culture, t } = useI18n();
   const [meta, setMeta] = useState<ReportMeta | null>(null);
   const [reportKey, setReportKey] = useState("sales-summary");
   const [from, setFrom] = useState(() => new Date(Date.now() - 1000 * 60 * 60 * 24 * 30).toISOString().slice(0, 10));
@@ -147,13 +147,17 @@ export default function Reports() {
       params.set("format", format);
       params.set("from", from);
       params.set("to", to);
+      params.set("culture", culture);
       for (const restaurantId of selectedRestaurantIds) {
         params.append("restaurantIds", String(restaurantId));
       }
 
       const token = getToken();
-      const response = await fetch(`/api/admin/reports/${reportKey}/export?${params.toString()}`, {
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
+      const response = await fetch(`${getApiOrigin()}/api/admin/reports/${reportKey}/export?${params.toString()}`, {
+        headers: {
+          ...(token ? { Authorization: `Bearer ${token}` } : {}),
+          "Accept-Language": culture,
+        },
       });
 
       if (!response.ok) {
